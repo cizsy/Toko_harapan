@@ -1,14 +1,13 @@
 [remap]
 
 importer="wav"
-type="AudioStreamWAV"
-uid="uid://dygy1uliks78e"
-path="res://.godot/imported/door_knock.wav-8946f7ada1c728cc1b843f82ff657677.sample"
+type="AudioStreamSample"
+path="res://.import/door_knock.wav-8946f7ada1c728cc1b843f82ff657677.sample"
 
 [deps]
 
 source_file="res://music/soundEffect/door_knock.wav"
-dest_files=["res://.godot/imported/door_knock.wav-8946f7ada1c728cc1b843f82ff657677.sample"]
+dest_files=[ "res://.import/door_knock.wav-8946f7ada1c728cc1b843f82ff657677.sample" ]
 
 [params]
 

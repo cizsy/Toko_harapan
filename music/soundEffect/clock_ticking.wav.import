@@ -1,14 +1,13 @@
 [remap]
 
 importer="wav"
-type="AudioStreamWAV"
-uid="uid://ckpx76xjkgr4r"
-path="res://.godot/imported/clock_ticking.wav-23936b4dc4e784e5421dffe942c7df18.sample"
+type="AudioStreamSample"
+path="res://.import/clock_ticking.wav-23936b4dc4e784e5421dffe942c7df18.sample"
 
 [deps]
 
 source_file="res://music/soundEffect/clock_ticking.wav"
-dest_files=["res://.godot/imported/clock_ticking.wav-23936b4dc4e784e5421dffe942c7df18.sample"]
+dest_files=[ "res://.import/clock_ticking.wav-23936b4dc4e784e5421dffe942c7df18.sample" ]
 
 [params]
 

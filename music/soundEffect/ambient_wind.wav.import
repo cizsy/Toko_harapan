@@ -1,14 +1,13 @@
 [remap]
 
 importer="wav"
-type="AudioStreamWAV"
-uid="uid://jsu2rjr45m4x"
-path="res://.godot/imported/ambient_wind.wav-4f95962608fb48c33cc5cf7fa3dc5f22.sample"
+type="AudioStreamSample"
+path="res://.import/ambient_wind.wav-4f95962608fb48c33cc5cf7fa3dc5f22.sample"
 
 [deps]
 
 source_file="res://music/soundEffect/ambient_wind.wav"
-dest_files=["res://.godot/imported/ambient_wind.wav-4f95962608fb48c33cc5cf7fa3dc5f22.sample"]
+dest_files=[ "res://.import/ambient_wind.wav-4f95962608fb48c33cc5cf7fa3dc5f22.sample" ]
 
 [params]
 

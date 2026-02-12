@@ -1,14 +1,13 @@
 [remap]
 
 importer="wav"
-type="AudioStreamWAV"
-uid="uid://b62h0gkklyu5g"
-path="res://.godot/imported/door_open.wav-9aed51d301c9a076110e65fd20c63aff.sample"
+type="AudioStreamSample"
+path="res://.import/door_open.wav-9aed51d301c9a076110e65fd20c63aff.sample"
 
 [deps]
 
 source_file="res://music/soundEffect/door_open.wav"
-dest_files=["res://.godot/imported/door_open.wav-9aed51d301c9a076110e65fd20c63aff.sample"]
+dest_files=[ "res://.import/door_open.wav-9aed51d301c9a076110e65fd20c63aff.sample" ]
 
 [params]
 

@@ -1,0 +1,47 @@
+[gd_scene format=2]
+
+[node name="mainMenu" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -67.0
+margin_top = -40.0
+margin_right = 1437.0
+margin_bottom = 918.0
+color = Color( 0.00784314, 0.0784314, 0.0235294, 1 )
+
+[node name="MenuButton" type="MenuButton" parent="."]
+margin_left = 365.0
+margin_top = 203.0
+margin_right = 629.0
+margin_bottom = 291.0
+text = "Start"
+icon_align = 1
+switch_on_hover = true
+
+[node name="MenuButton2" type="MenuButton" parent="."]
+margin_left = 365.0
+margin_top = 307.0
+margin_right = 629.0
+margin_bottom = 395.0
+focus_mode = 2
+text = "Settings
+"
+icon_align = 1
+switch_on_hover = true
+
+[node name="MenuButton3" type="MenuButton" parent="."]
+margin_left = 363.0
+margin_top = 413.0
+margin_right = 627.0
+margin_bottom = 501.0
+focus_mode = 2
+text = "Exit"
+icon_align = 1
+switch_on_hover = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 455.0
+margin_top = 126.0
+margin_right = 623.0
+margin_bottom = 153.0
+text = "Toko Harapan"
