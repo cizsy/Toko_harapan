@@ -6,7 +6,7 @@
 [ext_resource path="res://Asset/character/raka/raka_right.png" type="Texture" id=4]
 [ext_resource path="res://Asset/character/raka/xzca.png" type="Texture" id=5]
 [ext_resource path="res://Asset/character/raka/xzca2.png" type="Texture" id=6]
-[ext_resource path="res://scene/player.gd" type="Script" id=7]
+[ext_resource path="res://script/player.gd" type="Script" id=7]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 16.0

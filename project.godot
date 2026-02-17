@@ -82,7 +82,7 @@ _global_script_class_icons={
 
 config/name="Tokoharapan"
 run/main_scene="res://scene/mainMenu.tscn"
-config/icon="res://icon.png"
+config/icon="res://icon.svg"
 
 [display]
 
