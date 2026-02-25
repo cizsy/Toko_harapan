@@ -1,3 +1,51 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="ui_hp" type="Node2D"]
+[ext_resource path="res://Asset/UI buatan/hp.png" type="Texture" id=1]
+[ext_resource path="res://script/hp.gd" type="Script" id=2]
+
+[node name="ui_hp" type="Control"]
+script = ExtResource( 2 )
+
+[node name="HPFrame" type="TextureRect" parent="."]
+margin_left = 892.0
+margin_top = 247.0
+margin_right = 1404.0
+margin_bottom = 759.0
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="HPFrame"]
+margin_left = 295.0
+margin_top = 306.0
+margin_right = 333.0
+margin_bottom = 346.0
+
+[node name="Button3" type="Button" parent="HPFrame"]
+margin_left = 239.0
+margin_top = 304.0
+margin_right = 277.0
+margin_bottom = 344.0
+
+[node name="Button4" type="Button" parent="HPFrame"]
+margin_left = 294.0
+margin_top = 358.0
+margin_right = 332.0
+margin_bottom = 398.0
+
+[node name="Button2" type="Button" parent="HPFrame"]
+margin_left = 238.0
+margin_top = 358.0
+margin_right = 276.0
+margin_bottom = 398.0
+
+[node name="Button5" type="Button" parent="HPFrame"]
+margin_left = 182.0
+margin_top = 304.0
+margin_right = 220.0
+margin_bottom = 344.0
+
+[node name="Button6" type="Button" parent="HPFrame"]
+margin_left = 182.0
+margin_top = 358.0
+margin_right = 220.0
+margin_bottom = 398.0

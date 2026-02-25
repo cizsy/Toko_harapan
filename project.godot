@@ -84,6 +84,10 @@ config/name="Tokoharapan"
 run/main_scene="res://scene/mainMenu.tscn"
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameManager="*res://script/GameManager.gd"
+
 [display]
 
 window/size/width=1280
