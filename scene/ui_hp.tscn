@@ -20,32 +20,46 @@ margin_top = 304.0
 margin_right = 220.0
 margin_bottom = 344.0
 
+[node name="crome" type="Button" parent="HPFrame"]
+margin_left = 239.0
+margin_top = 304.0
+margin_right = 277.0
+margin_bottom = 344.0
+
 [node name="toktok" type="Button" parent="HPFrame"]
 margin_left = 295.0
 margin_top = 306.0
 margin_right = 333.0
 margin_bottom = 346.0
 
-[node name="chromes" type="Button" parent="HPFrame"]
-margin_left = 239.0
-margin_top = 304.0
-margin_right = 277.0
-margin_bottom = 344.0
-
-[node name="CloseButton" type="Button" parent="HPFrame"]
-margin_left = 294.0
+[node name="Peraturan" type="Button" parent="HPFrame"]
+margin_left = 182.0
 margin_top = 358.0
-margin_right = 332.0
+margin_right = 220.0
 margin_bottom = 398.0
 
-[node name="Button2" type="Button" parent="HPFrame"]
+[node name="AkhiriHari" type="Button" parent="HPFrame"]
 margin_left = 238.0
 margin_top = 358.0
 margin_right = 276.0
 margin_bottom = 398.0
 
-[node name="Button6" type="Button" parent="HPFrame"]
-margin_left = 182.0
+[node name="nutupHP" type="Button" parent="HPFrame"]
+margin_left = 294.0
 margin_top = 358.0
-margin_right = 220.0
+margin_right = 332.0
 margin_bottom = 398.0
+
+[node name="bankku" type="Button" parent="HPFrame"]
+margin_left = 182.0
+margin_top = 251.0
+margin_right = 220.0
+margin_bottom = 291.0
+
+[connection signal="pressed" from="HPFrame/Supplier" to="." method="_on_Supplier_pressed"]
+[connection signal="pressed" from="HPFrame/crome" to="." method="_on_crome_pressed"]
+[connection signal="pressed" from="HPFrame/toktok" to="." method="_on_toktok_pressed"]
+[connection signal="pressed" from="HPFrame/Peraturan" to="." method="_on_Peraturan_pressed"]
+[connection signal="pressed" from="HPFrame/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
+[connection signal="pressed" from="HPFrame/nutupHP" to="." method="_on_nutupHP_pressed"]
+[connection signal="pressed" from="HPFrame/bankku" to="." method="_on_bankku_pressed"]
