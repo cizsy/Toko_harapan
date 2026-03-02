@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/interact.png-6b12111dcd92d16cdba2a88721f044b9.stex"
+path="res://.import/hp.png-4227492d25bb8bae5fdb43ef323d9429.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/UI real/interact.png"
-dest_files=[ "res://.import/interact.png-6b12111dcd92d16cdba2a88721f044b9.stex" ]
+source_file="res://Asset/UI buatan/hp.png"
+dest_files=[ "res://.import/hp.png-4227492d25bb8bae5fdb43ef323d9429.stex" ]
 
 [params]
 

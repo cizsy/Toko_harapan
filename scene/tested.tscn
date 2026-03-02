@@ -1142,7 +1142,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 } ]
 28/z_index = 0
 
-[node name="Node2D" type="Node2D"]
+[node name="bg_toko" type="Node2D"]
 
 [node name="bg" type="ColorRect" parent="."]
 margin_left = -494.0
