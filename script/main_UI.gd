@@ -20,3 +20,5 @@ func _on_HpButton_pressed():
 	else:
 		hp_instance.queue_free()
 		hp_instance = null
+		
+		
