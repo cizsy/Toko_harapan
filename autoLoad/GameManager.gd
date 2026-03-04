@@ -85,8 +85,16 @@ func check_ending():
 func customer_served():
 	served_today += 1
 	
+	var profit = 10000
+	money += profit
+	
+	MainUi.showInfo("Pelanggan dilayani + Rp. " + str(profit))
+	
 	if served_today >= max_customer_per_day:
 		day_can_end = true
+		MainUi.showInfo("Semua pelanggan selesai! kamu bisa mengakhiri hari")
 
 func get_max_customer():
 	return 3 + current_month
+	
+

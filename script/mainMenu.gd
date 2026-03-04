@@ -1,10 +1,9 @@
 extends Control
 
-func _ready():
-	$VBoxContainer/Start.connect("pressed", self, "_on_Start_pressed")
-	$VBoxContainer/Settings.connect("pressed", self, "_on_Settings_pressed")
-	$VBoxContainer/Exit.connect("pressed", self, "_on_Exit_pressed")
 
+func _ready():
+	MainUi.hide()
+	
 func _on_Start_pressed():
 	get_tree().change_scene("res://scene/tested.tscn")
 

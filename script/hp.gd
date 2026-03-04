@@ -11,7 +11,7 @@ func _on_AkhiriHari_pressed():
 		GameManager.end_day()
 		
 	else:
-		print("Wah kamu belum bisa mengakhiri hari!  masih ada pelanngan hari ini")
+		print("Wah kamu belum bisa mengakhiri hari!  masih ada pelangan hari ini")
 
 
 func _on_Peraturan_pressed():
