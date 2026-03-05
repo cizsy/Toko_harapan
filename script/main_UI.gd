@@ -25,6 +25,7 @@ func update_ui():
 
 func _on_HpButton_pressed():
 	if hp_instance == null:
+		hp_instance = hp_scene.instance()
 		get_tree().current_scene.add_child(hp_instance)
 	else:
 		hp_instance.queue_free()
@@ -41,4 +42,7 @@ func mulaiLayanin():
 
 
 func _on_layaniPelanggan_pressed():
-	mulaiLayanin()
+	if GameManager.served_today < GameManager.max_customer_per_day and not layanin:
+		mulaiLayanin()
+	else:
+		showInfo("Hari ini sudah cukup pelanggan kamu bisa mengakhiri hari!")

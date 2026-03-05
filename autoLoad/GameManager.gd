@@ -35,16 +35,12 @@ var pinjol = 0
 
 #bayar hutang
 func pay_debt(amount):
-	if money >= amount and hutang_utama > 0:
-		money -= amount
-		hutang_utama -= amount
-		
-		if hutang_utama < 0:
-			hutang_utama = 0
-			
+	var payment = min(amount, hutang_utama)
+	if money >= payment:
+		money -= payment
+		hutang_utama -= payment
 	else:
 		print("Uang tidak cukup")
-		
 
 #ganti hari
 func end_day():
@@ -63,9 +59,8 @@ func end_day():
 func end_month():
 	current_day = 1
 	current_month += 1
-	
+	max_customer_per_day = get_max_customer()   # Add this line
 	evaluate_month()
-	
 	if current_month > max_month:
 		check_ending()
 
@@ -88,11 +83,11 @@ func customer_served():
 	var profit = 10000
 	money += profit
 	
-	MainUi.showInfo("Pelanggan dilayani + Rp. " + str(profit))
+	print("Pelanggan dilayani + Rp. " + str(profit))
 	
 	if served_today >= max_customer_per_day:
 		day_can_end = true
-		MainUi.showInfo("Semua pelanggan selesai! kamu bisa mengakhiri hari")
+		print("Semua pelanggan selesai! kamu bisa mengakhiri hari")
 
 func get_max_customer():
 	return 3 + current_month

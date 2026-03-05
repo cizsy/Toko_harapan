@@ -39,8 +39,8 @@ margin_bottom = 708.0
 
 [node name="infoPanel" type="Panel" parent="rootUI"]
 margin_top = 86.0
-margin_right = 195.0
-margin_bottom = 126.0
+margin_right = 249.0
+margin_bottom = 160.0
 
 [node name="infoLabel" type="Label" parent="rootUI/infoPanel"]
 margin_right = 195.0
