@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bgHP.jpg-08472c4dd972051b50882f56d8ec7a20.stex"
+path="res://.import/UI_Flat_Button01a_1.png-bf2274f82bb94c2ac405a6320348b814.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/bgHP.jpg"
-dest_files=[ "res://.import/bgHP.jpg-08472c4dd972051b50882f56d8ec7a20.stex" ]
+source_file="res://Asset/UI buatan/UI_Flat_Button01a_1.png"
+dest_files=[ "res://.import/UI_Flat_Button01a_1.png-bf2274f82bb94c2ac405a6320348b814.stex" ]
 
 [params]
 

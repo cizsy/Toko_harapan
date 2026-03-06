@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Asset/UI buatan/hp.png" type="Texture" id=1]
 [ext_resource path="res://script/hp.gd" type="Script" id=2]
-[ext_resource path="res://Asset/bgHP.jpg" type="Texture" id=3]
+[ext_resource path="res://Asset/UI buatan/bgHP.jpg" type="Texture" id=3]
 
 [node name="ui_hp" type="Control"]
 script = ExtResource( 2 )
@@ -23,52 +23,64 @@ margin_bottom = 755.0
 texture = ExtResource( 1 )
 expand = true
 
-[node name="Supplier" type="Button" parent="HPFrame"]
-margin_left = 174.0
-margin_top = 306.0
-margin_right = 212.0
-margin_bottom = 346.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HPFrame"]
+margin_left = 161.0
+margin_top = 193.0
+margin_right = 339.111
+margin_bottom = 417.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
 
-[node name="crome" type="Button" parent="HPFrame"]
-margin_left = 231.0
-margin_top = 306.0
-margin_right = 269.0
-margin_bottom = 346.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="HPFrame/VBoxContainer"]
+margin_right = 178.0
+margin_bottom = 20.0
 
-[node name="toktok" type="Button" parent="HPFrame"]
-margin_left = 287.0
-margin_top = 308.0
-margin_right = 325.0
-margin_bottom = 348.0
+[node name="bankku" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer3"]
+margin_right = 12.0
+margin_bottom = 20.0
 
-[node name="Peraturan" type="Button" parent="HPFrame"]
-margin_left = 174.0
-margin_top = 360.0
-margin_right = 212.0
-margin_bottom = 400.0
+[node name="HBoxContainer" type="HBoxContainer" parent="HPFrame/VBoxContainer"]
+margin_top = 24.0
+margin_right = 178.0
+margin_bottom = 44.0
 
-[node name="AkhiriHari" type="Button" parent="HPFrame"]
-margin_left = 230.0
-margin_top = 360.0
-margin_right = 268.0
-margin_bottom = 400.0
+[node name="Supplier" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer"]
+margin_right = 12.0
+margin_bottom = 20.0
 
-[node name="nutupHP" type="Button" parent="HPFrame"]
-margin_left = 286.0
-margin_top = 360.0
-margin_right = 324.0
-margin_bottom = 400.0
+[node name="crome" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer"]
+margin_left = 16.0
+margin_right = 28.0
+margin_bottom = 20.0
 
-[node name="bankku" type="Button" parent="HPFrame"]
-margin_left = 174.0
-margin_top = 253.0
-margin_right = 212.0
-margin_bottom = 293.0
+[node name="toktok" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer"]
+margin_left = 32.0
+margin_right = 44.0
+margin_bottom = 20.0
 
-[connection signal="pressed" from="HPFrame/Supplier" to="." method="_on_Supplier_pressed"]
-[connection signal="pressed" from="HPFrame/crome" to="." method="_on_crome_pressed"]
-[connection signal="pressed" from="HPFrame/toktok" to="." method="_on_toktok_pressed"]
-[connection signal="pressed" from="HPFrame/Peraturan" to="." method="_on_Peraturan_pressed"]
-[connection signal="pressed" from="HPFrame/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
-[connection signal="pressed" from="HPFrame/nutupHP" to="." method="_on_nutupHP_pressed"]
-[connection signal="pressed" from="HPFrame/bankku" to="." method="_on_bankku_pressed"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HPFrame/VBoxContainer"]
+margin_top = 48.0
+margin_right = 178.0
+margin_bottom = 68.0
+
+[node name="Peraturan" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer2"]
+margin_right = 12.0
+margin_bottom = 20.0
+
+[node name="AkhiriHari" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer2"]
+margin_left = 16.0
+margin_right = 28.0
+margin_bottom = 20.0
+
+[node name="nutupHP" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer2"]
+margin_left = 32.0
+margin_right = 44.0
+margin_bottom = 20.0
+
+[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer3/bankku" to="." method="_on_bankku_pressed"]
+[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer/Supplier" to="." method="_on_Supplier_pressed"]
+[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer/crome" to="." method="_on_crome_pressed"]
+[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer/toktok" to="." method="_on_toktok_pressed"]
+[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer2/Peraturan" to="." method="_on_Peraturan_pressed"]
+[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer2/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
+[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer2/nutupHP" to="." method="_on_nutupHP_pressed"]
