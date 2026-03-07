@@ -23,64 +23,57 @@ margin_bottom = 755.0
 texture = ExtResource( 1 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HPFrame"]
-margin_left = 161.0
-margin_top = 193.0
-margin_right = 339.111
-margin_bottom = 417.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="GridContainer" type="GridContainer" parent="HPFrame"]
+margin_left = 172.0
+margin_top = 243.0
+margin_right = 216.0
+margin_bottom = 311.0
+rect_min_size = Vector2( 10, 0 )
+rect_scale = Vector2( 3.5, 2.5 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="HPFrame/VBoxContainer"]
-margin_right = 178.0
-margin_bottom = 20.0
-
-[node name="bankku" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer3"]
+[node name="Supplier" type="Button" parent="HPFrame/GridContainer"]
 margin_right = 12.0
 margin_bottom = 20.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HPFrame/VBoxContainer"]
+[node name="crome" type="Button" parent="HPFrame/GridContainer"]
+margin_left = 16.0
+margin_right = 28.0
+margin_bottom = 20.0
+
+[node name="toktok" type="Button" parent="HPFrame/GridContainer"]
+margin_left = 32.0
+margin_right = 44.0
+margin_bottom = 20.0
+
+[node name="bankku" type="Button" parent="HPFrame/GridContainer"]
 margin_top = 24.0
-margin_right = 178.0
+margin_right = 12.0
 margin_bottom = 44.0
 
-[node name="Supplier" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer"]
-margin_right = 12.0
-margin_bottom = 20.0
-
-[node name="crome" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer"]
+[node name="Peraturan" type="Button" parent="HPFrame/GridContainer"]
 margin_left = 16.0
+margin_top = 24.0
 margin_right = 28.0
-margin_bottom = 20.0
+margin_bottom = 44.0
 
-[node name="toktok" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer"]
+[node name="AkhiriHari" type="Button" parent="HPFrame/GridContainer"]
 margin_left = 32.0
+margin_top = 24.0
 margin_right = 44.0
-margin_bottom = 20.0
+margin_bottom = 44.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HPFrame/VBoxContainer"]
+[node name="nutupHP" type="Button" parent="HPFrame/GridContainer"]
 margin_top = 48.0
-margin_right = 178.0
+margin_right = 12.0
 margin_bottom = 68.0
 
-[node name="Peraturan" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer2"]
-margin_right = 12.0
-margin_bottom = 20.0
-
-[node name="AkhiriHari" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer2"]
-margin_left = 16.0
-margin_right = 28.0
-margin_bottom = 20.0
-
-[node name="nutupHP" type="Button" parent="HPFrame/VBoxContainer/HBoxContainer2"]
-margin_left = 32.0
-margin_right = 44.0
-margin_bottom = 20.0
-
-[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer3/bankku" to="." method="_on_bankku_pressed"]
-[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer/Supplier" to="." method="_on_Supplier_pressed"]
-[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer/crome" to="." method="_on_crome_pressed"]
-[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer/toktok" to="." method="_on_toktok_pressed"]
-[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer2/Peraturan" to="." method="_on_Peraturan_pressed"]
-[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer2/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
-[connection signal="pressed" from="HPFrame/VBoxContainer/HBoxContainer2/nutupHP" to="." method="_on_nutupHP_pressed"]
+[connection signal="pressed" from="HPFrame/GridContainer/Supplier" to="." method="_on_Supplier_pressed"]
+[connection signal="pressed" from="HPFrame/GridContainer/crome" to="." method="_on_crome_pressed"]
+[connection signal="pressed" from="HPFrame/GridContainer/toktok" to="." method="_on_toktok_pressed"]
+[connection signal="pressed" from="HPFrame/GridContainer/bankku" to="." method="_on_bankku_pressed"]
+[connection signal="pressed" from="HPFrame/GridContainer/Peraturan" to="." method="_on_Peraturan_pressed"]
+[connection signal="pressed" from="HPFrame/GridContainer/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
+[connection signal="pressed" from="HPFrame/GridContainer/nutupHP" to="." method="_on_nutupHP_pressed"]
