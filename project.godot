@@ -87,7 +87,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://autoLoad/GameManager.gd"
-MainUi="*res://autoLoad/main_UI.tscn"
 
 [display]
 
