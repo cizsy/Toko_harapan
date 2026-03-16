@@ -5,3 +5,6 @@ var hud = preload("res://scene/main_UI.tscn")
 func _ready():
 	var hud_instance = hud.instance()
 	add_child(hud_instance)
+	
+	var dialogIntro = Dialogic.start("testing")
+	add_child(dialogIntro)

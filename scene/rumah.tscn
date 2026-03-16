@@ -341,11 +341,8 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 638, 360 )
+position = Vector2( 633, 249 )
 current = true
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="bg" type="Node2D" parent="."]
 
