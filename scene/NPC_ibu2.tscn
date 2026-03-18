@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=2]
 
-[ext_resource path="res://script/player.gd" type="Script" id=1]
+[ext_resource path="res://script/NPC_ibu2.gd" type="Script" id=1]
 [ext_resource path="res://Asset/character/larasRight.png" type="Texture" id=2]
 [ext_resource path="res://Asset/character/larasLeft.png" type="Texture" id=3]
 [ext_resource path="res://Asset/character/idle.png" type="Texture" id=4]
@@ -127,3 +127,5 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 18 )
+
+[node name="Navigation2D" type="Navigation2D" parent="."]
