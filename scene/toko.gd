@@ -3,9 +3,9 @@ extends Node2D
 var hud = preload("res://scene/main_UI.tscn")
 
 func _ready():
+	var canvas_layer = CanvasLayer.new() # Buat layer khusus UI
+	add_child(canvas_layer)
+	
 	var hud_instance = hud.instance()
-	add_child(hud_instance)
+	canvas_layer.add_child(hud_instance) # Masukkan HUD ke dalam layer tersebut
 
-
-func _on_teleport_body_entered(body):
-	pass # Replace with function body.

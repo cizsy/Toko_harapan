@@ -1,20 +1,24 @@
 extends Area2D
 
-onready var icon = $Interact
+var active = false
 
 func _ready():
-	icon.visible = false
-	
-func _on_teleport_body_entered(body):
-	if body.name == "Player":
-		body.can_interact = true
-		body.interact_target = self
+	connect("body_entered", self, "_on_body_entered")
+	connect("body_exited", self, "_on_body_exited")
 
-func _on_teleport_body_exited(body):
-	if body.name == "Player":
-		body.can_interact = false
-		body.interact_target = null
+func _on_Area2D_body_entered(body):
+	if body.name == "player":
+		active = true
 	
-func interact():
-	get_tree().change_scene("res://scene/rumah.tscn")
+
+func _on_Area2D_body_exited(body):
+	if body.name == "player":
+		active = false
+
+func _process(delta):
+	$Interact.visible = active
+	if active and Input.is_action_just_pressed("interact"):
+		get_tree().change_scene("res://scene/rumah.tscn")
+	
+
 	
