@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Asset/toko/furniture8_toko.png" type="Texture" id=1]
 [ext_resource path="res://Asset/toko/rak depan kasir.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scene/player.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scene/pintuToko.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/toko.gd" type="Script" id=10]
+[ext_resource path="res://scene/main_UI.tscn" type="PackedScene" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Floor_3_16x16.png 0"
@@ -1326,3 +1327,5 @@ z_index = 1
 [node name="player" parent="." instance=ExtResource( 8 )]
 position = Vector2( 506, 294 )
 z_index = 1
+
+[node name="mainUI" parent="." instance=ExtResource( 11 )]

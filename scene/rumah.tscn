@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://Asset/tileset 16x16/Floor_3_16x16.png" type="Texture" id=1]
 [ext_resource path="res://Asset/tileset 16x16/Wall_1_16x16.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Asset/tileset 16x16/Singles_16x16/Item_singles_44.png" type="Texture" id=19]
 [ext_resource path="res://Asset/tileset 16x16/Singles_16x16/Item_singles_26.png" type="Texture" id=20]
 [ext_resource path="res://scene/rumah.gd" type="Script" id=21]
+[ext_resource path="res://scene/main_UI.tscn" type="PackedScene" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Floor_3_16x16.png 0"
@@ -470,3 +471,5 @@ position = Vector2( 539, 325 )
 z_index = 1
 
 [node name="Area2D" parent="." instance=ExtResource( 15 )]
+
+[node name="mainUI" parent="." instance=ExtResource( 22 )]

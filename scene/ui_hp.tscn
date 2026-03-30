@@ -56,12 +56,8 @@ texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 2048, 2048 )
 
 [node name="ui_hp" type="Control"]
-anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1280.0
-margin_top = -720.0
 script = ExtResource( 2 )
 
 [node name="bg" type="TextureRect" parent="."]
@@ -69,10 +65,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -187.0
-margin_top = -367.0
-margin_right = -17.0
-margin_bottom = -14.0
+margin_left = -228.0
+margin_top = -419.0
+margin_right = -33.0
+margin_bottom = -21.0
 texture = ExtResource( 3 )
 expand = true
 
@@ -81,28 +77,25 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -351.0
-margin_top = -437.0
+margin_left = -409.0
+margin_top = -497.0
 margin_right = 143.0
 margin_bottom = 68.0
 texture = ExtResource( 1 )
 expand = true
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="GridContainer" type="GridContainer" parent="HPFrame"]
-margin_left = 169.0
-margin_top = 244.0
-margin_right = 213.0
-margin_bottom = 312.0
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 1061.0
+margin_top = 522.0
+margin_right = 1105.0
+margin_bottom = 590.0
 rect_min_size = Vector2( 10, 0 )
-rect_scale = Vector2( 3.49722, 2.26319 )
+rect_scale = Vector2( 4.00732, 2.31931 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="Supplier" type="Button" parent="HPFrame/GridContainer"]
+[node name="Supplier" type="Button" parent="GridContainer"]
 margin_right = 12.0
 margin_bottom = 20.0
 custom_styles/hover = SubResource( 1 )
@@ -111,12 +104,12 @@ custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 
-[node name="crome" type="Button" parent="HPFrame/GridContainer"]
+[node name="crome" type="Button" parent="GridContainer"]
 margin_left = 16.0
 margin_right = 28.0
 margin_bottom = 20.0
 
-[node name="toktok" type="Button" parent="HPFrame/GridContainer"]
+[node name="toktok" type="Button" parent="GridContainer"]
 margin_left = 32.0
 margin_right = 44.0
 margin_bottom = 20.0
@@ -126,7 +119,7 @@ custom_styles/focus = SubResource( 8 )
 custom_styles/disabled = SubResource( 9 )
 custom_styles/normal = SubResource( 10 )
 
-[node name="bankku" type="Button" parent="HPFrame/GridContainer"]
+[node name="bankku" type="Button" parent="GridContainer"]
 margin_top = 24.0
 margin_right = 12.0
 margin_bottom = 44.0
@@ -135,27 +128,27 @@ custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
 custom_styles/normal = SubResource( 14 )
 
-[node name="Peraturan" type="Button" parent="HPFrame/GridContainer"]
+[node name="Peraturan" type="Button" parent="GridContainer"]
 margin_left = 16.0
 margin_top = 24.0
 margin_right = 28.0
 margin_bottom = 44.0
 
-[node name="AkhiriHari" type="Button" parent="HPFrame/GridContainer"]
+[node name="AkhiriHari" type="Button" parent="GridContainer"]
 margin_left = 32.0
 margin_top = 24.0
 margin_right = 44.0
 margin_bottom = 44.0
 
-[node name="nutupHP" type="Button" parent="HPFrame/GridContainer"]
+[node name="nutupHP" type="Button" parent="GridContainer"]
 margin_top = 48.0
 margin_right = 12.0
 margin_bottom = 68.0
 
-[connection signal="pressed" from="HPFrame/GridContainer/Supplier" to="." method="_on_Supplier_pressed"]
-[connection signal="pressed" from="HPFrame/GridContainer/crome" to="." method="_on_crome_pressed"]
-[connection signal="pressed" from="HPFrame/GridContainer/toktok" to="." method="_on_toktok_pressed"]
-[connection signal="pressed" from="HPFrame/GridContainer/bankku" to="." method="_on_bankku_pressed"]
-[connection signal="pressed" from="HPFrame/GridContainer/Peraturan" to="." method="_on_Peraturan_pressed"]
-[connection signal="pressed" from="HPFrame/GridContainer/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
-[connection signal="pressed" from="HPFrame/GridContainer/nutupHP" to="." method="_on_nutupHP_pressed"]
+[connection signal="pressed" from="GridContainer/Supplier" to="." method="_on_Supplier_pressed"]
+[connection signal="pressed" from="GridContainer/crome" to="." method="_on_crome_pressed"]
+[connection signal="pressed" from="GridContainer/toktok" to="." method="_on_toktok_pressed"]
+[connection signal="pressed" from="GridContainer/bankku" to="." method="_on_bankku_pressed"]
+[connection signal="pressed" from="GridContainer/Peraturan" to="." method="_on_Peraturan_pressed"]
+[connection signal="pressed" from="GridContainer/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
+[connection signal="pressed" from="GridContainer/nutupHP" to="." method="_on_nutupHP_pressed"]
