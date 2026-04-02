@@ -2,7 +2,6 @@ extends Control
 
 
 func _on_nutupHP_pressed():
-	emit_signal("hp_ditutup")
 	queue_free()
 
 

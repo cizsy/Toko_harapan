@@ -1,11 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://script/main_UI.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialogic/Example Assets/Fonts/Overlock/Overlock-Black.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_1.png" type="Texture" id=3]
-[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_4.png" type="Texture" id=4]
-[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_3.png" type="Texture" id=5]
-[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_2.png" type="Texture" id=6]
 [ext_resource path="res://Asset/UI buatan/hpVerMati.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
@@ -31,26 +27,6 @@ region_rect = Rect2( 0, 0, 512, 512 )
 [sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 512, 512 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 26
-font_data = ExtResource( 2 )
-
-[sub_resource type="StyleBoxTexture" id=4]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 128, 32 )
-
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 128, 32 )
-
-[sub_resource type="StyleBoxTexture" id=6]
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 128, 32 )
-
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 128, 32 )
 
 [node name="mainUI" type="CanvasLayer"]
 
@@ -110,34 +86,4 @@ margin_top = -37.0
 margin_right = 280.0
 margin_bottom = 37.0
 
-[node name="layaniPelanggan" type="Button" parent="rootUI"]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -120.0
-margin_top = -177.0
-margin_right = 120.0
-margin_bottom = -121.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-text = "Layani pelanggan"
-
-[node name="pelangganBar" type="ProgressBar" parent="rootUI"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -84.0
-margin_top = -18.0
-margin_right = 84.0
-margin_bottom = 18.0
-
 [connection signal="pressed" from="rootUI/HpButton" to="rootUI" method="_on_HpButton_pressed"]
-[connection signal="pressed" from="rootUI/layaniPelanggan" to="rootUI" method="_on_layaniPelanggan_pressed"]

@@ -1,5 +1,6 @@
 extends Node
 
+
 # waktu
 var current_day = 1
 var current_month = 1

@@ -15,7 +15,7 @@ func _on_Area2D_body_exited(body):
 	if body.name == "player":
 		active = false
 
-func _process(delta):
+func _process(_delta):
 	$Interact.visible = active
 	if active and Input.is_action_just_pressed("interact"):
 		get_tree().change_scene("res://scene/rumah.tscn")

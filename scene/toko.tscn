@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Asset/toko/furniture8_toko.png" type="Texture" id=1]
 [ext_resource path="res://Asset/toko/rak depan kasir.png" type="Texture" id=2]
@@ -11,6 +11,11 @@
 [ext_resource path="res://scene/pintuToko.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scene/toko.gd" type="Script" id=10]
 [ext_resource path="res://scene/main_UI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Asset/font/Cabin-Bold.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_2.png" type="Texture" id=13]
+[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_3.png" type="Texture" id=14]
+[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_4.png" type="Texture" id=15]
+[ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_1.png" type="Texture" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Floor_3_16x16.png 0"
@@ -1146,7 +1151,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 28/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=25]
-extents = Vector2( 74.625, 21 )
+extents = Vector2( 75.8125, 26 )
 
 [sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 207.5, 15.5 )
@@ -1165,6 +1170,29 @@ extents = Vector2( 7.25, 241.125 )
 
 [sub_resource type="RectangleShape2D" id=31]
 extents = Vector2( 327, 6.53125 )
+
+[sub_resource type="DynamicFont" id=32]
+size = 27
+font_data = ExtResource( 12 )
+
+[sub_resource type="StyleBoxTexture" id=33]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 128, 32 )
+
+[sub_resource type="StyleBoxTexture" id=34]
+texture = ExtResource( 13 )
+region_rect = Rect2( 0, 0, 128, 32 )
+
+[sub_resource type="StyleBoxTexture" id=35]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 128, 32 )
+
+[sub_resource type="StyleBoxTexture" id=36]
+texture = ExtResource( 15 )
+region_rect = Rect2( 0, 0, 128, 32 )
+
+[sub_resource type="RectangleShape2D" id=37]
+extents = Vector2( 63.5, 22.75 )
 
 [node name="toko" type="Node2D"]
 script = ExtResource( 10 )
@@ -1307,12 +1335,12 @@ shape = SubResource( 30 )
 [node name="StaticBody2D" type="StaticBody2D" parent="map/YSort"]
 
 [node name="RakDepanKasir" type="Sprite" parent="map/YSort/StaticBody2D"]
-position = Vector2( 398, 283 )
+position = Vector2( 398, 264 )
 scale = Vector2( 2.00343, 2.00342 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/YSort/StaticBody2D"]
-position = Vector2( 399.375, 271 )
+position = Vector2( 398.188, 257 )
 shape = SubResource( 25 )
 
 [node name="Position2D2" type="Position2D" parent="."]
@@ -1329,3 +1357,40 @@ position = Vector2( 506, 294 )
 z_index = 1
 
 [node name="mainUI" parent="." instance=ExtResource( 11 )]
+
+[node name="layani" type="CanvasLayer" parent="."]
+
+[node name="layaniPelanggan" type="Button" parent="layani"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -28.0
+margin_right = 120.0
+margin_bottom = 28.0
+rect_scale = Vector2( 0.8, 0.7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 32 )
+custom_styles/hover = SubResource( 33 )
+custom_styles/pressed = SubResource( 34 )
+custom_styles/focus = SubResource( 35 )
+custom_styles/normal = SubResource( 36 )
+text = "Layani pelanggan"
+
+[node name="pelangganBar" type="ProgressBar" parent="layani"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -295.0
+margin_top = -237.0
+margin_right = -145.0
+margin_bottom = -207.0
+rect_scale = Vector2( 0.72, 0.727029 )
+
+[node name="player_bisa_layani" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_bisa_layani"]
+position = Vector2( 393.5, 203.25 )
+shape = SubResource( 37 )

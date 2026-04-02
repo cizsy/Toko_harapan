@@ -339,10 +339,11 @@ __meta__ = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 633, 249 )
+position = Vector2( 638, 359 )
 current = true
 
 [node name="bg" type="Node2D" parent="."]
+position = Vector2( 0, 111 )
 
 [node name="lantai" type="TileMap" parent="bg"]
 tile_set = SubResource( 1 )
@@ -372,7 +373,7 @@ format = 1
 tile_data = PoolIntArray( 131121, 1610612736, 0, 262157, 1610612736, 0, 1572877, 0, 0, 1572895, -1073741824, 0 )
 
 [node name="furniture" type="StaticBody2D" parent="."]
-position = Vector2( 726, 260 )
+position = Vector2( 726, 371 )
 scale = Vector2( 4, 4 )
 
 [node name="ItemSingles22" type="Sprite" parent="furniture"]
@@ -471,5 +472,7 @@ position = Vector2( 539, 325 )
 z_index = 1
 
 [node name="Area2D" parent="." instance=ExtResource( 15 )]
+position = Vector2( -3, -31 )
 
 [node name="mainUI" parent="." instance=ExtResource( 22 )]
+visible = false

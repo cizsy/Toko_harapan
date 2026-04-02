@@ -1,10 +1,24 @@
-extends Node2D
+extends Area2D
 
-var hud = preload("res://scene/main_UI.tscn")
+var active = false
 
 func _ready():
-	var canvas_layer = CanvasLayer.new() # Buat layer khusus UI
-	add_child(canvas_layer)
+	connect("body_entered", self, "_on_body_entered")
+	connect("body_exited", self, "_on_body_exited")
+
+func _on_Area2D_body_entered(body):
+	if body.name == "player":
+		active = true
 	
-	var hud_instance = hud.instance()
-	canvas_layer.add_child(hud_instance)
+
+func _on_Area2D_body_exited(body):
+	if body.name == "player":
+		active = false
+
+func _process(delta):
+	$Interact.visible = active
+	if active and Input.is_action_just_pressed("interact"):
+		get_tree().change_scene("res://scene/toko.tscn")
+	
+
+	
