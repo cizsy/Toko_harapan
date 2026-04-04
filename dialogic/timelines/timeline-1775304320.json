@@ -1,0 +1,130 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Uhuk uhuk uhuk, debunya tebal banget ini.\""
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Jadi ini toko Ayah dulu?\""
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1772283681.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1772283681.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Iya, Bapak bekerja di sini dari dulu. Biasanya Bapak kerja di shift pagi.\""
+		},
+		{
+			"character": "character-1772283681.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Kita akan membersihkan toko ini besok yah, kita akan berjuang bersama menghidupkan kembali toko ini.\""
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Raka: \"Siap Pak, makasih yah tetap berjuang untuk toko ini. \""
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Almarhum Ayah pasti bangga jika karyawannya masih ada yang tetap mau berjuang untuk tokonya.\""
+		},
+		{
+			"character": "character-1772283681.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Tenang saja, saya dan Ayah kamu itu berteman dari dulu.\""
+		},
+		{
+			"character": "character-1772283681.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Dah gini aja, besok pagi kamu fokus sekolah dulu aja.\""
+		},
+		{
+			"character": "character-1772283681.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Pak Beni yang akan membersihkan toko ini terlebih dahulu, lalu setelah kamu pulang baru kamu ke sini untuk membantu.\""
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Jadi Bapak ke sini pagi-pagi?"
+		},
+		{
+			"character": "character-1772283681.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": " \"Iya dong, kayak Pak Beni kerja dulu saat Ayah kamu masih ada.\""
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Makasih banyak ya Pak Beni.\""
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1.5
+		},
+		{
+			"custom_slot": "",
+			"event_id": "dialogic_026",
+			"use_default_slot": true
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.5.1",
+		"file": "timeline-1775304320.json",
+		"name": "scene1"
+	}
+}

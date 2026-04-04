@@ -1,0 +1,85 @@
+{
+	"events": [
+		{
+			"background": "",
+			"event_id": "dialogic_021"
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Pembeli hari ini sepi. Mereka nanyain beras, minyak, gula... tapi kita nggak punya stoknya."
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": " “Mas, kardus ini ngehalangin jalan deh. Aku geser ke gudang belakang ya?”"
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "“Jangan Ras, berat. Tunggu Pak Beni besok aja.”"
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": " “Ah, Pak Beni kan udah tua. Aku bisa kok, cuma digeser doang”."
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "BRUKKK"
+		},
+		{
+			"audio": "play",
+			"audio_bus": "Master",
+			"event_id": "dialogic_030",
+			"event_name": "AudioEvent",
+			"file": "",
+			"volume": 0
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": " “Laras!”"
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "“Aduh... ssshh...”"
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "“Kaki kamu kejepit?! Kan Mas Raka udah bilang jangan!”"
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "“Maaf Mas... Aku cuma mau bantu biar toko rapi... biar pembeli seneng...\nKalau toko kita punya duit, kita bisa bayar tukang angkut ya Mas? Biar Mas Raka sama Pak Beni nggak encok...”"
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Laras tersenyum, tapi kakinya merah lebam.\nHati rasanya perih. Toko ini butuh modal. Aku nggak bisa gini terus"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 2
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.5.1",
+		"file": "timeline-1775306977.json",
+		"name": "scene3"
+	}
+}

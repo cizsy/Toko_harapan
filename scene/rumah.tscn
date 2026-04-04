@@ -475,4 +475,3 @@ z_index = 1
 position = Vector2( -3, -31 )
 
 [node name="mainUI" parent="." instance=ExtResource( 22 )]
-visible = false

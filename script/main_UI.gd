@@ -21,22 +21,20 @@ func update_ui():
 	$moneyPanel/moneyLabel.text = "💰 Uang : Rp " + str(GameManager.money)
 
 func _on_HpButton_pressed():
-	# Jika HP belum ada, buat baru
 	if not is_instance_valid(hp_instance):
 		hp_instance = hp_scene.instance()
-		add_child(hp_instance) # Spawn di dalam main_UI (CanvasLayer)
+		add_child(hp_instance)
 		
-		hp_instance.raise()
+		hp_instance.connect("hp_ditutup", self, "_on_hp_terhapus_manual")
 		
 		$HpButton.visible = false
-		
-		# Jika di dalam ui_hp.tscn kamu punya tombol "Close", 
-		# pastikan dia memanggil queue_free() atau kirim signal ke sini.
 	else:
-		# Jika tombol ditekan saat HP masih ada, kita tutup
 		tutup_hp()
 
-# FUNGSI KUNCI: Gunakan ini untuk menutup HP dengan aman
+func _on_hp_terhapus_manual():
+	$HpButton.visible = true
+	hp_instance = null
+
 func tutup_hp():
 	if is_instance_valid(hp_instance):
 		hp_instance.queue_free()

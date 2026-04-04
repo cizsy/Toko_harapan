@@ -1,9 +1,10 @@
 extends Control
 
+signal hp_ditutup 
 
 func _on_nutupHP_pressed():
+	emit_signal("hp_ditutup")
 	queue_free()
-
 
 
 func _on_AkhiriHari_pressed():

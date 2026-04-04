@@ -1,0 +1,91 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Mas, kata Pak Beni besok Kakak sama Pak Beni akan membersihkan toko Ayah dulu yah Kak?\""
+		},
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Iya, kita akan menghidupkan toko Ayah kembali, meskipun modal kita masih belum cukup untuk menyiapkan banyak barang yang akan diperjualkan.\""
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Nda papa, Mas Raka pakai semua modalnya buat toko aja, toh aku SPP sekolah tidak bayar, uang tabunganku masih ada banyak.\""
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Makasih ya Dek.\""
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Sama-sama Mas. Besok aku bantu bersih-bersih toko ya supaya lebih cepat selesai dan lebih cepat buka. Gak sabar deh liat bocil-bocil yang akan datang ke toko kita!\""
+		},
+		{
+			"character": "character-1772283630.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Iya boleh Dek, tapi jangan capek-capek ya, atau enggak kamu duduk-duduk aja supaya tidak kelelahan.\""
+		},
+		{
+			"character": "character-1772283705.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "\"Siap Mas Raka!. Udah yuk mari kita tidur... kan besok ada upacara.\""
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.5.1",
+		"file": "timeline-1775304595.json",
+		"name": "scene2"
+	}
+}
