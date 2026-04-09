@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://Asset/toko/furniture8_toko.png" type="Texture" id=1]
 [ext_resource path="res://Asset/toko/rak depan kasir.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_3.png" type="Texture" id=14]
 [ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_4.png" type="Texture" id=15]
 [ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_1.png" type="Texture" id=16]
+[ext_resource path="res://music/bgm/╗¹║░(Daystar)-A Moment in Jeju.mp3" type="AudioStream" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Floor_3_16x16.png 0"
@@ -1393,5 +1394,9 @@ rect_scale = Vector2( 0.72, 0.727029 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_bisa_layani"]
 position = Vector2( 398.25, 204.125 )
 shape = SubResource( 37 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+autoplay = true
 
 [connection signal="pressed" from="layani/layaniPelanggan" to="." method="_on_layaniPelanggan_pressed"]

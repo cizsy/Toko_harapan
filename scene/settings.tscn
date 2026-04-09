@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Asset/font/Cabin-Medium.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Asset/font/Seven Moon.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scene/settings.gd" type="Script" id=3]
+[ext_resource path="res://music/bgm/massobeats - rose water (royalty free lofi music).mp3" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 35
@@ -248,6 +249,10 @@ margin_top = 221.0
 margin_right = 500.0
 margin_bottom = 241.0
 text = "Kembali"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+autoplay = true
 
 [connection signal="value_changed" from="VBoxContainer/volume/slider/masterSlider" to="." method="_on_masterSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/volume/slider/musicSlider" to="." method="_on_musicSlider_value_changed"]
