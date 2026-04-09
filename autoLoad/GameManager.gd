@@ -1,5 +1,9 @@
 extends Node
 
+signal data_update
+
+#entahlah
+var prev_scen = ""
 
 # waktu
 var current_day = 1
@@ -10,6 +14,7 @@ var max_month = 3
 
 # ekonomi
 var money = 5_000_000
+var hasil_uang = 10000
 
 #pelanggan
 var served_today = 0
@@ -29,7 +34,7 @@ var stock = {
 var reputasi = 0
 
 #hutang
-var hutang_utama = 25_000_000
+var hutang_utama = 20_000_000
 
 #pinjol
 var pinjol = 0
@@ -40,6 +45,7 @@ func pay_debt(amount):
 	if money >= payment:
 		money -= payment
 		hutang_utama -= payment
+		get_tree().call_group("UI", "tampilkan_info", "Hutang Terbayar: - Rp" )
 	else:
 		print("Uang tidak cukup")
 
@@ -84,6 +90,8 @@ func customer_served():
 	var profit = 10000
 	money += profit
 	
+	emit_signal("data_update")
+	
 	print("Pelanggan dilayani + Rp. " + str(profit))
 	
 	if served_today >= max_customer_per_day:
@@ -93,4 +101,11 @@ func customer_served():
 func get_max_customer():
 	return 3 + current_month
 	
+
+
+func pindah_ke_settings():
+	prev_scen = get_tree().current_scene.filename
+	
+	get_tree().change_scene("res://scene/settings.tscn")
+
 

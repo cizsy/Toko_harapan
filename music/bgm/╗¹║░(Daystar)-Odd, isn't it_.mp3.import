@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/╗¹║░(Daystar)-Odd, isn't it_.mp3-c0f52b3082bfefb57b6e3f3095d59e19.mp3str"
+
+[deps]
+
+source_file="res://music/bgm/╗¹║░(Daystar)-Odd, isn't it_.mp3"
+dest_files=[ "res://.import/╗¹║░(Daystar)-Odd, isn't it_.mp3-c0f52b3082bfefb57b6e3f3095d59e19.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

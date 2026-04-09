@@ -19,6 +19,4 @@ func _process(_delta):
 	$Interact.visible = active
 	if active and Input.is_action_just_pressed("interact"):
 		get_tree().change_scene("res://scene/rumah.tscn")
-	
 
-	

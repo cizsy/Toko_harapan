@@ -2,10 +2,16 @@ extends Control
 
 var hp_scene = preload("res://scene/ui_hp.tscn")
 var hp_instance = null
+onready var label_uang = $moneyPanel/moneyLabel
+onready var infoLabel = $infoPanel/infoLabel
+
 
 
 func _ready():
+	infoLabel.text = ""
 	
+	GameManager.connect("data_update", self, "update_tampilan_uang")
+	update_tampilan_uang()
 	
 	update_ui()
 	$HpButton.visible = true # Pastikan tombol muncul di awal
@@ -41,6 +47,22 @@ func tutup_hp():
 	
 	hp_instance = null
 	$HpButton.visible = true
+	
+func update_tampilan_uang():
+	# Mengambil nilai uang dari GameManager
+	label_uang.text = "Uang: " + str(GameManager.money)
+	
+func _process(_delta):
+	label_uang.text = "Uang: " + str(GameManager.money)
+	$dayPanel/dayLabel.text = "Hari " + str(GameManager.current_day)
 
-
-
+func tampilkan_info(pesan, warna = Color.black):
+	print("Masuk coy")
+	infoLabel.text = pesan
+	infoLabel.modulate = warna
+	
+	yield(get_tree().create_timer(2.0),"timeout")
+	
+	if infoLabel.text == pesan:
+		infoLabel.text = ""
+	

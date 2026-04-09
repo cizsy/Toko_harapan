@@ -1,20 +1,21 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Asset/UI buatan/hp.png" type="Texture" id=1]
 [ext_resource path="res://script/hp.gd" type="Script" id=2]
 [ext_resource path="res://Asset/UI buatan/bgHP.jpg" type="Texture" id=3]
 [ext_resource path="res://Asset/app hp/supplier.png" type="Texture" id=4]
 [ext_resource path="res://Asset/app hp/bankku.png" type="Texture" id=5]
-[ext_resource path="res://Asset/app hp/toktok.png" type="Texture" id=6]
-[ext_resource path="res://Asset/app hp/supply.png" type="Texture" id=7]
+[ext_resource path="res://Asset/app hp/settings.png" type="Texture" id=6]
+[ext_resource path="res://Asset/app hp/power.png" type="Texture" id=7]
+[ext_resource path="res://Asset/app hp/tiktok.png" type="Texture" id=8]
+[ext_resource path="res://Asset/app hp/chrome.png" type="Texture" id=9]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 500, 500 )
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
 
 [sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 500, 500 )
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 2048, 2048 )
 
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 4 )
@@ -28,21 +29,42 @@ region_rect = Rect2( 0, 0, 2048, 2048 )
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 2048, 2048 )
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
+
+[sub_resource type="StyleBoxTexture" id=17]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=18]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=19]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxFlat" id=20]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
 
 [sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 500, 500 )
 
 [sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 500, 500 )
 
 [sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 500, 500 )
 
 [sub_resource type="StyleBoxTexture" id=10]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 2048, 2048 )
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 500, 500 )
 
-[sub_resource type="StyleBoxTexture" id=11]
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 2048, 2048 )
+[sub_resource type="StyleBoxFlat" id=21]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
 
 [sub_resource type="StyleBoxTexture" id=12]
 texture = ExtResource( 5 )
@@ -55,6 +77,47 @@ region_rect = Rect2( 0, 0, 2048, 2048 )
 [sub_resource type="StyleBoxTexture" id=14]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 2048, 2048 )
+
+[sub_resource type="StyleBoxFlat" id=22]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
+
+[sub_resource type="StyleBoxTexture" id=23]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=24]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=25]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=26]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxFlat" id=27]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
+
+[sub_resource type="StyleBoxTexture" id=28]
+
+[sub_resource type="StyleBoxTexture" id=29]
+
+[sub_resource type="StyleBoxTexture" id=30]
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
+
+[sub_resource type="StyleBoxTexture" id=32]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=33]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=34]
 
 [node name="ui_hp" type="Control"]
 anchor_left = 1.0
@@ -98,14 +161,12 @@ margin_right = 1105.0
 margin_bottom = 590.0
 rect_min_size = Vector2( 10, 0 )
 rect_scale = Vector2( 4.00732, 2.31931 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
 columns = 3
 
 [node name="Supplier" type="Button" parent="GridContainer"]
 margin_right = 12.0
 margin_bottom = 20.0
-custom_styles/hover = SubResource( 1 )
+custom_styles/hover = SubResource( 15 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
@@ -115,12 +176,16 @@ custom_styles/normal = SubResource( 5 )
 margin_left = 16.0
 margin_right = 28.0
 margin_bottom = 20.0
+custom_styles/hover = SubResource( 16 )
+custom_styles/pressed = SubResource( 17 )
+custom_styles/focus = SubResource( 18 )
+custom_styles/disabled = SubResource( 19 )
 
 [node name="toktok" type="Button" parent="GridContainer"]
 margin_left = 32.0
 margin_right = 44.0
 margin_bottom = 20.0
-custom_styles/hover = SubResource( 6 )
+custom_styles/hover = SubResource( 20 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 8 )
 custom_styles/disabled = SubResource( 9 )
@@ -130,7 +195,7 @@ custom_styles/normal = SubResource( 10 )
 margin_top = 24.0
 margin_right = 12.0
 margin_bottom = 44.0
-custom_styles/hover = SubResource( 11 )
+custom_styles/hover = SubResource( 21 )
 custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
 custom_styles/normal = SubResource( 14 )
@@ -140,17 +205,30 @@ margin_left = 16.0
 margin_top = 24.0
 margin_right = 28.0
 margin_bottom = 44.0
+custom_styles/hover = SubResource( 22 )
+custom_styles/pressed = SubResource( 23 )
+custom_styles/focus = SubResource( 24 )
+custom_styles/disabled = SubResource( 25 )
+custom_styles/normal = SubResource( 26 )
 
 [node name="AkhiriHari" type="Button" parent="GridContainer"]
 margin_left = 32.0
 margin_top = 24.0
 margin_right = 44.0
 margin_bottom = 44.0
+custom_styles/hover = SubResource( 27 )
+custom_styles/pressed = SubResource( 28 )
+custom_styles/focus = SubResource( 29 )
+custom_styles/disabled = SubResource( 30 )
 
 [node name="nutupHP" type="Button" parent="GridContainer"]
 margin_top = 48.0
 margin_right = 12.0
 margin_bottom = 68.0
+custom_styles/hover = SubResource( 31 )
+custom_styles/pressed = SubResource( 32 )
+custom_styles/focus = SubResource( 33 )
+custom_styles/disabled = SubResource( 34 )
 
 [connection signal="pressed" from="GridContainer/Supplier" to="." method="_on_Supplier_pressed"]
 [connection signal="pressed" from="GridContainer/crome" to="." method="_on_crome_pressed"]

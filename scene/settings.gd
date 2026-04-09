@@ -33,4 +33,5 @@ func _on_sfxSlider_value_changed(value):
 
 
 func _on_Back_pressed():
-	get_tree().change_scene("res://scene/mainMenu.tscn")
+	if GameManager.prev_scen != "":
+		get_tree().change_scene(GameManager.prev_scen)

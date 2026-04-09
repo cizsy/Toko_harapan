@@ -49,7 +49,7 @@ region_rect = Rect2( 0, 0, 32, 3 )
 size = 22
 font_data = ExtResource( 6 )
 
-[node name="mainUI" type="CanvasLayer"]
+[node name="mainUI" type="CanvasLayer" groups=["UI"]]
 
 [node name="rootUI" type="Control" parent="."]
 anchor_right = 1.0
@@ -117,6 +117,6 @@ margin_right = 259.0
 margin_bottom = 51.5
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 15 )
-text = "pembeli terlayani +10000"
+text = "ini info pop up"
 
 [connection signal="pressed" from="rootUI/HpButton" to="rootUI" method="_on_HpButton_pressed"]

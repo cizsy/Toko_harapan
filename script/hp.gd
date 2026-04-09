@@ -16,7 +16,7 @@ func _on_AkhiriHari_pressed():
 
 
 func _on_Peraturan_pressed():
-	print("membuka peraturan")
+	get_tree().change_scene("res://scene/settings.tscn")
 
 
 func _on_toktok_pressed():
@@ -32,4 +32,4 @@ func _on_Supplier_pressed():
 
 
 func _on_bankku_pressed():
-	GameManager.pay_debt(1_000_000)
+	GameManager.pay_debt(200_000)

@@ -1192,7 +1192,7 @@ texture = ExtResource( 15 )
 region_rect = Rect2( 0, 0, 128, 32 )
 
 [sub_resource type="RectangleShape2D" id=37]
-extents = Vector2( 63.5, 22.75 )
+extents = Vector2( 71.75, 23.875 )
 
 [node name="toko" type="Node2D"]
 script = ExtResource( 10 )
@@ -1314,7 +1314,6 @@ shape = SubResource( 28 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="map/YSort/furniture"]
 position = Vector2( 408, 597.5 )
 shape = SubResource( 29 )
-one_way_collision = true
 
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="map/YSort/furniture"]
 position = Vector2( 347, 548 )
@@ -1344,12 +1343,12 @@ position = Vector2( 398.188, 257 )
 shape = SubResource( 25 )
 
 [node name="Position2D2" type="Position2D" parent="."]
-position = Vector2( 394, 359 )
+position = Vector2( 394, 381 )
 
 [node name="spawnNPC" type="Position2D" parent="."]
-position = Vector2( 409, 639 )
+position = Vector2( 411, 577 )
 
-[node name="teleport" parent="." instance=ExtResource( 9 )]
+[node name="Area2D" parent="." instance=ExtResource( 9 )]
 z_index = 1
 
 [node name="player" parent="." instance=ExtResource( 8 )]
@@ -1365,10 +1364,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -120.0
-margin_top = -28.0
-margin_right = 120.0
-margin_bottom = 28.0
+margin_left = -51.0
+margin_top = 227.0
+margin_right = 189.0
+margin_bottom = 283.0
 rect_scale = Vector2( 0.8, 0.7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 32 )
@@ -1392,5 +1391,7 @@ rect_scale = Vector2( 0.72, 0.727029 )
 [node name="player_bisa_layani" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_bisa_layani"]
-position = Vector2( 393.5, 203.25 )
+position = Vector2( 398.25, 204.125 )
 shape = SubResource( 37 )
+
+[connection signal="pressed" from="layani/layaniPelanggan" to="." method="_on_layaniPelanggan_pressed"]

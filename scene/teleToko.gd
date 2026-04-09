@@ -21,4 +21,3 @@ func _process(delta):
 		get_tree().change_scene("res://scene/toko.tscn")
 	
 
-	

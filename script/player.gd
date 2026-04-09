@@ -54,7 +54,7 @@ func _play_anim(anim_name):
 var interactables = []
 var current_interactable = null
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("interact"):
 		if current_interactable:
 			current_interactable.interact()
