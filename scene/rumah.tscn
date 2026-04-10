@@ -469,7 +469,7 @@ position = Vector2( -47.75, 47.75 )
 shape = SubResource( 24 )
 
 [node name="player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 539, 325 )
+position = Vector2( 538, 496 )
 z_index = 1
 
 [node name="Area2D" parent="." instance=ExtResource( 15 )]

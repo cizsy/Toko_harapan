@@ -13,7 +13,7 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": ""
+			"path": "res://Asset/portrait/Shiro/tile000.png"
 		}
 	],
 	"scale": 100,

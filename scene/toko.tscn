@@ -1353,7 +1353,7 @@ position = Vector2( 411, 577 )
 z_index = 1
 
 [node name="player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 506, 294 )
+position = Vector2( 412, 542 )
 z_index = 1
 
 [node name="mainUI" parent="." instance=ExtResource( 11 )]

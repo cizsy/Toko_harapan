@@ -12,7 +12,6 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 410, 566 )
 shape = SubResource( 32 )
-disabled = true
 
 [node name="Interact" type="Sprite" parent="."]
 position = Vector2( 457, 576 )
