@@ -1,16 +1,25 @@
 extends KinematicBody2D
 
+var kecepatan = 100
+var titik_kasir = Vector2(398, 344)
+var titik_pintu = Vector2(414, 609)
+var target_tujuan = titik_kasir # Ganti angka ini dengan koordinat depan kasirmu
+var sudah_sampai = false
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+func _physics_process(_delta):
+	if not sudah_sampai:
+		var arah = (target_tujuan - global_position).normalized()
+		move_and_slide(arah * kecepatan)
+		
+		if global_position.distance_to(target_tujuan) < 10:
+			sudah_sampai = true
+			
+			# JIKA sudah sampai di pintu setelah pulang, hapus NPC-nya
+			if target_tujuan == titik_pintu:
+				queue_free()
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+# Fungsi ini akan dipanggil oleh script Toko
+func pulang():
+	target_tujuan = titik_pintu
+	sudah_sampai = false
+	print("NPC: Makasih ya, saya pulang dulu!")

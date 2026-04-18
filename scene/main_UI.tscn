@@ -46,7 +46,7 @@ texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 32, 3 )
 
 [sub_resource type="DynamicFont" id=15]
-size = 22
+size = 18
 font_data = ExtResource( 6 )
 
 [node name="mainUI" type="CanvasLayer" groups=["UI"]]

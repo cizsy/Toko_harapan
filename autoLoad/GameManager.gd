@@ -2,6 +2,9 @@ extends Node
 
 signal data_update
 
+#player
+var player_bisa_gerak = true
+
 #entahlah
 var prev_scen = ""
 
@@ -12,6 +15,8 @@ var current_month = 1
 var days_per_month = 5
 var max_month = 3
 
+var day_can_end = false
+
 # ekonomi
 var money = 5_000_000
 var hasil_uang = 10000
@@ -20,8 +25,6 @@ var hasil_uang = 10000
 var served_today = 0
 var max_customer_per_day = 5
 
-
-var day_can_end = false
 
 # stok barang
 var stock = {
@@ -45,22 +48,20 @@ func pay_debt(amount):
 	if money >= payment:
 		money -= payment
 		hutang_utama -= payment
-		get_tree().call_group("UI", "tampilkan_info", "Hutang Terbayar: - Rp" )
+		get_tree().call_group("UI", "tampilkan_info", "Hutang Terbayar: - Rp" + str(payment))
 	else:
 		print("Uang tidak cukup")
 
 #ganti hari
 func end_day():
-	current_day += 1
-	
-	#reset hal hal harian 
-	served_today = 0
-	day_can_end = false
-	
-	#cek bulan
-	if current_day > days_per_month:
-		end_month()
-		
+	if served_today >= max_customer_per_day:
+		current_day += 1
+		served_today = 0
+		# Munculkan info ke UI
+		get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
+		# Di sini kamu bisa tambahin fungsi buat nge-spawn NPC lagi buat besok
+	else:
+		get_tree().call_group("UI", "tampilkan_info", "Belum bisa tutup toko!", Color.red)	
 
 #func ganti bulan
 func end_month():
@@ -100,7 +101,7 @@ func customer_served():
 
 func get_max_customer():
 	return 3 + current_month
-	
+
 
 
 func pindah_ke_settings():

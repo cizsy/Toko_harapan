@@ -4,12 +4,14 @@ var hp_scene = preload("res://scene/ui_hp.tscn")
 var hp_instance = null
 onready var label_uang = $moneyPanel/moneyLabel
 onready var infoLabel = $infoPanel/infoLabel
+onready var infoPanel = $infoPanel
 
 
 
 func _ready():
+	add_to_group("UI")
 	infoLabel.text = ""
-	
+	infoPanel.visible = false
 	GameManager.connect("data_update", self, "update_tampilan_uang")
 	update_tampilan_uang()
 	
@@ -61,8 +63,11 @@ func tampilkan_info(pesan, warna = Color.black):
 	infoLabel.text = pesan
 	infoLabel.modulate = warna
 	
+	infoPanel.visible = true
+	
 	yield(get_tree().create_timer(2.0),"timeout")
 	
 	if infoLabel.text == pesan:
 		infoLabel.text = ""
+		infoPanel.visible = false
 	

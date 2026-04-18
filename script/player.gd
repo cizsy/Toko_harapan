@@ -6,15 +6,16 @@ export var friction := 800.0
 
 var velocity := Vector2.ZERO
 var last_facing_dir := Vector2.DOWN 
-
 onready var anim: AnimatedSprite = $AnimatedSprite
-  # pastikan nama node bener
-
-# ======================
-# MOVEMENT
-# ======================
 
 func _physics_process(delta):
+	# --- GEMBOK GLOBAL ---
+	if not GameManager.player_bisa_gerak:
+		velocity = Vector2.ZERO # Berhenti mendadak
+		_update_animation(Vector2.ZERO) # Pasang pose diam
+		return # Abaikan semua perintah jalan di bawah
+
+	# --- LOGIKA JALAN ---
 	var input_dir = Vector2.ZERO
 	input_dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
@@ -31,8 +32,7 @@ func _physics_process(delta):
 
 func _update_animation(input_dir):
 	var dir_name = _get_dir_name(last_facing_dir)
-	
-	if input_dir == Vector2.ZERO and velocity.length() < 10.0:
+	if input_dir == Vector2.ZERO:
 		_play_anim("idle_" + dir_name)
 	else:
 		_play_anim("walk_" + dir_name)
@@ -46,7 +46,7 @@ func _get_dir_name(dir):
 func _play_anim(anim_name):
 	if anim.animation != anim_name:
 		anim.play(anim_name)
-
+		
 # ======================
 # INTERACTION SYSTEM
 # ======================
