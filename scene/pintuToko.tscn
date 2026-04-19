@@ -4,17 +4,17 @@
 [ext_resource path="res://scene/teleport.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=32]
-extents = Vector2( 23.25, 24.25 )
+extents = Vector2( 33.625, 24.25 )
 
 [node name="Area2D" type="Area2D" groups=["interactable"]]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 410, 566 )
+position = Vector2( 420.375, 566 )
 shape = SubResource( 32 )
 
 [node name="Interact" type="Sprite" parent="."]
-position = Vector2( 457, 576 )
+position = Vector2( 483, 574 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 1
 texture = ExtResource( 1 )

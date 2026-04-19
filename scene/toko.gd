@@ -3,7 +3,7 @@ extends Node2D
 signal pelayanan_selesai
 
 var sedang_melayani = false
-var npc_scene = preload("res://scene/NPC_ibu2.tscn")
+var npc_scene = preload("res://scene/NPC_Base.tscn")
 var npc_saat_ini = null
 var player_di_kasir = false
 
@@ -14,14 +14,18 @@ func _ready():
 	p_bar.visible = false
 	p_bar.value = 0
 	tombol_layani.visible = false
-	
-	spawn_npc()
 
 func _process(delta):
 	if sedang_melayani: 
 		p_bar.value += 40 * delta
 		if p_bar.value >= p_bar.max_value:
 			selesai_melayani()
+
+func buka_toko():
+	GameManager.toko_buka = true
+	get_tree().call_grouo("UI", "tampilkan_info", "Toko Dibuka!")
+	
+	spawn_npc()
 
 func mulaiLayanin():
 	sedang_melayani = true
@@ -46,6 +50,15 @@ func selesai_melayani():
 	emit_signal("pelayanan_selesai")
 	
 	get_tree().call_group("UI", "tampilkan_info", "Selesai + Rp 10.000", Color.darkblue)
+	
+	if GameManager.served_today < GameManager.max_customer_per_day and GameManager.toko_buka:
+		yield(get_tree().create_timer(2.0), "timeout")
+		spawn_npc()
+		
+	elif GameManager.served_today >= GameManager.max_customer_per_day:
+		GameManager.toko_buka = false
+		get_tree().call_group("UI", "tampilkan_info", "Target harian telah tercapai, Toko tutup")
+	
 
 func _on_layaniPelanggan_pressed():
 	if GameManager.served_today < GameManager.max_customer_per_day and not sedang_melayani and player_di_kasir:

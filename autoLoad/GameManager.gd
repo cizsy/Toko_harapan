@@ -42,6 +42,8 @@ var hutang_utama = 20_000_000
 #pinjol
 var pinjol = 0
 
+var toko_buka = false
+
 #bayar hutang
 func pay_debt(amount):
 	var payment = min(amount, hutang_utama)

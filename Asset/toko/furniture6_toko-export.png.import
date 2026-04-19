@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/furniture6_toko.png-85307d7220345e87d71ba02e8a77e6c1.stex"
+path="res://.import/furniture6_toko-export.png-a884252d0fb81af67659a001ac21437e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/toko/furniture6_toko.png"
-dest_files=[ "res://.import/furniture6_toko.png-85307d7220345e87d71ba02e8a77e6c1.stex" ]
+source_file="res://Asset/toko/furniture6_toko-export.png"
+dest_files=[ "res://.import/furniture6_toko-export.png-a884252d0fb81af67659a001ac21437e.stex" ]
 
 [params]
 

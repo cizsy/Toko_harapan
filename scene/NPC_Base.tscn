@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://scene/NPC_ibu2.gd" type="Script" id=1]
+[ext_resource path="res://scene/NPC_pembeli.gd" type="Script" id=1]
 [ext_resource path="res://Asset/character/larasRight.png" type="Texture" id=2]
 [ext_resource path="res://Asset/character/larasLeft.png" type="Texture" id=3]
 [ext_resource path="res://Asset/character/idle.png" type="Texture" id=4]
