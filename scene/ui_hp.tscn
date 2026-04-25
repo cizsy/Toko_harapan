@@ -2,13 +2,26 @@
 
 [ext_resource path="res://Asset/UI buatan/hp.png" type="Texture" id=1]
 [ext_resource path="res://script/hp.gd" type="Script" id=2]
-[ext_resource path="res://Asset/UI buatan/bgHP.jpg" type="Texture" id=3]
+[ext_resource path="res://Asset/app hp/wp.jpg" type="Texture" id=3]
 [ext_resource path="res://Asset/app hp/supplier.png" type="Texture" id=4]
 [ext_resource path="res://Asset/app hp/bankku.png" type="Texture" id=5]
 [ext_resource path="res://Asset/app hp/settings.png" type="Texture" id=6]
 [ext_resource path="res://Asset/app hp/power.png" type="Texture" id=7]
 [ext_resource path="res://Asset/app hp/tiktok.png" type="Texture" id=8]
 [ext_resource path="res://Asset/app hp/chrome.png" type="Texture" id=9]
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
+
+[sub_resource type="StyleBoxTexture" id=32]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=33]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=34]
 
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
@@ -106,27 +119,14 @@ bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
 
 [sub_resource type="StyleBoxTexture" id=30]
 
-[sub_resource type="StyleBoxFlat" id=31]
-bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
-
-[sub_resource type="StyleBoxTexture" id=32]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=33]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=34]
-
 [node name="ui_hp" type="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -1279.0
+margin_left = -1285.0
 margin_top = -719.0
-margin_right = 1.0
+margin_right = -5.0
 margin_bottom = 1.0
 script = ExtResource( 2 )
 
@@ -135,10 +135,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -228.0
-margin_top = -419.0
-margin_right = -33.0
-margin_bottom = -21.0
+margin_left = -275.0
+margin_top = -503.0
+margin_right = -44.0
+margin_bottom = -23.0
 texture = ExtResource( 3 )
 expand = true
 
@@ -147,93 +147,100 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -409.0
-margin_top = -497.0
-margin_right = 143.0
-margin_bottom = 68.0
+margin_left = -494.0
+margin_top = -598.0
+margin_right = 171.0
+margin_bottom = 83.0
 texture = ExtResource( 1 )
 expand = true
 
-[node name="GridContainer" type="GridContainer" parent="."]
-margin_left = 1061.0
-margin_top = 522.0
-margin_right = 1105.0
-margin_bottom = 590.0
-rect_min_size = Vector2( 10, 0 )
-rect_scale = Vector2( 4.00732, 2.31931 )
-columns = 3
+[node name="nutupHP" type="Button" parent="."]
+margin_left = 1095.0
+margin_top = 651.0
+margin_right = 1157.0
+margin_bottom = 671.0
+custom_styles/hover = SubResource( 31 )
+custom_styles/pressed = SubResource( 32 )
+custom_styles/focus = SubResource( 33 )
+custom_styles/disabled = SubResource( 34 )
 
-[node name="Supplier" type="Button" parent="GridContainer"]
-margin_right = 12.0
-margin_bottom = 20.0
+[node name="Supplier" type="Button" parent="."]
+margin_left = 1163.0
+margin_top = 480.0
+margin_right = 1228.0
+margin_bottom = 545.0
 custom_styles/hover = SubResource( 15 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 
-[node name="crome" type="Button" parent="GridContainer"]
-margin_left = 16.0
-margin_right = 28.0
-margin_bottom = 20.0
+[node name="crome" type="Button" parent="."]
+margin_left = 1013.0
+margin_top = 478.0
+margin_right = 1078.0
+margin_bottom = 543.0
 custom_styles/hover = SubResource( 16 )
 custom_styles/pressed = SubResource( 17 )
 custom_styles/focus = SubResource( 18 )
 custom_styles/disabled = SubResource( 19 )
 
-[node name="toktok" type="Button" parent="GridContainer"]
-margin_left = 32.0
-margin_right = 44.0
-margin_bottom = 20.0
+[node name="toktok" type="Button" parent="."]
+margin_left = 1088.0
+margin_top = 479.0
+margin_right = 1153.0
+margin_bottom = 544.0
 custom_styles/hover = SubResource( 20 )
 custom_styles/pressed = SubResource( 7 )
 custom_styles/focus = SubResource( 8 )
 custom_styles/disabled = SubResource( 9 )
 custom_styles/normal = SubResource( 10 )
 
-[node name="bankku" type="Button" parent="GridContainer"]
-margin_top = 24.0
-margin_right = 12.0
-margin_bottom = 44.0
+[node name="bankku" type="Button" parent="."]
+margin_left = 1053.0
+margin_top = 553.0
+margin_right = 1118.0
+margin_bottom = 618.0
 custom_styles/hover = SubResource( 21 )
 custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
 custom_styles/normal = SubResource( 14 )
 
-[node name="Peraturan" type="Button" parent="GridContainer"]
-margin_left = 16.0
-margin_top = 24.0
-margin_right = 28.0
-margin_bottom = 44.0
+[node name="Peraturan" type="Button" parent="."]
+margin_left = 1126.0
+margin_top = 552.0
+margin_right = 1191.0
+margin_bottom = 617.0
 custom_styles/hover = SubResource( 22 )
 custom_styles/pressed = SubResource( 23 )
 custom_styles/focus = SubResource( 24 )
 custom_styles/disabled = SubResource( 25 )
 custom_styles/normal = SubResource( 26 )
 
-[node name="AkhiriHari" type="Button" parent="GridContainer"]
-margin_left = 32.0
-margin_top = 24.0
-margin_right = 44.0
-margin_bottom = 44.0
+[node name="AkhiriHari" type="Button" parent="."]
+visible = false
+margin_left = 1349.0
+margin_top = 485.0
+margin_right = 1414.0
+margin_bottom = 550.0
 custom_styles/hover = SubResource( 27 )
 custom_styles/pressed = SubResource( 28 )
 custom_styles/focus = SubResource( 29 )
 custom_styles/disabled = SubResource( 30 )
 
-[node name="nutupHP" type="Button" parent="GridContainer"]
-margin_top = 48.0
-margin_right = 12.0
-margin_bottom = 68.0
-custom_styles/hover = SubResource( 31 )
-custom_styles/pressed = SubResource( 32 )
-custom_styles/focus = SubResource( 33 )
-custom_styles/disabled = SubResource( 34 )
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 220.0
+margin_top = 330.0
+margin_right = 248.0
+margin_bottom = 416.0
+rect_min_size = Vector2( 10, 0 )
+rect_scale = Vector2( 4.901, 2.823 )
+columns = 2
 
-[connection signal="pressed" from="GridContainer/Supplier" to="." method="_on_Supplier_pressed"]
-[connection signal="pressed" from="GridContainer/crome" to="." method="_on_crome_pressed"]
-[connection signal="pressed" from="GridContainer/toktok" to="." method="_on_toktok_pressed"]
-[connection signal="pressed" from="GridContainer/bankku" to="." method="_on_bankku_pressed"]
-[connection signal="pressed" from="GridContainer/Peraturan" to="." method="_on_Peraturan_pressed"]
-[connection signal="pressed" from="GridContainer/AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
-[connection signal="pressed" from="GridContainer/nutupHP" to="." method="_on_nutupHP_pressed"]
+[connection signal="pressed" from="nutupHP" to="." method="_on_nutupHP_pressed"]
+[connection signal="pressed" from="Supplier" to="." method="_on_Supplier_pressed"]
+[connection signal="pressed" from="crome" to="." method="_on_crome_pressed"]
+[connection signal="pressed" from="toktok" to="." method="_on_toktok_pressed"]
+[connection signal="pressed" from="bankku" to="." method="_on_bankku_pressed"]
+[connection signal="pressed" from="Peraturan" to="." method="_on_Peraturan_pressed"]
+[connection signal="pressed" from="AkhiriHari" to="." method="_on_AkhiriHari_pressed"]

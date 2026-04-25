@@ -3,9 +3,14 @@ extends Node2D
 signal pelayanan_selesai
 
 var sedang_melayani = false
-var npc_scene = preload("res://scene/NPC_Base.tscn")
 var npc_saat_ini = null
 var player_di_kasir = false
+
+var list_npc = [
+	preload("res://scene/NPC/NPC_Base.tscn"),
+	preload("res://scene/NPC/NPC_bapak2.tscn"),
+	preload("res://scene/NPC/NPC_bocah.tscn"),
+]
 
 onready var p_bar = $layani/pelangganBar
 onready var tombol_layani = $layani/layaniPelanggan
@@ -71,8 +76,10 @@ func _on_layaniPelanggan_pressed():
 #NPC SPAWN
 
 func spawn_npc():
-	var npc = npc_scene.instance()
-	npc.position = Vector2(414, 609)
+	randomize()
+	var index_acak = randi() % list_npc.size()
+	var npc = list_npc[index_acak].instance()
+	npc.position = Vector2(439, 577)
 	add_child(npc)
 	npc_saat_ini = npc
 
