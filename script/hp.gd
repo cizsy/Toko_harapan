@@ -2,6 +2,15 @@ extends Control
 
 signal hp_ditutup 
 
+onready var label_jam = $TeksJam 
+
+func _process(delta):
+	var jam_sekarang = GameManager.jam
+	var menit_sekarang = GameManager.menit
+
+	# Masukkan teksnya ke dalam properti .text milik label_jam
+	label_jam.text = "%02d:%02d" % [jam_sekarang, menit_sekarang]
+
 func _on_nutupHP_pressed():
 	emit_signal("hp_ditutup")
 	queue_free()

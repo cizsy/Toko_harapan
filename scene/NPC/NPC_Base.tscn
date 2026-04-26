@@ -3,7 +3,7 @@
 [ext_resource path="res://scene/NPC/NPC_pembeli.gd" type="Script" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 17.0
+radius = 11.0454
 
 [sub_resource type="RectangleShape2D" id=19]
 extents = Vector2( 25.25, 31.5 )

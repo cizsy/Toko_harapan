@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 0.0
 
 [node name="NPC_bapakbapak" type="KinematicBody2D"]
 

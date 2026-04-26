@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var kecepatan = 100
-var titik_kasir = Vector2(398, 344)
-var titik_pintu = Vector2(414, 609)
+var titik_kasir = Vector2(451, 405)
+var titik_pintu = Vector2(439, 577)
 var target_tujuan = titik_kasir # Ganti angka ini dengan koordinat depan kasirmu
 var sudah_sampai = false
 
