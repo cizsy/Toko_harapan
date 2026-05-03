@@ -17,7 +17,7 @@ var current_month = 1
 var days_per_month = 5
 	 
 var timer_detik = 0.0
-var kecepatan_waktu = 1.0
+var kecepatan_waktu = 0.2
 
 var day_can_end = false
 
@@ -124,8 +124,6 @@ func jalankan_jam(delta):
 		menit += 1
 		timer_detik = 0 # Reset timer
 
-		# Tampilkan jam di panel Output (bawah Godot) biar gampang nge-test
-		print("Jam: ", str(jam).pad_zeros(2), ":", str(menit).pad_zeros(2))
 
 		# Kalau menit sudah 60, tambah 1 jam
 		if menit >= 60:

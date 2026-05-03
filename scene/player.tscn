@@ -1,11 +1,11 @@
 [gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://Asset/character/raka/raka_left1.png" type="Texture" id=1]
-[ext_resource path="res://Asset/character/raka/raka_up.png" type="Texture" id=2]
-[ext_resource path="res://Asset/character/raka/raka_left2.png" type="Texture" id=3]
-[ext_resource path="res://Asset/character/raka/raka_right.png" type="Texture" id=4]
-[ext_resource path="res://Asset/character/raka/xzca.png" type="Texture" id=5]
-[ext_resource path="res://Asset/character/raka/xzca2.png" type="Texture" id=6]
+[ext_resource path="res://Asset/character/sprite/raka/raka_left1.png" type="Texture" id=1]
+[ext_resource path="res://Asset/character/sprite/raka/raka_up.png" type="Texture" id=2]
+[ext_resource path="res://Asset/character/sprite/raka/raka_left2.png" type="Texture" id=3]
+[ext_resource path="res://Asset/character/sprite/raka/raka_right.png" type="Texture" id=4]
+[ext_resource path="res://Asset/character/sprite/raka/xzca.png" type="Texture" id=5]
+[ext_resource path="res://Asset/character/sprite/raka/xzca2.png" type="Texture" id=6]
 [ext_resource path="res://script/player.gd" type="Script" id=7]
 
 [sub_resource type="AtlasTexture" id=2]
