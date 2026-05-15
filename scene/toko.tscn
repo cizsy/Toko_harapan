@@ -1291,11 +1291,11 @@ position = Vector2( 715, 284 )
 shape = SubResource( 25 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="map/furniture"]
-position = Vector2( 848, 391 )
+position = Vector2( 846, 380 )
 shape = SubResource( 25 )
 
 [node name="CollisionShape2D14" type="CollisionShape2D" parent="map/furniture"]
-position = Vector2( 700, 391 )
+position = Vector2( 699, 384 )
 shape = SubResource( 25 )
 
 [node name="kardus" type="Sprite" parent="map/furniture"]
@@ -1326,7 +1326,7 @@ position = Vector2( 671.5, 452.234 )
 shape = SubResource( 31 )
 
 [node name="CollisionShape2D9" type="CollisionShape2D" parent="map/furniture"]
-position = Vector2( 916, 267.469 )
+position = Vector2( 911, 269 )
 shape = SubResource( 30 )
 
 [node name="CollisionShape2D11" type="CollisionShape2D" parent="map/furniture"]

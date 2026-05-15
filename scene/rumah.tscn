@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Asset/tileset 16x16/Floor_3_16x16.png" type="Texture" id=1]
 [ext_resource path="res://Asset/furniture rumah crop/furniture rumah/sofa besar depan.png" type="Texture" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://Asset/tileset 16x16/Singles_16x16/Item_singles_64.png" type="Texture" id=6]
 [ext_resource path="res://Asset/furniture rumah crop/furniture rumah/meja bundar landscape.png" type="Texture" id=7]
 [ext_resource path="res://Asset/tileset 16x16/Singles_16x16/Item_singles_41.png" type="Texture" id=8]
-[ext_resource path="res://Asset/UI buatan/kasur.png" type="Texture" id=9]
+[ext_resource path="res://scene/bed.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Asset/furniture rumah crop/furniture rumah/sofa besarbelakang.png" type="Texture" id=10]
 [ext_resource path="res://scene/pintuRumah.tscn" type="PackedScene" id=15]
 [ext_resource path="res://scene/rumah.gd" type="Script" id=21]
@@ -328,9 +328,6 @@ extents = Vector2( 9.375, 2.9375 )
 radius = 3.5
 height = 9.0
 
-[sub_resource type="RectangleShape2D" id=39]
-extents = Vector2( 5.875, 11.0625 )
-
 [node name="rumah" type="Node2D"]
 script = ExtResource( 21 )
 __meta__ = {
@@ -415,10 +412,6 @@ position = Vector2( -1.5, -8.25 )
 rotation = 1.5708
 shape = SubResource( 38 )
 
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="furniture"]
-position = Vector2( 60.25, -7.5625 )
-shape = SubResource( 39 )
-
 [node name="YSort" type="YSort" parent="furniture"]
 
 [node name="player" parent="furniture/YSort" instance=ExtResource( 3 )]
@@ -456,12 +449,9 @@ position = Vector2( 30.25, -31.5 )
 scale = Vector2( 0.372396, 0.372396 )
 texture = ExtResource( 8 )
 
-[node name="Kasur" type="Sprite" parent="furniture/YSort"]
-position = Vector2( 58.25, -3.74998 )
-scale = Vector2( 0.875, 0.875 )
-texture = ExtResource( 9 )
+[node name="bed" parent="furniture/YSort" instance=ExtResource( 9 )]
 
-[node name="Area2D" parent="." instance=ExtResource( 15 )]
+[node name="pintu" parent="." instance=ExtResource( 15 )]
 position = Vector2( -53, -4 )
 
 [node name="mainUI" parent="." instance=ExtResource( 22 )]

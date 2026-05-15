@@ -2,14 +2,14 @@ extends Control
 
 signal hp_ditutup 
 
-onready var label_jam = $TeksJam 
+onready var label_jam = $HomePanel/TeksJam 
 
-func _process(delta):
-	var jam_sekarang = GameManager.jam
-	var menit_sekarang = GameManager.menit
+func _ready():
+	show_home()
 
-	# Masukkan teksnya ke dalam properti .text milik label_jam
-	label_jam.text = "%02d:%02d" % [jam_sekarang, menit_sekarang]
+func _process(_delta):
+	label_jam.text = "%02d:%02d" % [GameManager.jam, GameManager.menit]
+
 
 func _on_nutupHP_pressed():
 	emit_signal("hp_ditutup")
@@ -17,28 +17,91 @@ func _on_nutupHP_pressed():
 
 
 func _on_AkhiriHari_pressed():
-	if GameManager.day_can_end:
-		GameManager.end_day()
-		
-	else:
-		print("Wah kamu belum bisa mengakhiri hari!  masih ada pelangan hari ini")
+	get_tree().call_group("UI", "tampilkan_info", "Sekarang akhiri hari lewat kasur di rumah.", Color.orange)
 
 
 func _on_Peraturan_pressed():
-	get_tree().change_scene("res://scene/settings.tscn")
+	show_settings()
 
 
 func _on_toktok_pressed():
-	print("membuka toktok")
+	show_toktok()
 
 
 func _on_crome_pressed():
-	print("membuka crome")
+	show_crome()
 
 
 func _on_Supplier_pressed():
-	print("membuka app supplier")
+	show_supplier()
 
 
 func _on_bankku_pressed():
-	GameManager.pay_debt(200_000)
+	show_bank()
+
+
+func _on_BackButton_pressed():
+	show_home()
+
+
+func hide_all_panels():
+	$HomePanel.visible = false
+	$SupplierPanel.visible = false
+	$BankPanel.visible = false
+	$TokTokPanel.visible = false
+	$SettingsPanel.visible = false
+	$CromePanel.visible = false
+
+
+func show_home():
+	hide_all_panels()
+	$HomePanel.visible = true
+
+
+func show_supplier():
+	hide_all_panels()
+	$SupplierPanel.visible = true
+	update_supplier_ui()
+
+
+func show_bank():
+	hide_all_panels()
+	$BankPanel.visible = true
+
+
+func show_toktok():
+	hide_all_panels()
+	$TokTokPanel.visible = true
+
+
+func show_settings():
+	hide_all_panels()
+	$SettingsPanel.visible = true
+
+
+func show_crome():
+	hide_all_panels()
+	$CromePanel.visible = true
+
+
+func update_supplier_ui():
+	$SupplierPanel/StockLabel.text = \
+		"Stok:\n" + \
+		"Mie: " + str(GameManager.stock["mie"]) + "\n" + \
+		"Minyak: " + str(GameManager.stock["minyak"]) + "\n" + \
+		"Beras: " + str(GameManager.stock["beras"])
+
+
+func _on_BeliMie_pressed():
+	GameManager.restock_item("mie", 5, 10000)
+	update_supplier_ui()
+
+
+func _on_BeliMinyak_pressed():
+	GameManager.restock_item("minyak", 3, 75000)
+	update_supplier_ui()
+
+
+func _on_BeliBeras_pressed():
+	GameManager.restock_item("beras", 2, 80000)
+	update_supplier_ui()

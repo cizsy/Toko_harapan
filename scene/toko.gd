@@ -16,66 +16,94 @@ onready var p_bar = $layani/pelangganBar
 onready var tombol_layani = $layani/layaniPelanggan
 
 func _ready():
+	add_to_group("LevelToko")
 	p_bar.visible = false
 	p_bar.value = 0
 	tombol_layani.visible = false
 
 func _process(delta):
-	if sedang_melayani: 
+	if sedang_melayani:
 		p_bar.value += 40 * delta
 		if p_bar.value >= p_bar.max_value:
 			selesai_melayani()
 
-func buka_toko():
-	GameManager.toko_buka = true
-	get_tree().call_grouo("UI", "tampilkan_info", "Toko Dibuka!")
-	
-	spawn_npc()
-
 func mulaiLayanin():
+	if not _boleh_melayani():
+		return
+
 	sedang_melayani = true
 	p_bar.value = 0
 	p_bar.visible = true
-	tombol_layani.disabled = true 
-	
+	tombol_layani.disabled = true
 	GameManager.player_bisa_gerak = false
-
 
 func selesai_melayani():
 	sedang_melayani = false
 	p_bar.visible = false
 	tombol_layani.disabled = false
-	
-	GameManager.customer_served()
 	GameManager.player_bisa_gerak = true
-	
-	if is_instance_valid(npc_saat_ini):
-		npc_saat_ini.pulang()
-	
-	emit_signal("pelayanan_selesai")
-	
-	get_tree().call_group("UI", "tampilkan_info", "Selesai + Rp 10.000", Color.darkblue)
-	
-	if GameManager.served_today < GameManager.max_customer_per_day and GameManager.toko_buka:
-		yield(get_tree().create_timer(2.0), "timeout")
-		spawn_npc()
+
+	if not is_instance_valid(npc_saat_ini):
+		get_tree().call_group("UI", "tampilkan_info", "Tidak ada pelanggan yang dilayani.", Color.red)
+		return
+
+	var item = "mie"
+	if npc_saat_ini.has_method("get_requested_item"):
+		item = npc_saat_ini.get_requested_item()
+	elif "requested_item" in npc_saat_ini:
+		item = npc_saat_ini.requested_item
+
+	var success = GameManager.sell_item(item)
+	if success:
+		if is_instance_valid(npc_saat_ini):
+			npc_saat_ini.pulang()
+		npc_saat_ini = null
+		emit_signal("pelayanan_selesai")
 		
-	elif GameManager.served_today >= GameManager.max_customer_per_day:
-		GameManager.toko_buka = false
-		get_tree().call_group("UI", "tampilkan_info", "Target harian telah tercapai, Toko tutup")
-	
+		if GameManager.served_today < GameManager.max_customer_per_day and GameManager.toko_buka:
+			yield(get_tree().create_timer(2.0), "timeout")
+			spawn_npc()
+	else:
+		# Kalau stok habis, NPC tetap di kasir. Player harus restock dulu.
+		get_tree().call_group("UI", "tampilkan_info", "Stok tidak cukup. Restock dulu lewat HP.", Color.red)
 
 func _on_layaniPelanggan_pressed():
-	if GameManager.served_today < GameManager.max_customer_per_day and not sedang_melayani and player_di_kasir:
-		mulaiLayanin()
-	elif not player_di_kasir:
-		print("player terlalu jauh dari kasir")
-		
+	mulaiLayanin()
 
+func _boleh_melayani():
+	if not GameManager.toko_buka:
+		get_tree().call_group("UI", "tampilkan_info", "Toko belum buka.", Color.red)
+		return false
 
-#NPC SPAWN
+	if sedang_melayani:
+		return false
+
+	if not player_di_kasir:
+		get_tree().call_group("UI", "tampilkan_info", "Dekati kasir dulu.", Color.red)
+		return false
+
+	if not is_instance_valid(npc_saat_ini):
+		get_tree().call_group("UI", "tampilkan_info", "Belum ada pelanggan.", Color.red)
+		return false
+
+	if "sudah_sampai" in npc_saat_ini and not npc_saat_ini.sudah_sampai:
+		get_tree().call_group("UI", "tampilkan_info", "Tunggu pelanggan sampai kasir dulu.", Color.orange)
+		return false
+
+	return true
 
 func spawn_npc():
+	if not GameManager.toko_buka:
+		return
+
+	if is_instance_valid(npc_saat_ini):
+		return
+
+	if GameManager.served_today >= GameManager.max_customer_per_day:
+		GameManager.day_can_end = true
+		get_tree().call_group("UI", "tampilkan_info", "Semua pelanggan selesai. Toko bisa ditutup.", Color.green)
+		return
+
 	randomize()
 	var index_acak = randi() % list_npc.size()
 	var npc = list_npc[index_acak].instance()
@@ -83,14 +111,12 @@ func spawn_npc():
 	add_child(npc)
 	npc_saat_ini = npc
 
-
 func _on_player_bisa_layani_body_entered(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") or body.name == "Player" or body.name == "player":
 		player_di_kasir = true
 		tombol_layani.visible = true
 
-
 func _on_player_bisa_layani_body_exited(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") or body.name == "Player" or body.name == "player":
 		player_di_kasir = false
 		tombol_layani.visible = false

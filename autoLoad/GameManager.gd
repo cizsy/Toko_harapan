@@ -2,91 +2,170 @@ extends Node
 
 signal data_update
 
-#player
+# ======================
+# PLAYER / UI STATE
+# ======================
 var player_bisa_gerak = true
-
-#entahlah
 var prev_scen = ""
 
-# waktu
+# ======================
+# WAKTU / HARI
+# ======================
 var max_month = 3
-var jam = 15        # Raka mulai jam 3 sore
-var menit = 0   
+var jam = 15
+var menit = 0
 var current_day = 1
 var current_month = 1
 var days_per_month = 5
-	 
+
 var timer_detik = 0.0
 var kecepatan_waktu = 0.2
 
 var day_can_end = false
 
-# ekonomi
-var money = 5_000_000
-var hasil_uang = 10000
+# ======================
+# EKONOMI
+# ======================
+var money = 5000000
+var hutang_utama = 20000000
+var pinjol = 0
+var reputasi = 0
 
-# stok barang
 var stock = {
 	"mie": 10,
 	"minyak": 5,
 	"beras": 3
 }
 
-#reputasi
-var reputasi = 0
+var item_prices = {
+	"mie": 3000,
+	"minyak": 32000,
+	"beras": 50000
+}
 
-#hutang
-var hutang_utama = 20_000_000
-
-#pinjol
-var pinjol = 0
-
-#status toko
+# ======================
+# TOKO / PELANGGAN
+# ======================
 var toko_buka = false
-#pelanggan
+var toko_sudah_dibuka_hari_ini = false
 var served_today = 0
 var max_customer_per_day = 5
+
 
 func _process(delta):
 	if toko_buka:
 		jalankan_jam(delta)
 
 
-#bayar hutang
+# ======================
+# EKONOMI
+# ======================
+
+func sell_item(item_name):
+	if not stock.has(item_name):
+		get_tree().call_group("UI", "tampilkan_info", "Barang tidak dikenal: " + str(item_name), Color.red)
+		return false
+
+	if stock[item_name] <= 0:
+		get_tree().call_group("UI", "tampilkan_info", "Stok " + str(item_name) + " habis!", Color.red)
+		return false
+
+	var harga = item_prices.get(item_name, 10000)
+
+	stock[item_name] -= 1
+	money += harga
+	served_today += 1
+
+	get_tree().call_group("UI", "tampilkan_info", "Terjual " + str(item_name) + " +Rp " + str(harga), Color.darkblue)
+
+	if served_today >= max_customer_per_day:
+		day_can_end = true
+		get_tree().call_group("UI", "tampilkan_info", "Semua pelanggan selesai. Toko bisa ditutup.", Color.green)
+
+	emit_signal("data_update")
+	return true
+
+
+func restock_item(item_name, amount, cost):
+	if not stock.has(item_name):
+		stock[item_name] = 0
+
+	if money < cost:
+		get_tree().call_group("UI", "tampilkan_info", "Uang tidak cukup untuk restock.", Color.red)
+		return false
+
+	money -= cost
+	stock[item_name] += amount
+
+	emit_signal("data_update")
+	get_tree().call_group("UI", "tampilkan_info", "Restock " + str(item_name) + " +" + str(amount), Color.green)
+	return true
+
+
 func pay_debt(amount):
 	var payment = min(amount, hutang_utama)
+
 	if money >= payment:
 		money -= payment
 		hutang_utama -= payment
-		get_tree().call_group("UI", "tampilkan_info", "Hutang Terbayar: - Rp" + str(payment))
+		emit_signal("data_update")
+		get_tree().call_group("UI", "tampilkan_info", "Hutang terbayar: -Rp " + str(payment), Color.green)
 	else:
-		print("Uang tidak cukup")
+		get_tree().call_group("UI", "tampilkan_info", "Uang tidak cukup.", Color.red)
 
-#ganti hari
+
+func customer_served():
+	sell_item("mie")
+
+
+# ======================
+# HARI / BULAN
+# ======================
+
 func end_day():
-	if served_today >= max_customer_per_day:
-		current_day += 1
-		served_today = 0
-		# Munculkan info ke UI
-		get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
-		# Di sini kamu bisa tambahin fungsi buat nge-spawn NPC lagi buat besok
-	else:
-		get_tree().call_group("UI", "tampilkan_info", "Belum bisa tutup toko!", Color.red)	
+	if not day_can_end:
+		get_tree().call_group("UI", "tampilkan_info", "Belum bisa tidur. Layani semua pelanggan dulu.", Color.red)
+		return false
 
-#func ganti bulan
+	current_day += 1
+
+	if current_day > days_per_month:
+		end_month()
+	else:
+		reset_day_state()
+
+	get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
+	emit_signal("data_update")
+	return true
+
+
+func reset_day_state():
+	served_today = 0
+	day_can_end = false
+	toko_buka = false
+	toko_sudah_dibuka_hari_ini = false
+	jam = 15
+	menit = 0
+	timer_detik = 0.0
+	player_bisa_gerak = true
+
+
 func end_month():
 	current_day = 1
 	current_month += 1
-	max_customer_per_day = get_max_customer()   # Add this line
-	evaluate_month()
+
 	if current_month > max_month:
 		check_ending()
+		return
+
+	max_customer_per_day = get_max_customer()
+	reset_day_state()
+	evaluate_month()
 
 
-#evaluasi perbulan
 func evaluate_month():
-	#dummy
-	print("evaluasi bulan ", current_month - 1)
+	print("Evaluasi bulan ", current_month - 1)
+
 
 func check_ending():
 	if hutang_utama <= 0:
@@ -95,47 +174,46 @@ func check_ending():
 		print("BAD ENDING")
 
 
-func customer_served():
-	served_today += 1
-	
-	var profit = 10000
-	money += profit
-	
-	emit_signal("data_update")
-	
-	print("Pelanggan dilayani + Rp. " + str(profit))
-	
-	if served_today >= max_customer_per_day:
-		day_can_end = true
-		print("Semua pelanggan selesai! kamu bisa mengakhiri hari")
-
 func get_max_customer():
 	return 3 + current_month
 
+
+# ======================
+# SCENE
+# ======================
+
 func pindah_ke_settings():
-	prev_scen = get_tree().current_scene.filename
-	
+	if get_tree().current_scene:
+		prev_scen = get_tree().current_scene.filename
+	else:
+		prev_scen = ""
+
+	player_bisa_gerak = true
 	get_tree().change_scene("res://scene/settings.tscn")
+
+
+# ======================
+# JAM
+# ======================
 
 func jalankan_jam(delta):
 	timer_detik += delta
 
 	if timer_detik >= kecepatan_waktu:
 		menit += 1
-		timer_detik = 0 # Reset timer
+		timer_detik = 0.0
 
-
-		# Kalau menit sudah 60, tambah 1 jam
 		if menit >= 60:
 			menit = 0
 			jam += 1
-			
-		# Kalau sudah jam 24 (Tengah Malam)
+
 		if jam >= 24:
-			jam = 0 # Kembali ke jam 00:00
+			jam = 0
 			paksa_tutup_toko()
+
 
 func paksa_tutup_toko():
 	toko_buka = false
-	print("TENG TONG! Tengah malam, toko otomatis tutup.")
-	get_tree().call_group("UI", "tampilkan_info", "Sudah larut malam! Toko Tutup.", Color.red)
+	player_bisa_gerak = true
+	get_tree().call_group("UI", "tampilkan_info", "Sudah larut malam. Toko tutup.", Color.red)
+	emit_signal("data_update")

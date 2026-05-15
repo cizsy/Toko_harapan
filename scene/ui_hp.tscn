@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://Asset/UI buatan/hp.png" type="Texture" id=1]
 [ext_resource path="res://script/hp.gd" type="Script" id=2]
@@ -10,19 +10,6 @@
 [ext_resource path="res://Asset/app hp/tiktok.png" type="Texture" id=8]
 [ext_resource path="res://Asset/app hp/chrome.png" type="Texture" id=9]
 [ext_resource path="res://Asset/font/Cabin-Bold.ttf" type="DynamicFontData" id=10]
-
-[sub_resource type="StyleBoxFlat" id=31]
-bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
-
-[sub_resource type="StyleBoxTexture" id=32]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=33]
-texture = ExtResource( 7 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=34]
 
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
@@ -111,18 +98,22 @@ region_rect = Rect2( 0, 0, 500, 500 )
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 500, 500 )
 
-[sub_resource type="StyleBoxFlat" id=27]
-bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
-
-[sub_resource type="StyleBoxTexture" id=28]
-
-[sub_resource type="StyleBoxTexture" id=29]
-
-[sub_resource type="StyleBoxTexture" id=30]
-
 [sub_resource type="DynamicFont" id=35]
 size = 60
 font_data = ExtResource( 10 )
+
+[sub_resource type="StyleBoxFlat" id=31]
+bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
+
+[sub_resource type="StyleBoxTexture" id=32]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=33]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 500, 500 )
+
+[sub_resource type="StyleBoxTexture" id=34]
 
 [node name="ui_hp" type="Control"]
 anchor_left = 1.0
@@ -159,17 +150,11 @@ margin_bottom = 83.0
 texture = ExtResource( 1 )
 expand = true
 
-[node name="nutupHP" type="Button" parent="."]
-margin_left = 1095.0
-margin_top = 651.0
-margin_right = 1157.0
-margin_bottom = 671.0
-custom_styles/hover = SubResource( 31 )
-custom_styles/pressed = SubResource( 32 )
-custom_styles/focus = SubResource( 33 )
-custom_styles/disabled = SubResource( 34 )
+[node name="HomePanel" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
-[node name="Supplier" type="Button" parent="."]
+[node name="Supplier" type="Button" parent="HomePanel"]
 margin_left = 1163.0
 margin_top = 480.0
 margin_right = 1228.0
@@ -180,7 +165,7 @@ custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
 
-[node name="crome" type="Button" parent="."]
+[node name="crome" type="Button" parent="HomePanel"]
 margin_left = 1013.0
 margin_top = 478.0
 margin_right = 1078.0
@@ -190,7 +175,7 @@ custom_styles/pressed = SubResource( 17 )
 custom_styles/focus = SubResource( 18 )
 custom_styles/disabled = SubResource( 19 )
 
-[node name="toktok" type="Button" parent="."]
+[node name="toktok" type="Button" parent="HomePanel"]
 margin_left = 1088.0
 margin_top = 479.0
 margin_right = 1153.0
@@ -201,7 +186,7 @@ custom_styles/focus = SubResource( 8 )
 custom_styles/disabled = SubResource( 9 )
 custom_styles/normal = SubResource( 10 )
 
-[node name="bankku" type="Button" parent="."]
+[node name="bankku" type="Button" parent="HomePanel"]
 margin_left = 1053.0
 margin_top = 553.0
 margin_right = 1118.0
@@ -211,7 +196,7 @@ custom_styles/pressed = SubResource( 12 )
 custom_styles/focus = SubResource( 13 )
 custom_styles/normal = SubResource( 14 )
 
-[node name="Peraturan" type="Button" parent="."]
+[node name="Peraturan" type="Button" parent="HomePanel"]
 margin_left = 1126.0
 margin_top = 552.0
 margin_right = 1191.0
@@ -222,27 +207,7 @@ custom_styles/focus = SubResource( 24 )
 custom_styles/disabled = SubResource( 25 )
 custom_styles/normal = SubResource( 26 )
 
-[node name="AkhiriHari" type="Button" parent="."]
-visible = false
-margin_left = 1349.0
-margin_top = 485.0
-margin_right = 1414.0
-margin_bottom = 550.0
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/focus = SubResource( 29 )
-custom_styles/disabled = SubResource( 30 )
-
-[node name="GridContainer" type="GridContainer" parent="."]
-margin_left = 220.0
-margin_top = 330.0
-margin_right = 248.0
-margin_bottom = 416.0
-rect_min_size = Vector2( 10, 0 )
-rect_scale = Vector2( 4.901, 2.823 )
-columns = 2
-
-[node name="TeksJam" type="Label" parent="."]
+[node name="TeksJam" type="Label" parent="HomePanel"]
 margin_left = 1040.0
 margin_top = 261.0
 margin_right = 1205.0
@@ -250,10 +215,75 @@ margin_bottom = 341.0
 custom_fonts/font = SubResource( 35 )
 text = "15.00"
 
-[connection signal="pressed" from="nutupHP" to="." method="_on_nutupHP_pressed"]
-[connection signal="pressed" from="Supplier" to="." method="_on_Supplier_pressed"]
-[connection signal="pressed" from="crome" to="." method="_on_crome_pressed"]
-[connection signal="pressed" from="toktok" to="." method="_on_toktok_pressed"]
-[connection signal="pressed" from="bankku" to="." method="_on_bankku_pressed"]
-[connection signal="pressed" from="Peraturan" to="." method="_on_Peraturan_pressed"]
-[connection signal="pressed" from="AkhiriHari" to="." method="_on_AkhiriHari_pressed"]
+[node name="nutupHP" type="Button" parent="HomePanel"]
+margin_left = 1095.0
+margin_top = 651.0
+margin_right = 1157.0
+margin_bottom = 671.0
+custom_styles/hover = SubResource( 31 )
+custom_styles/pressed = SubResource( 32 )
+custom_styles/focus = SubResource( 33 )
+custom_styles/disabled = SubResource( 34 )
+
+[node name="SupplierPanel" type="Control" parent="."]
+margin_left = 111.0
+margin_top = 69.0
+margin_right = 391.0
+margin_bottom = 249.0
+
+[node name="StockLabel" type="Label" parent="SupplierPanel"]
+margin_left = 217.0
+margin_top = 4.0
+margin_right = 385.0
+margin_bottom = 126.0
+
+[node name="BeliMie" type="Button" parent="SupplierPanel"]
+margin_right = 41.0
+margin_bottom = 36.0
+
+[node name="BeliMinyak" type="Button" parent="SupplierPanel"]
+margin_left = 52.0
+margin_top = 5.0
+margin_right = 96.0
+margin_bottom = 35.0
+
+[node name="BeliBeras" type="Button" parent="SupplierPanel"]
+margin_left = 107.0
+margin_top = 2.0
+margin_right = 169.0
+margin_bottom = 35.0
+
+[node name="BackButton" type="Button" parent="SupplierPanel"]
+margin_left = 44.0
+margin_top = 61.0
+margin_right = 159.0
+margin_bottom = 97.0
+
+[node name="BankPanel" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="SettingsPanel" type="Control" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="CromePanel" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TokTokPanel" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[connection signal="pressed" from="HomePanel/Supplier" to="." method="_on_Supplier_pressed"]
+[connection signal="pressed" from="HomePanel/crome" to="." method="_on_crome_pressed"]
+[connection signal="pressed" from="HomePanel/toktok" to="." method="_on_toktok_pressed"]
+[connection signal="pressed" from="HomePanel/bankku" to="." method="_on_bankku_pressed"]
+[connection signal="pressed" from="HomePanel/Peraturan" to="." method="_on_Peraturan_pressed"]
+[connection signal="pressed" from="HomePanel/nutupHP" to="." method="_on_nutupHP_pressed"]
+[connection signal="pressed" from="SupplierPanel/BeliMie" to="." method="_on_BeliMie_pressed"]
+[connection signal="pressed" from="SupplierPanel/BeliMinyak" to="." method="_on_BeliMinyak_pressed"]
+[connection signal="pressed" from="SupplierPanel/BeliBeras" to="." method="_on_BeliBeras_pressed"]
+[connection signal="pressed" from="SupplierPanel/BackButton" to="." method="_on_BackButton_pressed"]

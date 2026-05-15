@@ -1,37 +1,40 @@
 extends Control
 
+onready var master_slider = get_node_or_null("VBoxContainer/volume/slider/masterSlider")
+onready var music_slider = get_node_or_null("VBoxContainer/volume/slider/musicSlider")
+onready var sfx_slider = get_node_or_null("VBoxContainer/volume/slider/sfxSlider")
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	load_slider_values()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func load_slider_values():
+	if master_slider:
+		master_slider.value = SettingsManager.get_setting("audio", "master_volume", master_slider.value)
+	if music_slider:
+		music_slider.value = SettingsManager.get_setting("audio", "music_volume", music_slider.value)
+	if sfx_slider:
+		sfx_slider.value = SettingsManager.get_setting("audio", "sfx_volume", sfx_slider.value)
 
 
 func _on_masterSlider_value_changed(value):
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),linear2db(value))
-	
-	SettingsManager.save_setting("audio", "$VBoxContainer/volume/slider/masterSlider", value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear2db(max(value, 0.001)))
+	SettingsManager.save_setting("audio", "master_volume", value)
+
 
 func _on_musicSlider_value_changed(value):
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),linear2db(value))
-	
-	SettingsManager.save_setting("audio", "$VBoxContainer/volume/slider/musicSlider", value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(max(value, 0.001)))
+	SettingsManager.save_setting("audio", "music_volume", value)
+
 
 func _on_sfxSlider_value_changed(value):
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),linear2db(value))
-
-	SettingsManager.save_setting("audio", "$VBoxContainer/volume/slider/sfxSlider", value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear2db(max(value, 0.001)))
+	SettingsManager.save_setting("audio", "sfx_volume", value)
 
 
 func _on_Back_pressed():
 	if GameManager.prev_scen != "":
 		get_tree().change_scene(GameManager.prev_scen)
+	else:
+		get_tree().change_scene("res://scene/mainMenu.tscn")

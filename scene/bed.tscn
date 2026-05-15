@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Asset/UI buatan/kasur.png" type="Texture" id=1]
+[ext_resource path="res://scene/bed.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=39]
+extents = Vector2( 6.9375, 12.4375 )
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="detectBed" type="CollisionShape2D" parent="."]
+position = Vector2( 59.1875, -6.1875 )
+shape = SubResource( 39 )
+
+[node name="Kasur" type="Sprite" parent="."]
+position = Vector2( 59.25, -5.5 )
+scale = Vector2( 0.781851, 0.768134 )
+texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Area2D_body_exited"]
