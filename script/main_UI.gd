@@ -9,6 +9,9 @@ onready var infoLabel = $infoPanel/infoLabel
 onready var infoPanel = $infoPanel
 onready var hp_button = $HpButton
 
+onready var misiPanel = $MisiPanel
+onready var misiLabel = $MisiPanel/MisiLabel
+
 
 func _ready():
 	add_to_group("UI")
@@ -16,6 +19,8 @@ func _ready():
 	infoLabel.text = ""
 	infoPanel.visible = false
 	hp_button.visible = true
+
+	misiPanel.visible = true
 
 	if not GameManager.is_connected("data_update", self, "update_ui"):
 		GameManager.connect("data_update", self, "update_ui")
@@ -30,6 +35,24 @@ func _process(_delta):
 func update_ui():
 	day_label.text = "Hari " + str(GameManager.current_day)
 	label_uang.text = "💰 Rp " + str(GameManager.money)
+	update_misi()
+
+
+func update_misi():
+	if not GameManager.toko_sudah_dibuka_hari_ini:
+		$MisiPanel/MisiLabel.text = "Misi: Buka toko"
+
+	elif GameManager.toko_buka and not GameManager.day_can_end:
+		$MisiPanel/MisiLabel.text = "Misi: Layani pelanggan " + str(GameManager.served_today) + "/" + str(GameManager.max_customer_per_day)
+
+	elif GameManager.toko_buka and GameManager.day_can_end:
+		$MisiPanel/MisiLabel.text = "Misi: Tutup toko"
+
+	elif not GameManager.toko_buka and GameManager.day_can_end:
+		$MisiPanel/MisiLabel.text = "Misi: Pulang ke rumah lalu tidur"
+
+	else:
+		$MisiPanel/MisiLabel.text = "Misi: Lanjutkan aktivitas"
 
 
 func _on_HpButton_pressed():

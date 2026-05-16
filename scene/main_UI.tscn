@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://script/main_UI.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialogic/Example Assets/Fonts/Overlock/Overlock-Black.ttf" type="DynamicFontData" id=2]
@@ -48,6 +48,9 @@ region_rect = Rect2( 0, 0, 32, 3 )
 [sub_resource type="DynamicFont" id=15]
 size = 18
 font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=16]
+bg_color = Color( 0.168627, 0.160784, 0, 1 )
 
 [node name="mainUI" type="CanvasLayer" groups=["UI"]]
 
@@ -103,19 +106,38 @@ custom_styles/focus = SubResource( 11 )
 custom_styles/normal = SubResource( 8 )
 
 [node name="infoPanel" type="Panel" parent="rootUI"]
-margin_top = 85.0
-margin_right = 267.0
-margin_bottom = 193.0
+margin_top = 232.0
+margin_right = 272.0
+margin_bottom = 312.0
 custom_styles/panel = SubResource( 14 )
 
 [node name="infoLabel" type="Label" parent="rootUI/infoPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 8.0
-margin_top = -49.5
-margin_right = 259.0
-margin_bottom = 51.5
+margin_top = -40.0
+margin_right = 272.0
+margin_bottom = 40.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "ini info pop up"
+
+[node name="MisiPanel" type="Panel" parent="rootUI"]
+margin_top = 96.0
+margin_right = 272.0
+margin_bottom = 216.0
+custom_styles/panel = SubResource( 16 )
+
+[node name="MisiLabel" type="Label" parent="rootUI/MisiPanel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 8.0
+margin_top = -60.0
+margin_right = 272.0
+margin_bottom = 60.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 15 )
 text = "ini info pop up"
 

@@ -85,11 +85,9 @@ func show_crome():
 
 
 func update_supplier_ui():
-	$SupplierPanel/StockLabel.text = \
-		"Stok:\n" + \
-		"Mie: " + str(GameManager.stock["mie"]) + "\n" + \
-		"Minyak: " + str(GameManager.stock["minyak"]) + "\n" + \
-		"Beras: " + str(GameManager.stock["beras"])
+	$SupplierPanel/miePanel/StokLabel.text = "Stok: " + str(GameManager.stock["mie"])
+	$SupplierPanel/MinyakPanel/StokLabel.text = "Stok: " + str(GameManager.stock["minyak"])
+	$SupplierPanel/BerasPanel/StokLabel.text = "Stok: " + str(GameManager.stock["beras"])
 
 
 func _on_BeliMie_pressed():
