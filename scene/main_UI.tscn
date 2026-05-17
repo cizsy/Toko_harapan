@@ -121,6 +121,7 @@ margin_bottom = 40.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 15 )
 text = "ini info pop up"
+autowrap = true
 
 [node name="MisiPanel" type="Panel" parent="rootUI"]
 margin_top = 96.0
@@ -140,5 +141,6 @@ custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 15 )
 text = "ini info pop up"
+autowrap = true
 
 [connection signal="pressed" from="rootUI/HpButton" to="rootUI" method="_on_HpButton_pressed"]
