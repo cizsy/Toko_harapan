@@ -51,11 +51,21 @@ var toko_sudah_dibuka_hari_ini = false
 var served_today = 0
 var max_customer_per_day = 5
 
+# ======================
+# STORY EVENT
+# ======================
+var event_hari_3_done = false
+var event_hari_4_done = false
+var event_hari_5_done = false
+
 
 func _process(delta):
 	if toko_buka:
 		jalankan_jam(delta)
 
+
+func _ready():
+	debug_go_to_day(3)
 
 # ======================
 # EKONOMI
@@ -177,6 +187,30 @@ func check_ending():
 func get_max_customer():
 	return 3 + current_month
 
+# ======================
+# STORY EVENT
+# ======================
+
+func check_story_event_on_open_store():
+	if current_day == 3 and not event_hari_3_done:
+		event_hari_3_done = true
+		get_tree().call_group("UI", "tampilkan_info", "Ada pelanggan mencari barang yang belum tersedia.", Color.orange)
+		emit_signal("data_update")
+		return "hari_3"
+
+	if current_day == 4 and not event_hari_4_done:
+		event_hari_4_done = true
+		get_tree().call_group("UI", "tampilkan_info", "Pak Beni ingin membicarakan soal modal.", Color.orange)
+		emit_signal("data_update")
+		return "hari_4"
+
+	if current_day == 5 and not event_hari_5_done:
+		event_hari_5_done = true
+		get_tree().call_group("UI", "tampilkan_info", "HP Raka bergetar. Ada iklan mencurigakan.", Color.orange)
+		emit_signal("data_update")
+		return "hari_5"
+
+	return ""
 
 # ======================
 # SCENE
@@ -217,3 +251,32 @@ func paksa_tutup_toko():
 	player_bisa_gerak = true
 	get_tree().call_group("UI", "tampilkan_info", "Sudah larut malam. Toko tutup.", Color.red)
 	emit_signal("data_update")
+
+func debug_go_to_day(day):
+	current_day = day
+	served_today = 0
+	day_can_end = false
+	toko_buka = false
+	toko_sudah_dibuka_hari_ini = false
+	jam = 15
+	menit = 0
+	timer_detik = 0.0
+	player_bisa_gerak = true
+	
+	if day == 3:
+		event_hari_3_done = false
+	
+	emit_signal("data_update")
+	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)
+	current_day = day
+	served_today = 0
+	day_can_end = false
+	toko_buka = false
+	toko_sudah_dibuka_hari_ini = false
+	jam = 15
+	menit = 0
+	timer_detik = 0.0
+	player_bisa_gerak = true
+	
+	emit_signal("data_update")
+	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)

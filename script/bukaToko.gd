@@ -37,9 +37,30 @@ func eksekusi_buka_toko():
 
 	GameManager.toko_buka = true
 	GameManager.toko_sudah_dibuka_hari_ini = true
+
 	_update_sign()
+
 	get_tree().call_group("UI", "tampilkan_info", "Toko Dibuka!", Color.green)
-	get_tree().call_group("LevelToko", "spawn_npc")
+
+	var event = GameManager.check_story_event_on_open_store()
+
+	if event == "hari_3":
+		print("Trigger event Hari 3: pelanggan kecewa")
+		get_tree().call_group("LevelToko", "spawn_npc_event_hari3")
+
+	elif event == "hari_4":
+		print("Trigger event Hari 4: masalah modal")
+		get_tree().call_group("UI", "tampilkan_info", "Pak Beni ingin membicarakan soal modal.", Color.orange)
+		get_tree().call_group("LevelToko", "spawn_npc")
+
+	elif event == "hari_5":
+		print("Trigger event Hari 5: iklan pinjol")
+		get_tree().call_group("UI", "tampilkan_info", "HP Raka bergetar. Ada iklan mencurigakan.", Color.orange)
+		get_tree().call_group("LevelToko", "spawn_npc")
+
+	else:
+		get_tree().call_group("LevelToko", "spawn_npc")
+
 	GameManager.emit_signal("data_update")
 
 func eksekusi_tutup_toko():

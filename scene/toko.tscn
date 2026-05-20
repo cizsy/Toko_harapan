@@ -1192,7 +1192,7 @@ region_rect = Rect2( 0, 0, 128, 32 )
 [sub_resource type="RectangleShape2D" id=37]
 extents = Vector2( 131.844, 28.7188 )
 
-[node name="toko" type="Node2D"]
+[node name="toko" type="Node2D" groups=["LevelToko"]]
 script = ExtResource( 10 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
