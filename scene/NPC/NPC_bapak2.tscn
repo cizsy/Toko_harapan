@@ -4,6 +4,9 @@
 
 [node name="NPC_bapak2" instance=ExtResource( 1 )]
 
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( -0.75, 2 )
+
 [node name="ColorRect" type="ColorRect" parent="." index="2"]
 margin_left = -21.0
 margin_top = -18.0
