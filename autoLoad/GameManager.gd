@@ -139,13 +139,28 @@ func customer_served():
 # ======================
 
 func end_day():
+	# KHUSUS HARI 1: Syarat tidurnya adalah harus sudah selesai explore toko
+	if current_day == 1:
+		if story_step != "hari_1_pulang":
+			get_tree().call_group("UI", "tampilkan_info", "Periksa kondisi toko dulu sebelum pulang.", Color.red)
+			return false
+		else:
+			# Jika sudah beres, izinkan pindah ke Hari 2
+			current_day += 1
+			set_story_step("normal_gameplay")
+			reset_day_state()
+			get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
+			emit_signal("data_update")
+			return true
+
+	# GAMEPLAY NORMAL (HARI 2 KE ATAS): Pakai aturan jumlah pelanggan
 	if not day_can_end:
 		get_tree().call_group("UI", "tampilkan_info", "Belum bisa tidur. Layani semua pelanggan dulu.", Color.red)
 		return false
 
 	current_day += 1
 
-	if current_day == 2:
+	if current_day == 2: # Baris ini opsional / bisa dihapus karena sudah di-handle di atas
 		set_story_step("normal_gameplay")
 
 	if current_day > days_per_month:

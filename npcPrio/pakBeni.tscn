@@ -3,7 +3,8 @@
 [ext_resource path="res://npcPrio/pakBeni.gd" type="Script" id=1]
 [ext_resource path="res://Asset/UI buatan/interact.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=3]
+radius = 11.0454
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 40.0
@@ -13,7 +14,8 @@ z_index = 1
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+z_index = 1
+shape = SubResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
