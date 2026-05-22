@@ -135,6 +135,37 @@ func update_misi():
 	else:
 		misiLabel.text = "Misi: Lanjutkan aktivitas"
 
+func masuk_mode_dialog():
+	# Tutup HP kalau sedang terbuka
+	if is_instance_valid(hp_instance):
+		hp_instance.queue_free()
+		hp_instance = null
+
+	# Sembunyikan semua UI gameplay
+	$moneyPanel.visible = false
+	$dayPanel.visible = false
+	$MisiPanel.visible = false
+	$infoPanel.visible = false
+	$HpButton.visible = false
+
+	# Kunci player
+	GameManager.player_bisa_gerak = false
+
+
+func keluar_mode_dialog():
+	# Tampilkan lagi UI gameplay
+	$moneyPanel.visible = true
+	$dayPanel.visible = true
+	$MisiPanel.visible = true
+	$HpButton.visible = true
+
+	# infoPanel tetap false dulu, nanti muncul kalau tampilkan_info dipanggil
+	$infoPanel.visible = false
+
+	# Buka gerakan player
+	GameManager.player_bisa_gerak = true
+
+	update_ui()
 
 func _on_HpButton_pressed():
 	if not is_instance_valid(hp_instance):

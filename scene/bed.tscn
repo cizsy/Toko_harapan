@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Asset/UI buatan/kasur.png" type="Texture" id=1]
-[ext_resource path="res://scene/bed.gd" type="Script" id=2]
+[ext_resource path="res://script/bed.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=39]
 extents = Vector2( 6.9375, 12.4375 )

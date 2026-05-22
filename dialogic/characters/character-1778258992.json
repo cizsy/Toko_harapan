@@ -5,6 +5,7 @@
 	"display_name_bool": false,
 	"id": "character-1778258992.json",
 	"mirror_portraits": false,
+	"name": "Raka",
 	"nickname": "",
 	"nickname_bool": false,
 	"offset_x": 0,
@@ -12,9 +13,9 @@
 	"portraits": [
 		{
 			"name": "Default",
-			"path": ""
+			"path": "res://Asset/character/portrait/raka/1.png"
 		}
 	],
 	"scale": 100,
-	"theme": ""
+	"theme": "theme-1775783669.cfg"
 }

@@ -23,7 +23,12 @@ func tidur():
 	if not GameManager.toko_sudah_dibuka_hari_ini:
 		get_tree().call_group("UI", "tampilkan_info", "Buka toko dulu sebelum tidur.", Color.red)
 		return
-
+	
+	if GameManager.current_day == 1 and GameManager.story_step == "hari_1_tidur":
+		GameManager.day_can_end = true
+		GameManager.end_day()
+		return
+	
 	if GameManager.toko_buka:
 		get_tree().call_group("UI", "tampilkan_info", "Tutup toko dulu sebelum tidur.", Color.red)
 		return
@@ -35,3 +40,4 @@ func tidur():
 	var success = GameManager.end_day()
 	if success:
 		get_tree().call_group("UI", "tampilkan_info", "Kamu beristirahat. Hari berikutnya dimulai.", Color.gold)
+	

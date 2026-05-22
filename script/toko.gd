@@ -13,6 +13,9 @@ var list_npc = [
 	preload("res://scene/NPC/NPC_bocah.tscn"),
 ]
 
+var pak_beni_scene = preload("res://npcPrio/pakBeni.tscn")
+var pak_beni_instance = null
+
 var npc_event = preload("res://scene/NPC/NPC_event.tscn")
 
 onready var p_bar = $layani/pelangganBar
@@ -25,6 +28,12 @@ func _ready():
 	p_bar.value = 0
 	tombol_layani.visible = false
 	tombol_layani.disabled = false
+	
+	# Memastikan fungsi acak di-seed sekali saja di awal
+	randomize()
+
+	if GameManager.current_day == 1 and GameManager.story_step == "hari_1_intro":
+		spawn_pak_beni()
 
 
 func _process(delta):
@@ -46,8 +55,6 @@ func mulaiLayanin():
 	# =========================
 	# KHUSUS NPC EVENT
 	# =========================
-	# Kalau NPC punya method interact_event,
-	# berarti dia NPC event, bukan pelanggan biasa.
 	if npc_saat_ini.has_method("interact_event"):
 		event_sedang_berjalan = true
 		sedang_melayani = false
@@ -71,6 +78,18 @@ func mulaiLayanin():
 	GameManager.player_bisa_gerak = false
 
 
+# =========================
+# NPC PRIORITAS (Sudah dipisah secara benar)
+# =========================
+func spawn_pak_beni():
+	if is_instance_valid(pak_beni_instance):
+		return
+
+	pak_beni_instance = pak_beni_scene.instance()
+	pak_beni_instance.global_position = Vector2(451, 473)
+	add_child(pak_beni_instance)
+
+
 func selesai_melayani():
 	sedang_melayani = false
 	p_bar.visible = false
@@ -81,8 +100,6 @@ func selesai_melayani():
 		get_tree().call_group("UI", "tampilkan_info", "Tidak ada pelanggan yang dilayani.", Color.red)
 		return
 
-	# Pengaman:
-	# Kalau ternyata NPC event masuk sini, jangan jual item.
 	if npc_saat_ini.has_method("interact_event"):
 		return
 
@@ -104,10 +121,10 @@ func selesai_melayani():
 		
 		if GameManager.served_today < GameManager.max_customer_per_day and GameManager.toko_buka:
 			yield(get_tree().create_timer(2.0), "timeout")
-			spawn_npc()
+			# PENGAMAN: Pastikan level/toko belum di-free saat timer selesai
+			if is_inside_tree():
+				spawn_npc()
 	else:
-		# Kalau stok habis, NPC tetap di kasir.
-		# Player harus restock dulu lewat HP.
 		get_tree().call_group("UI", "tampilkan_info", "Stok tidak cukup. Restock dulu lewat HP.", Color.red)
 
 
@@ -154,8 +171,6 @@ func spawn_npc():
 		GameManager.emit_signal("data_update")
 		return
 
-	randomize()
-
 	var index_acak = randi() % list_npc.size()
 	var npc = list_npc[index_acak].instance()
 
@@ -178,16 +193,11 @@ func spawn_npc_event_hari3():
 	var npc = npc_event.instance()
 	npc.global_position = Vector2(439, 577)
 	add_child(npc)
-
-	# PENTING:
-	# NPC event tetap dimasukkan ke npc_saat_ini,
-	# supaya tombol Layani bisa memanggil interact_event().
+	
 	npc_saat_ini = npc
 
-	# JANGAN kunci player di sini.
 	GameManager.player_bisa_gerak = true
 
-	# Kalau player sudah ada di kasir, tombol boleh muncul.
 	if player_di_kasir:
 		tombol_layani.visible = true
 		tombol_layani.disabled = false
@@ -203,7 +213,6 @@ func selesai_event_hari3():
 	tombol_layani.disabled = false
 	GameManager.player_bisa_gerak = true
 
-	# NPC event sudah selesai, jadi kosongkan slot pelanggan.
 	npc_saat_ini = null
 
 	if player_di_kasir:
@@ -212,8 +221,9 @@ func selesai_event_hari3():
 		tombol_layani.visible = false
 
 	if GameManager.toko_buka:
-		yield(get_tree().create_timer(1.0), "timeout")
-		spawn_npc()
+		yield(get_tree().create_timer(2.0), "timeout")
+		if is_inside_tree():
+			spawn_npc()
 
 
 func _on_player_bisa_layani_body_entered(body):

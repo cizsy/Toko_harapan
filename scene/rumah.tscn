@@ -11,7 +11,7 @@
 [ext_resource path="res://scene/bed.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Asset/furniture rumah crop/furniture rumah/sofa besarbelakang.png" type="Texture" id=10]
 [ext_resource path="res://scene/pintuRumah.tscn" type="PackedScene" id=15]
-[ext_resource path="res://scene/rumah.gd" type="Script" id=21]
+[ext_resource path="res://script/rumah.gd" type="Script" id=21]
 [ext_resource path="res://scene/main_UI.tscn" type="PackedScene" id=22]
 [ext_resource path="res://music/bgm/╗¹║░(Daystar)-Odd, isn't it_.mp3" type="AudioStream" id=23]
 [ext_resource path="res://Asset/rumah/TopDownHouse_FloorsAndWalls.png" type="Texture" id=24]

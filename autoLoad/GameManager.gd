@@ -57,7 +57,11 @@ var max_customer_per_day = 5
 var event_hari_3_done = false
 var event_hari_4_done = false
 var event_hari_5_done = false
+var story_step = "hari_1_intro"
 
+var rak_checked = false
+var kardus_checked = false
+var kasir_checked = false
 
 func _process(delta):
 	if toko_buka:
@@ -65,7 +69,9 @@ func _process(delta):
 
 
 func _ready():
-	debug_go_to_day(3)
+	#debug_go_to_day(3)
+	pass
+
 
 # ======================
 # EKONOMI
@@ -138,6 +144,9 @@ func end_day():
 		return false
 
 	current_day += 1
+
+	if current_day == 2:
+		set_story_step("normal_gameplay")
 
 	if current_day > days_per_month:
 		end_month()
@@ -262,21 +271,34 @@ func debug_go_to_day(day):
 	menit = 0
 	timer_detik = 0.0
 	player_bisa_gerak = true
-	
+
+	if day == 1:
+		story_step = "hari_1_intro"
+		reset_story_check()
+
 	if day == 3:
 		event_hari_3_done = false
+
+	if day == 4:
+		event_hari_4_done = false
+
+	if day == 5:
+		event_hari_5_done = false
 	
 	emit_signal("data_update")
 	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)
-	current_day = day
-	served_today = 0
-	day_can_end = false
-	toko_buka = false
-	toko_sudah_dibuka_hari_ini = false
-	jam = 15
-	menit = 0
-	timer_detik = 0.0
-	player_bisa_gerak = true
-	
+
+func set_story_step(step):
+	story_step = step
 	emit_signal("data_update")
-	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)
+
+func reset_story_check():
+	rak_checked = false
+	kardus_checked = false
+	kasir_checked = false
+
+
+func cek_explore_toko_selesai():
+	if rak_checked and kardus_checked and kasir_checked:
+		set_story_step("hari_1_pulang")
+		get_tree().call_group("UI", "tampilkan_info", "Misi selesai. Pulang ke rumah.", Color.gold)
