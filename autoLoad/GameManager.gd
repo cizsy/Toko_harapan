@@ -2,15 +2,9 @@ extends Node
 
 signal data_update
 
-# ======================
-# PLAYER / UI STATE
-# ======================
 var player_bisa_gerak = true
 var prev_scen = ""
 
-# ======================
-# WAKTU / HARI
-# ======================
 var max_month = 3
 var jam = 15
 var menit = 0
@@ -23,9 +17,6 @@ var kecepatan_waktu = 0.2
 
 var day_can_end = false
 
-# ======================
-# EKONOMI
-# ======================
 var money = 5000000
 var hutang_utama = 20000000
 var pinjol = 0
@@ -43,25 +34,19 @@ var item_prices = {
 	"beras": 50000
 }
 
-# ======================
-# TOKO / PELANGGAN
-# ======================
 var toko_buka = false
 var toko_sudah_dibuka_hari_ini = false
 var served_today = 0
 var max_customer_per_day = 5
 
-# ======================
-# STORY EVENT
-# ======================
 var event_hari_3_done = false
 var event_hari_4_done = false
 var event_hari_5_done = false
 var story_step = "hari_1_intro"
 
-var rak_checked = false
-var kardus_checked = false
-var kasir_checked = false
+var total_objek_wajib = 6 
+var jumlah_objek_dicek = 0
+
 
 func _process(delta):
 	if toko_buka:
@@ -69,13 +54,8 @@ func _process(delta):
 
 
 func _ready():
-	#debug_go_to_day(3)
 	pass
 
-
-# ======================
-# EKONOMI
-# ======================
 
 func sell_item(item_name):
 	if not stock.has(item_name):
@@ -134,40 +114,32 @@ func customer_served():
 	sell_item("mie")
 
 
-# ======================
-# HARI / BULAN
-# ======================
-
 func end_day():
-	# KHUSUS HARI 1: Syarat tidurnya adalah harus sudah selesai explore toko
 	if current_day == 1:
 		if story_step != "hari_1_pulang":
 			get_tree().call_group("UI", "tampilkan_info", "Periksa kondisi toko dulu sebelum pulang.", Color.red)
 			return false
 		else:
-			# Jika sudah beres, izinkan pindah ke Hari 2
 			current_day += 1
 			set_story_step("normal_gameplay")
 			reset_day_state()
+			save_game()
 			get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
 			emit_signal("data_update")
 			return true
 
-	# GAMEPLAY NORMAL (HARI 2 KE ATAS): Pakai aturan jumlah pelanggan
 	if not day_can_end:
 		get_tree().call_group("UI", "tampilkan_info", "Belum bisa tidur. Layani semua pelanggan dulu.", Color.red)
 		return false
 
 	current_day += 1
 
-	if current_day == 2: # Baris ini opsional / bisa dihapus karena sudah di-handle di atas
-		set_story_step("normal_gameplay")
-
 	if current_day > days_per_month:
 		end_month()
 	else:
 		reset_day_state()
 
+	save_game()
 	get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
 	emit_signal("data_update")
 	return true
@@ -211,9 +183,26 @@ func check_ending():
 func get_max_customer():
 	return 3 + current_month
 
-# ======================
-# STORY EVENT
-# ======================
+
+func set_story_step(step):
+	story_step = step
+	emit_signal("data_update")
+
+
+func reset_story_check():
+	jumlah_objek_dicek = 0
+	emit_signal("data_update")
+
+
+func tambah_progres_eksplorasi():
+	jumlah_objek_dicek += 1
+	cek_explore_toko_selesai()
+
+
+func cek_explore_toko_selesai():
+	if jumlah_objek_dicek >= total_objek_wajib:
+		set_story_step("hari_1_pulang")
+
 
 func check_story_event_on_open_store():
 	if current_day == 3 and not event_hari_3_done:
@@ -236,9 +225,6 @@ func check_story_event_on_open_store():
 
 	return ""
 
-# ======================
-# SCENE
-# ======================
 
 func pindah_ke_settings():
 	if get_tree().current_scene:
@@ -249,10 +235,6 @@ func pindah_ke_settings():
 	player_bisa_gerak = true
 	get_tree().change_scene("res://scene/settings.tscn")
 
-
-# ======================
-# JAM
-# ======================
 
 func jalankan_jam(delta):
 	timer_detik += delta
@@ -275,6 +257,7 @@ func paksa_tutup_toko():
 	player_bisa_gerak = true
 	get_tree().call_group("UI", "tampilkan_info", "Sudah larut malam. Toko tutup.", Color.red)
 	emit_signal("data_update")
+
 
 func debug_go_to_day(day):
 	current_day = day
@@ -303,17 +286,56 @@ func debug_go_to_day(day):
 	emit_signal("data_update")
 	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)
 
-func set_story_step(step):
-	story_step = step
-	emit_signal("data_update")
 
-func reset_story_check():
-	rak_checked = false
-	kardus_checked = false
-	kasir_checked = false
+func save_game():
+	var save_file = File.new()
+	var err = save_file.open("user://save_game.save", File.WRITE)
+	if err != OK:
+		return
+
+	var save_data = {
+		"current_day": current_day,
+		"current_month": current_month,
+		"money": money,
+		"hutang_utama": hutang_utama,
+		"pinjol": pinjol,
+		"reputasi": reputasi,
+		"stock": stock,
+		"story_step": story_step,
+		"last_scene": get_tree().current_scene.filename if get_tree().current_scene else "res://scene/rumah.tscn"
+	}
+
+	save_file.store_line(to_json(save_data))
+	save_file.close()
 
 
-func cek_explore_toko_selesai():
-	if rak_checked and kardus_checked and kasir_checked:
-		set_story_step("hari_1_pulang")
-		get_tree().call_group("UI", "tampilkan_info", "Misi selesai. Pulang ke rumah.", Color.gold)
+func load_game() -> bool:
+	var save_file = File.new()
+	if not save_file.file_exists("user://save_game.save"):
+		return false
+
+	var err = save_file.open("user://save_game.save", File.READ)
+	if err != OK:
+		return false
+
+	var current_line = save_file.get_line()
+	var save_data = parse_json(current_line)
+	save_file.close()
+
+	if typeof(save_data) == TYPE_DICTIONARY:
+		current_day = int(save_data.get("current_day", 1))
+		current_month = int(save_data.get("current_month", 1))
+		money = int(save_data.get("money", 5000000))
+		hutang_utama = int(save_data.get("hutang_utama", 20000000))
+		pinjol = int(save_data.get("pinjol", 0))
+		reputasi = int(save_data.get("reputasi", 0))
+		stock = save_data.get("stock", stock)
+		story_step = save_data.get("story_step", "normal_gameplay")
+		
+		var target_scene = save_data.get("last_scene", "res://scene/rumah.tscn")
+		get_tree().change_scene(target_scene)
+		
+		emit_signal("data_update")
+		return true
+
+	return false

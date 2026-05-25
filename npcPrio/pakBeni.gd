@@ -46,7 +46,7 @@ func mulai_dialog_hari_1():
 
 	get_tree().call_group("UI", "masuk_mode_dialog")
 
-	var dialog = Dialogic.start("day1")
+	var dialog = Dialogic.start("tes")
 	get_tree().get_root().add_child(dialog)
 
 	# PERBAIKAN: Menunggu sinyal timeline selesai dari Dialogic, bukan menggunakan timer statis

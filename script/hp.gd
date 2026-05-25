@@ -7,6 +7,7 @@ onready var label_jam = $HomePanel/TeksJam
 func _ready():
 	show_home()
 
+
 func _process(_delta):
 	label_jam.text = "%02d:%02d" % [GameManager.jam, GameManager.menit]
 
@@ -91,15 +92,33 @@ func update_supplier_ui():
 
 
 func _on_BeliMie_pressed():
-	GameManager.restock_item("mie", 5, 10000)
-	update_supplier_ui()
+	if GameManager.current_day == 1:
+		get_tree().call_group("UI", "tampilkan_info", "Belum waktunya belanja stok di hari pertama.", Color.red)
+		return
+		
+	var sukses = GameManager.restock_item("mie", 5, 10000)
+	if sukses:
+		update_supplier_ui()
+		GameManager.emit_signal("data_update")
 
 
 func _on_BeliMinyak_pressed():
-	GameManager.restock_item("minyak", 3, 75000)
-	update_supplier_ui()
+	if GameManager.current_day == 1:
+		get_tree().call_group("UI", "tampilkan_info", "Belum waktunya belanja stok di hari pertama.", Color.red)
+		return
+		
+	var sukses = GameManager.restock_item("minyak", 3, 75000)
+	if sukses:
+		update_supplier_ui()
+		GameManager.emit_signal("data_update")
 
 
 func _on_BeliBeras_pressed():
-	GameManager.restock_item("beras", 2, 80000)
-	update_supplier_ui()
+	if GameManager.current_day == 1:
+		get_tree().call_group("UI", "tampilkan_info", "Belum waktunya belanja stok di hari pertama.", Color.red)
+		return
+		
+	var sukses = GameManager.restock_item("beras", 2, 80000)
+	if sukses:
+		update_supplier_ui()
+		GameManager.emit_signal("data_update")

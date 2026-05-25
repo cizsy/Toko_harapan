@@ -1,10 +1,11 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Asset/tileset 16x16/Floor_3_16x16.png" type="Texture" id=1]
 [ext_resource path="res://Asset/tileset 16x16/Wall_1_16x16.png" type="Texture" id=2]
 [ext_resource path="res://Asset/toko/furniture11_toko.png" type="Texture" id=3]
 [ext_resource path="res://Asset/toko/rak depan kasir.png" type="Texture" id=4]
 [ext_resource path="res://scene/main_UI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scene/pintuToko.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scene/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Asset/toko/rak kosong1.png" type="Texture" id=8]
 [ext_resource path="res://Asset/toko/furniture11_toko3.png" type="Texture" id=9]
@@ -12,6 +13,7 @@
 [ext_resource path="res://Asset/toko/furniture11_toko2.png" type="Texture" id=11]
 [ext_resource path="res://scene/day1_toko.gd" type="Script" id=12]
 [ext_resource path="res://scene/object_interact_story.gd" type="Script" id=13]
+[ext_resource path="res://Asset/UI buatan/tandaseru.png" type="Texture" id=14]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Floor_3_16x16.png 0"
@@ -1147,7 +1149,10 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 28/z_index = 0
 
 [sub_resource type="RectangleShape2D" id=27]
-extents = Vector2( 75.8125, 19.5 )
+extents = Vector2( 75.8125, 18.75 )
+
+[sub_resource type="RectangleShape2D" id=34]
+extents = Vector2( 45.5, 13.375 )
 
 [sub_resource type="RectangleShape2D" id=28]
 extents = Vector2( 35.1875, 3.75 )
@@ -1165,7 +1170,7 @@ extents = Vector2( 16, 24 )
 extents = Vector2( 146.375, 19.25 )
 
 [sub_resource type="RectangleShape2D" id=33]
-extents = Vector2( 47.5, 13 )
+extents = Vector2( 70.25, 13 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 12 )
@@ -1220,11 +1225,13 @@ texture = ExtResource( 4 )
 [node name="Furniture8Toko" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 679.513, 362.094 )
 scale = Vector2( 1.83363, 1.83363 )
+z_index = 1
 texture = ExtResource( 10 )
 
 [node name="Furniture8Toko2" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 827.513, 362.094 )
 scale = Vector2( 1.83363, 1.83363 )
+z_index = 1
 texture = ExtResource( 10 )
 
 [node name="RakKosong1" type="Sprite" parent="map/furniture/YSort"]
@@ -1241,6 +1248,7 @@ texture = ExtResource( 8 )
 
 [node name="Furniture11Toko" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 598, 286 )
+z_index = 1
 texture = ExtResource( 3 )
 
 [node name="Furniture11Toko3" type="Sprite" parent="map/furniture/YSort"]
@@ -1250,24 +1258,29 @@ texture = ExtResource( 9 )
 
 [node name="Furniture11Toko2" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 569, 191 )
+z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Furniture11Toko5" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 503, 254 )
+z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Furniture11Toko4" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 596, 191 )
+z_index = 1
 texture = ExtResource( 11 )
 
 [node name="Furniture8Toko3" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 703, 265 )
 scale = Vector2( 1.67958, 1.67958 )
+z_index = 1
 texture = ExtResource( 10 )
 
 [node name="Furniture8Toko4" type="Sprite" parent="map/furniture/YSort"]
 position = Vector2( 839, 265 )
 scale = Vector2( 1.67958, 1.67958 )
+z_index = 1
 texture = ExtResource( 10 )
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="map/furniture"]
@@ -1285,6 +1298,22 @@ shape = SubResource( 27 )
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="map/furniture"]
 position = Vector2( 716, 286 )
 shape = SubResource( 27 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="map/furniture"]
+position = Vector2( 599.5, 291.625 )
+shape = SubResource( 34 )
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="map/furniture"]
+position = Vector2( 587, 198 )
+shape = SubResource( 34 )
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="map/furniture"]
+position = Vector2( 588, 181 )
+shape = SubResource( 34 )
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="map/furniture"]
+position = Vector2( 457, 259 )
+shape = SubResource( 34 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="map/furniture"]
 position = Vector2( 837, 371 )
@@ -1324,35 +1353,87 @@ shape = SubResource( 27 )
 
 [node name="RakInteract" type="Area2D" parent="."]
 script = ExtResource( 13 )
-object_type = "rak"
+dialog_teks = "Rak ini berdebu..."
+
+[node name="Tandaseru" type="Sprite" parent="RakInteract"]
+position = Vector2( 812, 416 )
+scale = Vector2( 0.148438, 0.148438 )
+z_index = 2
+texture = ExtResource( 14 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RakInteract"]
 position = Vector2( 808.625, 527 )
 shape = SubResource( 32 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="RakInteract"]
-position = Vector2( 827, 326 )
+[node name="RakInteract2" type="Area2D" parent="."]
+script = ExtResource( 13 )
+dialog_teks = "Rak sebelah kiri ini keropos, sepertinya bekas dimakan rayap."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RakInteract2"]
+position = Vector2( 810, 422 )
 shape = SubResource( 32 )
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="RakInteract"]
-position = Vector2( 810, 423 )
+[node name="Tandaseru2" type="Sprite" parent="RakInteract2"]
+position = Vector2( 828, 322 )
+scale = Vector2( 0.148438, 0.148438 )
+z_index = 2
+texture = ExtResource( 14 )
+
+[node name="RakInteract3" type="Area2D" parent="."]
+script = ExtResource( 13 )
+dialog_teks = "Benar-benar kosong. Tidak ada satu pun sisa barang di rak ini."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RakInteract3"]
+position = Vector2( 829, 330 )
 shape = SubResource( 32 )
+
+[node name="Tandaseru3" type="Sprite" parent="RakInteract3"]
+position = Vector2( 822, 240 )
+scale = Vector2( 0.148438, 0.148438 )
+z_index = 2
+texture = ExtResource( 14 )
 
 [node name="KardusInteract" type="Area2D" parent="."]
 script = ExtResource( 13 )
-object_type = "kardus"
+dialog_teks = "Aku tidak yakin barang barang ini bisa dijual kembali"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KardusInteract"]
 position = Vector2( 630, 326 )
 shape = SubResource( 33 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="KardusInteract"]
-position = Vector2( 643, 414 )
+[node name="Tandaseru4" type="Sprite" parent="KardusInteract"]
+position = Vector2( 642, 266 )
+scale = Vector2( 0.148438, 0.148438 )
+z_index = 2
+texture = ExtResource( 14 )
+
+[node name="KardusInteract2" type="Area2D" parent="."]
+script = ExtResource( 13 )
+dialog_teks = "Produk ini sudah hampir expired.."
+
+[node name="Tandaseru5" type="Sprite" parent="KardusInteract2"]
+position = Vector2( 654, 366 )
+scale = Vector2( 0.148438, 0.148438 )
+z_index = 2
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KardusInteract2"]
+position = Vector2( 642, 421 )
+shape = SubResource( 33 )
+
+[node name="KasirInteract" type="Area2D" parent="."]
+script = ExtResource( 13 )
+
+[node name="Tandaseru6" type="Sprite" parent="KasirInteract"]
+position = Vector2( 453, 287 )
+scale = Vector2( 0.148438, 0.148438 )
+z_index = 2
+texture = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KasirInteract"]
+position = Vector2( 454.75, 316 )
 shape = SubResource( 33 )
 
 [node name="mainUI" parent="." instance=ExtResource( 5 )]
 
-[connection signal="body_entered" from="RakInteract" to="RakInteract" method="_on_RakInteract_body_entered"]
-[connection signal="body_exited" from="RakInteract" to="RakInteract" method="_on_RakInteract_body_exited"]
-[connection signal="body_entered" from="KardusInteract" to="KardusInteract" method="_on_KardusInteract_body_entered"]
-[connection signal="body_exited" from="KardusInteract" to="KardusInteract" method="_on_KardusInteract_body_exited"]
+[node name="Area2D" parent="." instance=ExtResource( 6 )]

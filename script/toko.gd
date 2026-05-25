@@ -79,7 +79,7 @@ func mulaiLayanin():
 
 
 # =========================
-# NPC PRIORITAS (Sudah dipisah secara benar)
+# NPC PRIORITAS
 # =========================
 func spawn_pak_beni():
 	if is_instance_valid(pak_beni_instance):
@@ -93,6 +93,8 @@ func spawn_pak_beni():
 func selesai_melayani():
 	sedang_melayani = false
 	p_bar.visible = false
+	
+	# Tombol langsung dibebaskan dari disable di awal biar tidak softlock kalau transaksi gagal
 	tombol_layani.disabled = false
 	GameManager.player_bisa_gerak = true
 
@@ -122,10 +124,11 @@ func selesai_melayani():
 		if GameManager.served_today < GameManager.max_customer_per_day and GameManager.toko_buka:
 			yield(get_tree().create_timer(2.0), "timeout")
 			# PENGAMAN: Pastikan level/toko belum di-free saat timer selesai
-			if is_inside_tree():
+			if is_inside_tree() and GameManager.toko_buka:
 				spawn_npc()
 	else:
-		get_tree().call_group("UI", "tampilkan_info", "Stok tidak cukup. Restock dulu lewat HP.", Color.red)
+		# Jika stok kurang, tombol_layani sudah otomatis bisa diklik lagi nanti setelah player restock!
+		get_tree().call_group("UI", "tampilkan_info", "Stok " + item.to_upper() + " tidak cukup! Restock lewat HP.", Color.red)
 
 
 func _boleh_melayani():
@@ -178,6 +181,11 @@ func spawn_npc():
 	add_child(npc)
 
 	npc_saat_ini = npc
+	
+	# Sinkronisasi visual tombol jika player kebetulan sudah stand-by di kasir
+	if player_di_kasir:
+		tombol_layani.visible = true
+		tombol_layani.disabled = false
 
 
 func spawn_npc_event_hari3():
@@ -222,7 +230,7 @@ func selesai_event_hari3():
 
 	if GameManager.toko_buka:
 		yield(get_tree().create_timer(2.0), "timeout")
-		if is_inside_tree():
+		if is_inside_tree() and GameManager.toko_buka:
 			spawn_npc()
 
 
@@ -230,7 +238,7 @@ func _on_player_bisa_layani_body_entered(body):
 	if body.is_in_group("Player") or body.name == "Player" or body.name == "player":
 		player_di_kasir = true
 		
-		if GameManager.toko_buka and not event_sedang_berjalan:
+		if GameManager.toko_buka and not event_sedang_berjalan and is_instance_valid(npc_saat_ini):
 			tombol_layani.visible = true
 
 
