@@ -50,6 +50,12 @@ func _update_animation(input_dir):
 	if not is_instance_valid(anim):
 		return
 
+	# PERBAIKAN: Atur flip_h berdasarkan arah horizontal terakhir
+	if abs(last_facing_dir.x) > abs(last_facing_dir.y) and last_facing_dir.x < 0:
+		anim.flip_h = true  # Aktifkan flip jika menghadap kiri
+	else:
+		anim.flip_h = false # Matikan flip jika menghadap kanan, atas, atau bawah
+
 	var dir_name = _get_dir_name(last_facing_dir)
 
 	if input_dir == Vector2.ZERO:
@@ -60,10 +66,7 @@ func _update_animation(input_dir):
 
 func _get_dir_name(dir):
 	if abs(dir.x) > abs(dir.y):
-		if dir.x > 0:
-			return "right"
-		else:
-			return "left"
+		return "right"
 	else:
 		if dir.y > 0:
 			return "down"

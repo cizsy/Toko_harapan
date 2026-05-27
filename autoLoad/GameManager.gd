@@ -195,6 +195,11 @@ func reset_story_check():
 
 
 func tambah_progres_eksplorasi():
+	# KUNCI: Player harus sudah selesai ngobrol dengan Pak Beni baru bisa periksa barang!
+	if story_step != "hari_1_periksa":
+		get_tree().call_group("UI", "tampilkan_info", "Bicara dengan Pak Beni dulu sebelum memeriksa toko.", Color.orange)
+		return
+
 	jumlah_objek_dicek += 1
 	cek_explore_toko_selesai()
 
@@ -202,6 +207,9 @@ func tambah_progres_eksplorasi():
 func cek_explore_toko_selesai():
 	if jumlah_objek_dicek >= total_objek_wajib:
 		set_story_step("hari_1_pulang")
+		get_tree().call_group("UI", "tampilkan_info", "Pemeriksaan selesai. Sekarang pulanglah ke rumah untuk istirahat.", Color.green)
+
+
 
 
 func check_story_event_on_open_store():

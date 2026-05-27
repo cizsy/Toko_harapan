@@ -43,14 +43,12 @@ func update_misi():
 	# HARI 1 - OPENING (FIXED SINKRON)
 	# ======================
 	if GameManager.current_day == 1:
-		if GameManager.story_step == "hari_1_intro" or GameManager.story_step == "explore_toko":
-			# Menampilkan progres real-time objek yang sudah dicek di panel misi!
-			misiLabel.text = "Misi: Lihat kondisi toko (" + str(GameManager.jumlah_objek_dicek) + "/" + str(GameManager.total_objek_wajib) + ")"
+		if GameManager.story_step == "hari_1_intro":
+			misiLabel.text = "Misi: Bicara dengan Pak Beni"
+		elif GameManager.story_step == "hari_1_periksa":
+			misiLabel.text = "Misi: Periksa kondisi toko (" + str(GameManager.jumlah_objek_dicek) + "/" + str(GameManager.total_objek_wajib) + ")"
 		elif GameManager.story_step == "hari_1_pulang":
-			misiLabel.text = "Misi: Pulang ke rumah lalu tidur"
-		else:
-			misiLabel.text = "Misi: Lanjutkan aktivitas"
-		return
+			misiLabel.text = "Misi: Pulang ke rumah dan tidur"
 
 	# ======================
 	# HARI 2 - TUTORIAL USAHA

@@ -36,27 +36,45 @@ func _process(_delta):
 		if GameManager.current_day == 1 and GameManager.story_step == "hari_1_intro":
 			mulai_dialog_hari_1()
 
-
 func mulai_dialog_hari_1():
 	if dialog_started:
 		return
 
 	dialog_started = true
 	interact_icon.visible = false
-
 	get_tree().call_group("UI", "masuk_mode_dialog")
 
-	var dialog = Dialogic.start("tes")
-	get_tree().get_root().add_child(dialog)
+	var percakapan = [
+		{
+			"nama": "Pak Beni",
+			"teks": "Raka, akhirnya kamu datang juga. Mulai hari ini kamu yang pegang toko ini ya.",
+			"portrait": "res://aset/portrait/pak_beni.png",
+			"posisi": "kiri" # Pak Beni muncul di kiri
+		},
+		{
+			"nama": "Raka",
+			"teks": "Baik, Pak. Tapi saya harus mulai dari mana dulu?",
+			"portrait": "res://aset/portrait/raka.png",
+			"posisi": "kanan" # Raka muncul di kanan saat membalas obrolan
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Tolong periksa 6 objek vital di toko ini sebelum kita mulai jualan besok.",
+			"portrait": "res://aset/portrait/pak_beni.png",
+			"posisi": "kiri" # Kamera fokus kembali ke Pak Beni di kiri
+		}
+	]
 
-	# PERBAIKAN: Menunggu sinyal timeline selesai dari Dialogic, bukan menggunakan timer statis
-	yield(dialog, "timeline_end")
-
+	var dialog_ui = get_tree().get_nodes_in_group("DialogSystem")[0]
+	dialog_ui.mulai_dialog(percakapan)
+	
+	yield(dialog_ui, "dialog_selesai")
 	selesai_dialog_hari_1()
 
 
 func selesai_dialog_hari_1():
-	GameManager.set_story_step("explore_toko")
+	GameManager.set_story_step("hari_1_periksa") 
+	
 	get_tree().call_group("UI", "keluar_mode_dialog")
 	pulang()
 

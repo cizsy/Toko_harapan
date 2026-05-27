@@ -37,4 +37,4 @@ func _process(_delta):
 			return # Batalkan pindah scene
 			
 		# Hari biasa (Hari 2 ke atas) boleh bolak-balik normal
-		get_tree().change_scene("res://res://scene/toko.tscn")
+		get_tree().change_scene("res://scene/toko.tscn")
