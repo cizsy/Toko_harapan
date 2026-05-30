@@ -31,7 +31,7 @@ func tidur():
 
 			var success = GameManager.end_day()
 			if success:
-				jalankan_transisi_hari("Hari Ke-2", "res://scene/rumah.tscn", "hari_2_sore_di_rumah")
+				jalankan_transisi_hari("Hari Ke-2", "res://scene/rumah.tscn", "hari_2_sore_di_rumah", Vector2(869, 366))
 		else:
 			get_tree().call_group("UI", "tampilkan_info", "Bicara dengan Laras dulu sebelum tidur.", Color.red)
 
@@ -53,7 +53,7 @@ func tidur():
 	if success:
 		jalankan_transisi_hari("Hari Ke-" + str(GameManager.current_day), "res://scene/toko.tscn", "normal_gameplay")
 
-func jalankan_transisi_hari(teks_transisi, scene_tujuan, next_story_step):
+func jalankan_transisi_hari(teks_transisi, scene_tujuan, next_story_step, posisi_player = null):
 	GameManager.player_bisa_gerak = false
 
 	var ui_list = get_tree().get_nodes_in_group("UI")
@@ -73,6 +73,9 @@ func jalankan_transisi_hari(teks_transisi, scene_tujuan, next_story_step):
 		yield(get_tree().create_timer(1.5), "timeout")
 
 	GameManager.set_story_step(next_story_step)
+
+	if posisi_player != null:
+		GameManager.set_next_player_position(posisi_player)
+
 	GameManager.player_bisa_gerak = true
 	get_tree().change_scene(scene_tujuan)
-

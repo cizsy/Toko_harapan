@@ -5,6 +5,7 @@ var laras_instance = null
 
 
 func _ready():
+	call_deferred("atur_posisi_player_awal")
 	if GameManager.current_day == 1 and GameManager.story_step == "hari_1_laras":
 		spawn_laras()
 
@@ -16,3 +17,6 @@ func spawn_laras():
 	laras_instance = laras_scene.instance()
 	laras_instance.global_position = Vector2(485, 427) # ganti sesuai posisi Laras di rumahmu
 	add_child(laras_instance)
+
+func atur_posisi_player_awal():
+	GameManager.apply_next_player_position()

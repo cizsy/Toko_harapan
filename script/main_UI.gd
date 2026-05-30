@@ -60,16 +60,22 @@ func update_misi():
 	# HARI 2 - TUTORIAL USAHA
 	# ======================
 	if GameManager.current_day == 2:
-		if not GameManager.toko_sudah_dibuka_hari_ini:
+		if GameManager.story_step == "hari_2_sore_di_rumah":
+			misiLabel.text = "Misi: Bersiap pergi ke toko"
+		elif GameManager.story_step == "hari_2_pergi_ke_toko":
+			misiLabel.text = "Misi: Pergi ke toko"
+		elif GameManager.story_step == "hari_2_bersih_toko":
+			misiLabel.text = "Misi: Bersihkan toko (" + str(GameManager.jumlah_objek_dibersihkan) + "/" + str(GameManager.total_objek_bersih) + ")"
+		elif GameManager.story_step == "hari_2_buka_toko":
 			misiLabel.text = "Misi: Buka toko"
-		elif GameManager.toko_buka and not GameManager.day_can_end:
+		elif GameManager.story_step == "hari_2_jualan" and GameManager.toko_buka and not GameManager.day_can_end:
 			misiLabel.text = "Misi: Layani pelanggan " + str(GameManager.served_today) + "/" + str(GameManager.max_customer_per_day)
 		elif GameManager.toko_buka and GameManager.day_can_end:
 			misiLabel.text = "Misi: Tutup toko"
 		elif not GameManager.toko_buka and GameManager.day_can_end:
 			misiLabel.text = "Misi: Pulang ke rumah lalu tidur"
 		else:
-			misiLabel.text = "Misi: Cek HP Supplier untuk membeli stok"
+			misiLabel.text = "Misi: Lanjutkan aktivitas"
 		return
 
 	# ======================

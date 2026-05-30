@@ -462,12 +462,11 @@ stream = ExtResource( 23 )
 autoplay = true
 
 [node name="posisiLaras" type="Position2D" parent="."]
-position = Vector2( 485, 427 )
+position = Vector2( 501, 431 )
 z_index = 3
 
 [node name="DialogUI" parent="." instance=ExtResource( 11 )]
 
 [node name="posisitidur" type="Position2D" parent="."]
-visible = false
-position = Vector2( 914, 369 )
+position = Vector2( 869, 366 )
 z_index = 3

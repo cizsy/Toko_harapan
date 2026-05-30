@@ -8,22 +8,15 @@ onready var dialog_ui = $DialogUI
 
 func _ready():
 	add_to_group("Day1Toko")
+	add_to_group("LevelToko")
 
-	GameManager.current_day = 1
-	
-	if GameManager.story_step == "":
-		GameManager.story_step = "hari_1_intro"
-	
 	GameManager.player_bisa_gerak = true
 	GameManager.emit_signal("data_update")
 
-	# DialogUI cuma dipastikan ada.
-	# Dialog TIDAK dimulai dari sini.
-	if dialog_ui:
-		print("DialogUI ditemukan di Day1 scene")
-
-	if GameManager.story_step == "hari_1_intro":
-		spawn_pak_beni()
+	if GameManager.current_day == 1:
+		mode_day1()
+	elif GameManager.current_day == 2:
+		mode_day2()
 
 
 func spawn_pak_beni():
@@ -33,3 +26,10 @@ func spawn_pak_beni():
 	pak_beni_instance = pak_beni_scene.instance()
 	pak_beni_instance.global_position = Vector2(451, 473)
 	add_child(pak_beni_instance)
+
+func mode_day2():
+	if GameManager.story_step == "hari_2_pergi_ke_toko":
+		GameManager.set_story_step("hari_2_bersih_toko")
+		GameManager.reset_bersih_toko()
+
+	get_tree().call_group("UI", "tampilkan_info", "Bersihkan toko dulu sebelum buka.", Color.orange)

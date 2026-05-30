@@ -46,6 +46,10 @@ var story_step = "hari_1_intro"
 
 var total_objek_wajib = 6 
 var jumlah_objek_dicek = 0
+var jumlah_objek_dibersihkan = 0
+var total_objek_bersih = 3
+
+var next_player_position = null
 
 
 func _process(delta):
@@ -343,3 +347,33 @@ func load_game() -> bool:
 		return true
 
 	return false
+
+func set_next_player_position(posisi):
+	next_player_position = posisi
+
+
+func apply_next_player_position():
+	if next_player_position == null:
+		return
+
+	var players = get_tree().get_nodes_in_group("Player")
+	if players.size() > 0:
+		players[0].global_position = next_player_position
+		next_player_position = null
+
+func reset_bersih_toko():
+	jumlah_objek_dibersihkan = 0
+	emit_signal("data_update")
+
+
+func tambah_progres_bersih():
+	if story_step != "hari_2_bersih_toko":
+		get_tree().call_group("UI", "tampilkan_info", "Belum waktunya bersih-bersih.", Color.orange)
+		return
+
+	jumlah_objek_dibersihkan += 1
+	emit_signal("data_update")
+
+	if jumlah_objek_dibersihkan >= total_objek_bersih:
+		set_story_step("hari_2_buka_toko")
+		get_tree().call_group("UI", "tampilkan_info", "Toko sudah bersih. Sekarang buka toko.", Color.gold)

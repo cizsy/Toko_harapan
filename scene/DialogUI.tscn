@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/dialogic/Example Assets/Fonts/DefaultBoldFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://DialogUI.gd" type="Script" id=2]
+[ext_resource path="res://script/DialogUI.gd" type="Script" id=2]
 [ext_resource path="res://Asset/character/portrait/raka/4.png" type="Texture" id=3]
 [ext_resource path="res://addons/dialogic/Example Assets/Fonts/DefaultFont.tres" type="DynamicFont" id=4]
 
