@@ -116,17 +116,15 @@ func customer_served():
 
 func end_day():
 	if current_day == 1:
-		if story_step != "hari_1_pulang":
-			get_tree().call_group("UI", "tampilkan_info", "Periksa kondisi toko dulu sebelum pulang.", Color.red)
+		if story_step != "hari_1_tidur":
+			get_tree().call_group("UI", "tampilkan_info", "Belum waktunya tidur.", Color.red)
 			return false
-		else:
-			current_day += 1
-			set_story_step("normal_gameplay")
-			reset_day_state()
-			save_game()
-			get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
-			emit_signal("data_update")
-			return true
+
+		current_day += 1
+		reset_day_state()
+		save_game()
+		emit_signal("data_update")
+		return true
 
 	if not day_can_end:
 		get_tree().call_group("UI", "tampilkan_info", "Belum bisa tidur. Layani semua pelanggan dulu.", Color.red)
@@ -140,10 +138,8 @@ func end_day():
 		reset_day_state()
 
 	save_game()
-	get_tree().call_group("UI", "tampilkan_info", "Hari Ke-" + str(current_day) + " Dimulai!", Color.gold)
 	emit_signal("data_update")
 	return true
-
 
 func reset_day_state():
 	served_today = 0

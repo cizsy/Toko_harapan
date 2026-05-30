@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Boy.png-c830735d5fd8ff81c9e78376b9312a4a.stex"
+path="res://.import/raka.png-d37333f3642a50c4024698cf35edc60e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/character/PortraitsFinal/Boy.png"
-dest_files=[ "res://.import/Boy.png-c830735d5fd8ff81c9e78376b9312a4a.stex" ]
+source_file="res://Asset/character/PortraitsFinal/raka.png"
+dest_files=[ "res://.import/raka.png-d37333f3642a50c4024698cf35edc60e.stex" ]
 
 [params]
 

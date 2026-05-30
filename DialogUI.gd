@@ -3,7 +3,8 @@ extends CanvasLayer
 signal dialog_selesai
 
 onready var panel_dialog = $DialogBox
-onready var label_nama = $DialogBox/NamaLabel
+onready var label_nama_kiri = $DialogBox/NamaLabelKiri
+onready var label_nama_kanan = $DialogBox/NamaLabelKanan
 onready var label_teks = $DialogBox/TeksLabel
 onready var portrait_kiri = $DialogBox/PortraitKiri
 onready var portrait_kanan = $DialogBox/PortraitKanan
@@ -12,59 +13,108 @@ onready var tween = $Tween
 var data_dialog = []
 var indeks_sekarang = 0
 var sedang_mengetik = false
+var dialog_aktif = false
+
 
 func _ready():
 	add_to_group("DialogSystem")
-	panel_dialog.visible = false
 
-func mulai_dialog(list_percakapan: Array):
+	panel_dialog.visible = false
+	label_nama_kiri.visible = false
+	label_nama_kanan.visible = false
+	portrait_kiri.visible = false
+	portrait_kanan.visible = false
+
+
+func mulai_dialog(list_percakapan):
+	if list_percakapan.empty():
+		print("Dialog kosong.")
+		return
+
 	data_dialog = list_percakapan
 	indeks_sekarang = 0
+	sedang_mengetik = false
+	dialog_aktif = true
+
 	GameManager.player_bisa_gerak = false
+	get_tree().call_group("UI", "masuk_mode_dialog")
+
 	panel_dialog.visible = true
 	tampilkan_baris_dialog()
+
 
 func tampilkan_baris_dialog():
 	if indeks_sekarang >= data_dialog.size():
 		selesai_dialog()
 		return
-		
+
 	var data = data_dialog[indeks_sekarang]
-	
-	label_nama.text = data.get("nama", "")
-	label_teks.text = data.get("teks", "")
-	
-	# Sembunyikan kedua portrait terlebih dahulu sebelum menentukan posisi
+
+	var nama = data.get("nama", "")
+	var teks = data.get("teks", "")
+	var posisi = data.get("posisi", "kiri")
+	var jalur_foto = data.get("portrait", "")
+
+	label_teks.text = teks
+
+	# Reset tampilan dulu
+	label_nama_kiri.visible = false
+	label_nama_kanan.visible = false
 	portrait_kiri.visible = false
 	portrait_kanan.visible = false
-	
-	var jalur_foto = data.get("portrait", "")
-	var posisi = data.get("posisi", "kiri") # Default ke kiri jika tidak diisi
-	
+
+	label_nama_kiri.text = ""
+	label_nama_kanan.text = ""
+
+	# Nama karakter sesuai posisi
+	if posisi == "kiri":
+		label_nama_kiri.text = nama
+		label_nama_kiri.visible = true
+	elif posisi == "kanan":
+		label_nama_kanan.text = nama
+		label_nama_kanan.visible = true
+
+	# Portrait karakter sesuai posisi
 	if jalur_foto != "":
-		if posisi == "kiri":
-			portrait_kiri.texture = load(jalur_foto)
-			portrait_kiri.visible = true
-		elif posisi == "kanan":
-			portrait_kanan.texture = load(jalur_foto)
-			portrait_kanan.visible = true
-			
-	# Animasi Teks Mengetik
+		var texture = load(jalur_foto)
+
+		if texture != null:
+			if posisi == "kiri":
+				portrait_kiri.texture = texture
+				portrait_kiri.visible = true
+			elif posisi == "kanan":
+				portrait_kanan.texture = texture
+				portrait_kanan.visible = true
+		else:
+			print("Portrait tidak ditemukan: " + str(jalur_foto))
+
+	# Efek ketik
 	label_teks.percent_visible = 0.0
-	var durasi_ketik = label_teks.text.length() * 0.03
-	
+
+	var durasi_ketik = max(label_teks.text.length() * 0.03, 0.2)
+
+	tween.stop_all()
 	tween.interpolate_property(
-		label_teks, "percent_visible",
-		0.0, 1.0, durasi_ketik,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
+		label_teks,
+		"percent_visible",
+		0.0,
+		1.0,
+		durasi_ketik,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
 	)
 	tween.start()
+
 	sedang_mengetik = true
 
+
 func _input(event):
+	if not dialog_aktif:
+		return
+
 	if not panel_dialog.visible:
 		return
-		
+
 	if event.is_action_pressed("ui_accept") or event.is_action_pressed("interact"):
 		if sedang_mengetik:
 			tween.stop_all()
@@ -74,10 +124,26 @@ func _input(event):
 			indeks_sekarang += 1
 			tampilkan_baris_dialog()
 
+
 func selesai_dialog():
+	tween.stop_all()
+
 	panel_dialog.visible = false
+	label_nama_kiri.visible = false
+	label_nama_kanan.visible = false
+	portrait_kiri.visible = false
+	portrait_kanan.visible = false
+
+	data_dialog = []
+	indeks_sekarang = 0
+	sedang_mengetik = false
+	dialog_aktif = false
+
 	GameManager.player_bisa_gerak = true
+	get_tree().call_group("UI", "keluar_mode_dialog")
+
 	emit_signal("dialog_selesai")
+
 
 func _on_Tween_tween_all_completed():
 	sedang_mengetik = false

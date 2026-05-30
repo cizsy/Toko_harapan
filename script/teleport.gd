@@ -31,11 +31,13 @@ func _process(_delta):
 		interact_icon.visible = active
 
 	if active and Input.is_action_just_pressed("interact"):
-		# INTEGRASI HARI 1: Kunci pintu kalau belum selesai meriksa objek
 		if GameManager.current_day == 1:
 			if GameManager.story_step != "hari_1_pulang":
 				get_tree().call_group("UI", "tampilkan_info", "Periksa semua sudut toko dulu sebelum pulang.", Color.red)
-				return # Batalkan pindah scene
-		
-		# Kalau sudah kelar atau sudah hari 2 ke atas, silakan lewat
+				return
+
+			GameManager.set_story_step("hari_1_laras")
+			get_tree().change_scene("res://scene/rumah.tscn")
+			return
+
 		get_tree().change_scene("res://scene/rumah.tscn")

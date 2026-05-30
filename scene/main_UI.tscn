@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://script/main_UI.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialogic/Example Assets/Fonts/Overlock/Overlock-Black.ttf" type="DynamicFontData" id=2]
@@ -51,6 +51,10 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.168627, 0.160784, 0, 1 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 80
+font_data = ExtResource( 6 )
 
 [node name="mainUI" type="CanvasLayer" groups=["UI"]]
 
@@ -142,5 +146,25 @@ custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 15 )
 text = "ini info pop up"
 autowrap = true
+
+[node name="DayTransition" type="CanvasLayer" parent="rootUI"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="rootUI/DayTransition"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="rootUI/DayTransition/ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.0
+margin_top = -49.0
+margin_right = 175.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 17 )
+text = "HARI KE 2"
 
 [connection signal="pressed" from="rootUI/HpButton" to="rootUI" method="_on_HpButton_pressed"]

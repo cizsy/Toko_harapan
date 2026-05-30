@@ -25,23 +25,18 @@ func _on_Bed_body_exited(body):
 
 
 func tidur():
-	# ==========================================
-	# KHUSUS HARI 1: Harus sudah selesai tutorial (story_step == "hari_1_pulang")
-	# ==========================================
 	if GameManager.current_day == 1:
-		if GameManager.story_step == "hari_1_pulang":
+		if GameManager.story_step == "hari_1_tidur":
+			GameManager.day_can_end = true
+
 			var success = GameManager.end_day()
 			if success:
-				get_tree().call_group("UI", "tampilkan_info", "Hari pertama selesai. Kamu tidur bersiap untuk besok...", Color.gold)
-				# Pindah scene otomatis ke Toko untuk memulai Hari 2 jualan!
-				get_tree().change_scene("res://scene/toko.tscn")
+				jalankan_transisi_hari("Hari Ke-2", "res://scene/rumah.tscn", "hari_2_sore_di_rumah")
 		else:
-			get_tree().call_group("UI", "tampilkan_info", "Periksa kondisi toko dulu sebelum pulang dan tidur.", Color.red)
-		return # Kunci alur agar tidak bocor ke logika hari normal di bawah
-	
-	# ==========================================
-	# LOGIKA GAMEPLAY NORMAL (HARI 2 KE ATAS)
-	# ==========================================
+			get_tree().call_group("UI", "tampilkan_info", "Bicara dengan Laras dulu sebelum tidur.", Color.red)
+
+		return
+
 	if not GameManager.toko_sudah_dibuka_hari_ini:
 		get_tree().call_group("UI", "tampilkan_info", "Buka toko dulu sebelum tidur.", Color.red)
 		return
@@ -54,9 +49,30 @@ func tidur():
 		get_tree().call_group("UI", "tampilkan_info", "Masih ada pelanggan hari ini.", Color.red)
 		return
 
-	# Eksekusi ganti hari untuk gameplay normal
 	var success = GameManager.end_day()
 	if success:
-		get_tree().call_group("UI", "tampilkan_info", "Kamu beristirahat. Hari berikutnya dimulai.", Color.gold)
-		# FIX BUG: Lempar kembali player ke Toko setelah bangun tidur di hari baru!
-		get_tree().change_scene("res://scene/toko.tscn")
+		jalankan_transisi_hari("Hari Ke-" + str(GameManager.current_day), "res://scene/toko.tscn", "normal_gameplay")
+
+func jalankan_transisi_hari(teks_transisi, scene_tujuan, next_story_step):
+	GameManager.player_bisa_gerak = false
+
+	var ui_list = get_tree().get_nodes_in_group("UI")
+	var ui_transisi = null
+
+	for ui in ui_list:
+		print("Node di group UI: ", ui.name)
+
+		if ui.has_method("tampilkan_transisi_hari"):
+			ui_transisi = ui
+			break
+
+	if ui_transisi != null:
+		yield(ui_transisi.tampilkan_transisi_hari(teks_transisi), "completed")
+	else:
+		print("ERROR: Tidak ada UI yang punya method tampilkan_transisi_hari")
+		yield(get_tree().create_timer(1.5), "timeout")
+
+	GameManager.set_story_step(next_story_step)
+	GameManager.player_bisa_gerak = true
+	get_tree().change_scene(scene_tujuan)
+

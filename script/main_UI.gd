@@ -8,10 +8,10 @@ onready var day_label = $dayPanel/dayLabel
 onready var infoLabel = $infoPanel/infoLabel
 onready var infoPanel = $infoPanel
 onready var hp_button = $HpButton
-
+onready var day_transition = $DayTransition/ColorRect
+onready var day_transition_label = $DayTransition/ColorRect/Label
 onready var misiPanel = $MisiPanel
 onready var misiLabel = $MisiPanel/MisiLabel
-
 
 func _ready():
 	add_to_group("UI")
@@ -19,8 +19,11 @@ func _ready():
 	infoLabel.text = ""
 	infoPanel.visible = false
 	hp_button.visible = true
-
 	misiPanel.visible = true
+
+	if is_instance_valid(day_transition):
+		day_transition.visible = false
+		day_transition.modulate.a = 0
 
 	if not GameManager.is_connected("data_update", self, "update_ui"):
 		GameManager.connect("data_update", self, "update_ui")
@@ -49,6 +52,9 @@ func update_misi():
 			misiLabel.text = "Misi: Periksa kondisi toko (" + str(GameManager.jumlah_objek_dicek) + "/" + str(GameManager.total_objek_wajib) + ")"
 		elif GameManager.story_step == "hari_1_pulang":
 			misiLabel.text = "Misi: Pulang ke rumah dan tidur"
+		else:
+			misiLabel.text = "Misi: Lanjutkan aktivitas"
+		return
 
 	# ======================
 	# HARI 2 - TUTORIAL USAHA
@@ -210,3 +216,63 @@ func tampilkan_info(pesan, warna = Color.black):
 	if infoLabel.text == str(pesan):
 		infoLabel.text = ""
 		infoPanel.visible = false
+
+
+func tampilkan_transisi_hari(teks):
+	if not is_instance_valid(day_transition):
+		print("ERROR: DayTransition ColorRect tidak ditemukan.")
+		return
+
+	if not is_instance_valid(day_transition_label):
+		print("ERROR: DayTransition Label tidak ditemukan.")
+		return
+
+	print("TRANSISI MULAI: " + str(teks))
+
+	# Pastikan dia muncul di atas
+	day_transition.visible = true
+	day_transition.show()
+	day_transition.raise()
+	day_transition.modulate.a = 0.0
+	day_transition_label.text = teks
+
+	# Sembunyikan UI gameplay saat transisi
+	$moneyPanel.visible = false
+	$dayPanel.visible = false
+	$MisiPanel.visible = false
+	$infoPanel.visible = false
+	$HpButton.visible = false
+
+	var tween_baru = Tween.new()
+	add_child(tween_baru)
+
+	tween_baru.interpolate_property(
+		day_transition,
+		"modulate:a",
+		0.0,
+		1.0,
+		0.5,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+	)
+	tween_baru.start()
+	yield(tween_baru, "tween_completed")
+
+	yield(get_tree().create_timer(1.2), "timeout")
+
+	tween_baru.interpolate_property(
+		day_transition,
+		"modulate:a",
+		1.0,
+		0.0,
+		0.5,
+		Tween.TRANS_LINEAR,
+		Tween.EASE_IN_OUT
+	)
+	tween_baru.start()
+	yield(tween_baru, "tween_completed")
+
+	day_transition.visible = false
+	tween_baru.queue_free()
+
+	print("TRANSISI SELESAI")

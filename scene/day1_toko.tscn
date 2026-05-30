@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://Asset/tileset 16x16/Floor_3_16x16.png" type="Texture" id=1]
 [ext_resource path="res://Asset/tileset 16x16/Wall_1_16x16.png" type="Texture" id=2]
@@ -14,6 +14,9 @@
 [ext_resource path="res://scene/day1_toko.gd" type="Script" id=12]
 [ext_resource path="res://scene/object_interact_story.gd" type="Script" id=13]
 [ext_resource path="res://Asset/UI buatan/tandaseru.png" type="Texture" id=14]
+[ext_resource path="res://scene/DialogUI.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Asset/rumah/debu.png" type="Texture" id=16]
+[ext_resource path="res://Asset/rumah/sarang.png" type="Texture" id=17]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Floor_3_16x16.png 0"
@@ -1353,7 +1356,6 @@ shape = SubResource( 27 )
 
 [node name="RakInteract" type="Area2D" parent="."]
 script = ExtResource( 13 )
-dialog_teks = "Rak ini berdebu..."
 
 [node name="Tandaseru" type="Sprite" parent="RakInteract"]
 position = Vector2( 812, 416 )
@@ -1367,7 +1369,6 @@ shape = SubResource( 32 )
 
 [node name="RakInteract2" type="Area2D" parent="."]
 script = ExtResource( 13 )
-dialog_teks = "Rak sebelah kiri ini keropos, sepertinya bekas dimakan rayap."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RakInteract2"]
 position = Vector2( 810, 422 )
@@ -1381,7 +1382,6 @@ texture = ExtResource( 14 )
 
 [node name="RakInteract3" type="Area2D" parent="."]
 script = ExtResource( 13 )
-dialog_teks = "Benar-benar kosong. Tidak ada satu pun sisa barang di rak ini."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RakInteract3"]
 position = Vector2( 829, 330 )
@@ -1395,7 +1395,6 @@ texture = ExtResource( 14 )
 
 [node name="KardusInteract" type="Area2D" parent="."]
 script = ExtResource( 13 )
-dialog_teks = "Aku tidak yakin barang barang ini bisa dijual kembali"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KardusInteract"]
 position = Vector2( 630, 326 )
@@ -1409,7 +1408,6 @@ texture = ExtResource( 14 )
 
 [node name="KardusInteract2" type="Area2D" parent="."]
 script = ExtResource( 13 )
-dialog_teks = "Produk ini sudah hampir expired.."
 
 [node name="Tandaseru5" type="Sprite" parent="KardusInteract2"]
 position = Vector2( 654, 366 )
@@ -1435,5 +1433,366 @@ position = Vector2( 454.75, 316 )
 shape = SubResource( 33 )
 
 [node name="mainUI" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [node name="Area2D" parent="." instance=ExtResource( 6 )]
+
+[node name="DialogUI" parent="." instance=ExtResource( 15 )]
+visible = false
+
+[node name="debu" type="Node2D" parent="."]
+z_index = 2
+
+[node name="Sarang" type="Sprite" parent="debu"]
+modulate = Color( 0, 0, 0, 0.701961 )
+position = Vector2( 395, 208 )
+scale = Vector2( 0.138889, 0.138889 )
+z_index = 1
+texture = ExtResource( 17 )
+
+[node name="Sarang2" type="Sprite" parent="debu"]
+modulate = Color( 0, 0, 0, 0.701961 )
+position = Vector2( 940, 210 )
+scale = Vector2( 0.138889, 0.138889 )
+z_index = 2
+texture = ExtResource( 17 )
+flip_h = true
+
+[node name="Sarang3" type="Sprite" parent="debu"]
+modulate = Color( 0, 0, 0, 0.701961 )
+position = Vector2( 935, 352 )
+scale = Vector2( 0.0944444, 0.0944444 )
+z_index = 2
+texture = ExtResource( 17 )
+flip_h = true
+
+[node name="Sarang4" type="Sprite" parent="debu"]
+modulate = Color( 0, 0, 0, 0.701961 )
+position = Vector2( 880, 261 )
+scale = Vector2( 0.0527778, 0.0527778 )
+z_index = 2
+texture = ExtResource( 17 )
+flip_h = true
+
+[node name="Sarang5" type="Sprite" parent="debu"]
+modulate = Color( 0, 0, 0, 0.701961 )
+position = Vector2( 790, 478 )
+scale = Vector2( 0.0527778, 0.0527778 )
+z_index = 2
+texture = ExtResource( 17 )
+flip_h = true
+
+[node name="Sarang6" type="Sprite" parent="debu"]
+modulate = Color( 0, 0, 0, 0.701961 )
+position = Vector2( 710, 377 )
+scale = Vector2( 0.0527778, 0.0527778 )
+z_index = 2
+texture = ExtResource( 17 )
+
+[node name="Sarang7" type="Sprite" parent="debu"]
+modulate = Color( 0, 0, 0, 0.701961 )
+position = Vector2( 697, 282 )
+scale = Vector2( 0.0527778, 0.0527778 )
+z_index = 2
+texture = ExtResource( 17 )
+
+[node name="Sarang8" type="Sprite" parent="debu"]
+modulate = Color( 0.4, 0.376471, 0.376471, 0.294118 )
+position = Vector2( 541, 349 )
+scale = Vector2( 0.0527778, 0.0527778 )
+z_index = 2
+texture = ExtResource( 17 )
+
+[node name="Sarang9" type="Sprite" parent="debu"]
+modulate = Color( 0.4, 0.376471, 0.376471, 0.294118 )
+position = Vector2( 506, 358 )
+scale = Vector2( 0.0527778, 0.0527778 )
+z_index = 2
+texture = ExtResource( 17 )
+
+[node name="Sarang10" type="Sprite" parent="debu"]
+modulate = Color( 0.4, 0.376471, 0.376471, 0.294118 )
+position = Vector2( 445, 359 )
+scale = Vector2( 0.0527778, 0.0527778 )
+z_index = 2
+texture = ExtResource( 17 )
+
+[node name="Debu" type="Sprite" parent="debu"]
+position = Vector2( 423, 410 )
+texture = ExtResource( 16 )
+
+[node name="Debu6" type="Sprite" parent="debu"]
+position = Vector2( 686, 486 )
+texture = ExtResource( 16 )
+
+[node name="Debu7" type="Sprite" parent="debu"]
+position = Vector2( 719, 485 )
+texture = ExtResource( 16 )
+
+[node name="Debu8" type="Sprite" parent="debu"]
+position = Vector2( 688, 444 )
+texture = ExtResource( 16 )
+
+[node name="Debu9" type="Sprite" parent="debu"]
+position = Vector2( 723, 444 )
+texture = ExtResource( 16 )
+
+[node name="Debu10" type="Sprite" parent="debu"]
+position = Vector2( 756, 444 )
+texture = ExtResource( 16 )
+
+[node name="Debu11" type="Sprite" parent="debu"]
+position = Vector2( 785, 444 )
+texture = ExtResource( 16 )
+
+[node name="Debu12" type="Sprite" parent="debu"]
+position = Vector2( 752, 486 )
+texture = ExtResource( 16 )
+
+[node name="Debu13" type="Sprite" parent="debu"]
+position = Vector2( 784, 486 )
+texture = ExtResource( 16 )
+
+[node name="Debu14" type="Sprite" parent="debu"]
+position = Vector2( 837, 442 )
+texture = ExtResource( 16 )
+
+[node name="Debu15" type="Sprite" parent="debu"]
+position = Vector2( 799, 350 )
+texture = ExtResource( 16 )
+
+[node name="Debu16" type="Sprite" parent="debu"]
+position = Vector2( 787, 381 )
+texture = ExtResource( 16 )
+
+[node name="Debu17" type="Sprite" parent="debu"]
+position = Vector2( 768, 350 )
+texture = ExtResource( 16 )
+
+[node name="Debu18" type="Sprite" parent="debu"]
+position = Vector2( 739, 348 )
+texture = ExtResource( 16 )
+
+[node name="Debu19" type="Sprite" parent="debu"]
+position = Vector2( 720, 349 )
+texture = ExtResource( 16 )
+
+[node name="Debu20" type="Sprite" parent="debu"]
+position = Vector2( 737, 389 )
+texture = ExtResource( 16 )
+
+[node name="Debu21" type="Sprite" parent="debu"]
+position = Vector2( 853, 348 )
+texture = ExtResource( 16 )
+
+[node name="Debu22" type="Sprite" parent="debu"]
+position = Vector2( 853, 348 )
+texture = ExtResource( 16 )
+
+[node name="Debu23" type="Sprite" parent="debu"]
+position = Vector2( 881, 349 )
+texture = ExtResource( 16 )
+
+[node name="Debu24" type="Sprite" parent="debu"]
+position = Vector2( 912, 350 )
+texture = ExtResource( 16 )
+
+[node name="Debu25" type="Sprite" parent="debu"]
+position = Vector2( 896, 386 )
+texture = ExtResource( 16 )
+
+[node name="Debu26" type="Sprite" parent="debu"]
+position = Vector2( 865, 384 )
+texture = ExtResource( 16 )
+
+[node name="Debu27" type="Sprite" parent="debu"]
+position = Vector2( 847, 385 )
+texture = ExtResource( 16 )
+
+[node name="Debu28" type="Sprite" parent="debu"]
+position = Vector2( 896, 384 )
+texture = ExtResource( 16 )
+
+[node name="Debu29" type="Sprite" parent="debu"]
+position = Vector2( 934, 442 )
+texture = ExtResource( 16 )
+
+[node name="Debu30" type="Sprite" parent="debu"]
+position = Vector2( 896, 444 )
+texture = ExtResource( 16 )
+
+[node name="Debu31" type="Sprite" parent="debu"]
+position = Vector2( 876, 443 )
+texture = ExtResource( 16 )
+
+[node name="Debu32" type="Sprite" parent="debu"]
+position = Vector2( 876, 443 )
+texture = ExtResource( 16 )
+
+[node name="Debu33" type="Sprite" parent="debu"]
+position = Vector2( 835, 487 )
+texture = ExtResource( 16 )
+
+[node name="Debu34" type="Sprite" parent="debu"]
+position = Vector2( 867, 487 )
+texture = ExtResource( 16 )
+
+[node name="Debu35" type="Sprite" parent="debu"]
+position = Vector2( 898, 485 )
+texture = ExtResource( 16 )
+
+[node name="Debu36" type="Sprite" parent="debu"]
+position = Vector2( 935, 485 )
+texture = ExtResource( 16 )
+
+[node name="Debu37" type="Sprite" parent="debu"]
+position = Vector2( 937, 387 )
+texture = ExtResource( 16 )
+
+[node name="Debu38" type="Sprite" parent="debu"]
+position = Vector2( 919, 387 )
+texture = ExtResource( 16 )
+
+[node name="Debu39" type="Sprite" parent="debu"]
+position = Vector2( 759, 392 )
+texture = ExtResource( 16 )
+
+[node name="Debu40" type="Sprite" parent="debu"]
+position = Vector2( 943, 292 )
+texture = ExtResource( 16 )
+
+[node name="Debu41" type="Sprite" parent="debu"]
+position = Vector2( 914, 293 )
+texture = ExtResource( 16 )
+
+[node name="Debu42" type="Sprite" parent="debu"]
+position = Vector2( 880, 292 )
+texture = ExtResource( 16 )
+
+[node name="Debu43" type="Sprite" parent="debu"]
+position = Vector2( 865, 293 )
+texture = ExtResource( 16 )
+
+[node name="Debu44" type="Sprite" parent="debu"]
+position = Vector2( 865, 293 )
+texture = ExtResource( 16 )
+
+[node name="Debu45" type="Sprite" parent="debu"]
+position = Vector2( 824, 293 )
+texture = ExtResource( 16 )
+
+[node name="Debu46" type="Sprite" parent="debu"]
+position = Vector2( 847, 259 )
+texture = ExtResource( 16 )
+
+[node name="Debu47" type="Sprite" parent="debu"]
+position = Vector2( 918, 253 )
+texture = ExtResource( 16 )
+
+[node name="Debu48" type="Sprite" parent="debu"]
+position = Vector2( 949, 252 )
+texture = ExtResource( 16 )
+
+[node name="Debu49" type="Sprite" parent="debu"]
+position = Vector2( 772, 248 )
+texture = ExtResource( 16 )
+
+[node name="Debu50" type="Sprite" parent="debu"]
+position = Vector2( 805, 249 )
+texture = ExtResource( 16 )
+
+[node name="Debu51" type="Sprite" parent="debu"]
+position = Vector2( 799, 292 )
+texture = ExtResource( 16 )
+
+[node name="Debu52" type="Sprite" parent="debu"]
+position = Vector2( 770, 292 )
+texture = ExtResource( 16 )
+
+[node name="Debu53" type="Sprite" parent="debu"]
+position = Vector2( 731, 292 )
+texture = ExtResource( 16 )
+
+[node name="Debu54" type="Sprite" parent="debu"]
+position = Vector2( 732, 250 )
+texture = ExtResource( 16 )
+
+[node name="Debu55" type="Sprite" parent="debu"]
+position = Vector2( 697, 249 )
+texture = ExtResource( 16 )
+
+[node name="Debu56" type="Sprite" parent="debu"]
+position = Vector2( 697, 249 )
+texture = ExtResource( 16 )
+
+[node name="Debu57" type="Sprite" parent="debu"]
+position = Vector2( 659, 294 )
+texture = ExtResource( 16 )
+
+[node name="Debu58" type="Sprite" parent="debu"]
+position = Vector2( 673, 394 )
+texture = ExtResource( 16 )
+
+[node name="Debu59" type="Sprite" parent="debu"]
+position = Vector2( 616, 440 )
+texture = ExtResource( 16 )
+
+[node name="Debu60" type="Sprite" parent="debu"]
+position = Vector2( 578, 465 )
+texture = ExtResource( 16 )
+
+[node name="Debu61" type="Sprite" parent="debu"]
+position = Vector2( 580, 404 )
+texture = ExtResource( 16 )
+
+[node name="Debu62" type="Sprite" parent="debu"]
+position = Vector2( 589, 339 )
+texture = ExtResource( 16 )
+
+[node name="Debu63" type="Sprite" parent="debu"]
+position = Vector2( 589, 339 )
+texture = ExtResource( 16 )
+
+[node name="Debu64" type="Sprite" parent="debu"]
+position = Vector2( 535, 293 )
+texture = ExtResource( 16 )
+
+[node name="Debu65" type="Sprite" parent="debu"]
+position = Vector2( 497, 307 )
+texture = ExtResource( 16 )
+
+[node name="Debu66" type="Sprite" parent="debu"]
+position = Vector2( 522, 412 )
+texture = ExtResource( 16 )
+
+[node name="Debu67" type="Sprite" parent="debu"]
+position = Vector2( 522, 412 )
+texture = ExtResource( 16 )
+
+[node name="Debu2" type="Sprite" parent="debu"]
+position = Vector2( 454, 437 )
+texture = ExtResource( 16 )
+
+[node name="Debu3" type="Sprite" parent="debu"]
+position = Vector2( 619.5, 383 )
+scale = Vector2( 0.78125, 0.6875 )
+texture = ExtResource( 16 )
+
+[node name="Debu5" type="Sprite" parent="debu"]
+position = Vector2( 620, 400 )
+scale = Vector2( 0.78125, 0.375 )
+texture = ExtResource( 16 )
+
+[node name="Debu4" type="Sprite" parent="debu"]
+position = Vector2( 615, 289 )
+texture = ExtResource( 16 )
+
+[node name="ColorRect" type="ColorRect" parent="debu"]
+margin_left = 368.0
+margin_top = 183.0
+margin_right = 982.0
+margin_bottom = 605.0
+color = Color( 0.160784, 0.129412, 0.0235294, 0.211765 )
+__meta__ = {
+"_edit_lock_": true
+}

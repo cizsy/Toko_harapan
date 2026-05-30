@@ -8,9 +8,9 @@ var target_tujuan = Vector2.ZERO
 var player_in_area = false
 var dialog_started = false
 var sedang_pulang = false
-var sudah_sampai = true
 
 onready var interact_icon = $Interact
+onready var body_collision = $CollisionShape2D
 
 
 func _ready():
@@ -24,7 +24,6 @@ func _physics_process(_delta):
 		var arah = (target_tujuan - global_position).normalized()
 		move_and_slide(arah * kecepatan)
 
-		# PERBAIKAN FATAL: Pengecekan jarak dimasukkan ke dalam scope 'sedang_pulang'
 		if global_position.distance_to(target_tujuan) < 10:
 			queue_free()
 
@@ -36,45 +35,153 @@ func _process(_delta):
 		if GameManager.current_day == 1 and GameManager.story_step == "hari_1_intro":
 			mulai_dialog_hari_1()
 
+
 func mulai_dialog_hari_1():
 	if dialog_started:
 		return
 
 	dialog_started = true
 	interact_icon.visible = false
-	get_tree().call_group("UI", "masuk_mode_dialog")
 
 	var percakapan = [
 		{
 			"nama": "Pak Beni",
-			"teks": "Raka, akhirnya kamu datang juga. Mulai hari ini kamu yang pegang toko ini ya.",
-			"portrait": "res://aset/portrait/pak_beni.png",
-			"posisi": "kiri" # Pak Beni muncul di kiri
+			"teks": "Hati-hati, Ka. Lantainya agak licin.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
 		},
 		{
 			"nama": "Raka",
-			"teks": "Baik, Pak. Tapi saya harus mulai dari mana dulu?",
-			"portrait": "res://aset/portrait/raka.png",
-			"posisi": "kanan" # Raka muncul di kanan saat membalas obrolan
+			"teks": "Iya, Pak.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Debunya tebal banget ya.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
 		},
 		{
 			"nama": "Pak Beni",
-			"teks": "Tolong periksa 6 objek vital di toko ini sebelum kita mulai jualan besok.",
-			"portrait": "res://aset/portrait/pak_beni.png",
-			"posisi": "kiri" # Kamera fokus kembali ke Pak Beni di kiri
+			"teks": "Sudah lama toko ini nggak dibuka penuh.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Dulu waktu Ayah masih ada... nggak sesepi ini kan?",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Nggak. Dulu jam segini biasanya masih ada orang beli.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Sekarang raknya kosong semua.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Barang yang sisa ada di kardus pojok. Nggak banyak.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Berarti mulai dari sisa itu dulu?",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Iya. Pelan-pelan.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Pak Beni masih mau bantu?",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Bapak biasa sif pagi dari dulu. Besok juga begitu.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Tapi saya sekolah, Pak.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Makanya kamu sekolah dulu. Pulang sekolah baru ke sini.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Maaf ya, Pak. Jadi ngerepotin.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Kalau Bapak merasa repot, Bapak nggak akan datang hari ini.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "...Makasih, Pak.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Kuncinya kamu pegang. Agak macet, jadi pas diputer angkat sedikit.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Iya.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Bapak pulang dulu. Coba kamu lihat-lihat kondisi toko ini.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
 		}
 	]
 
-	var dialog_ui = get_tree().get_nodes_in_group("DialogSystem")[0]
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		print("ERROR: DialogSystem tidak ditemukan di scene.")
+		get_tree().call_group("UI", "tampilkan_info", "DialogSystem belum ada di scene.", Color.red)
+		return
+
+	var dialog_ui = dialog_list[0]
 	dialog_ui.mulai_dialog(percakapan)
-	
+
 	yield(dialog_ui, "dialog_selesai")
 	selesai_dialog_hari_1()
 
 
 func selesai_dialog_hari_1():
-	GameManager.set_story_step("hari_1_periksa") 
-	
+	GameManager.set_story_step("hari_1_periksa")
 	get_tree().call_group("UI", "keluar_mode_dialog")
 	pulang()
 
@@ -82,6 +189,14 @@ func selesai_dialog_hari_1():
 func pulang():
 	player_in_area = false
 	interact_icon.visible = false
+	
+	# Biar Pak Beni nggak nabrak player pas pulang
+	if is_instance_valid(body_collision):
+		body_collision.set_deferred("disabled", true)
+
+	collision_layer = 0
+	collision_mask = 0
+
 	target_tujuan = titik_keluar
 	sedang_pulang = true
 	

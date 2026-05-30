@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Luimberjack.png-efaee54cf8cec70db20d747f4d493b2b.stex"
+path="res://.import/pakBeni.png-49b7d0783e01f37d4135fa63555c5473.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Asset/character/PortraitsFinal/Luimberjack.png"
-dest_files=[ "res://.import/Luimberjack.png-efaee54cf8cec70db20d747f4d493b2b.stex" ]
+source_file="res://Asset/character/ezgif-split(6)/pakBeni.png"
+dest_files=[ "res://.import/pakBeni.png-49b7d0783e01f37d4135fa63555c5473.stex" ]
 
 [params]
 
