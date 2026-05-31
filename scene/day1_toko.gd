@@ -19,13 +19,10 @@ func _ready():
 		mode_day2()
 
 
-func spawn_pak_beni():
-	if is_instance_valid(pak_beni_instance):
-		return
+func mode_day1():
+	if GameManager.story_step == "hari_1_intro":
+		spawn_pak_beni()
 
-	pak_beni_instance = pak_beni_scene.instance()
-	pak_beni_instance.global_position = Vector2(451, 473)
-	add_child(pak_beni_instance)
 
 func mode_day2():
 	if GameManager.story_step == "hari_2_pergi_ke_toko":
@@ -33,3 +30,12 @@ func mode_day2():
 		GameManager.reset_bersih_toko()
 
 	get_tree().call_group("UI", "tampilkan_info", "Bersihkan toko dulu sebelum buka.", Color.orange)
+
+
+func spawn_pak_beni():
+	if is_instance_valid(pak_beni_instance):
+		return
+
+	pak_beni_instance = pak_beni_scene.instance()
+	pak_beni_instance.global_position = Vector2(451, 473)
+	add_child(pak_beni_instance)

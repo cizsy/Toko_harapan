@@ -94,36 +94,25 @@ func update_misi():
 			misiLabel.text = "Misi: Lanjutkan aktivitas"
 		return
 
-	# ======================
+	# # ======================
 	# HARI 4 - MASALAH MODAL
 	# ======================
 	if GameManager.current_day == 4:
 		if not GameManager.toko_sudah_dibuka_hari_ini:
 			misiLabel.text = "Misi: Buka toko dan cari pemasukan"
 		elif GameManager.toko_buka and not GameManager.day_can_end:
-			misiLabel.text = "Misi: Layani pelanggan " + str(GameManager.served_today) + "/" + str(GameManager.max_customer_per_day)
+			misiLabel.text = "Misi: Pikirkan cara menambah modal"
 		elif GameManager.toko_buka and GameManager.day_can_end:
-			misiLabel.text = "Misi: Tutup toko"
+			misiLabel.text = "Misi: Tutup toko" 
 		elif not GameManager.toko_buka and GameManager.day_can_end:
-			misiLabel.text = "Misi: Pulang dan pikirkan cara menambah modal"
-		else:
-			misiLabel.text = "Misi: Bicara dengan Pak Beni"
+			misiLabel.text = "Misi: Pulang ke rumah lalu tidur" 
 		return
 
 	# ======================
-	# HARI 5 - PINJOL / CHOICE
+	# HARI 5 - PILIHAN AKHIR
 	# ======================
 	if GameManager.current_day == 5:
-		if not GameManager.toko_sudah_dibuka_hari_ini:
-			misiLabel.text = "Misi: Buka toko"
-		elif GameManager.toko_buka and not GameManager.day_can_end:
-			misiLabel.text = "Misi: Layani pelanggan sampai HP bergetar"
-		elif GameManager.toko_buka and GameManager.day_can_end:
-			misiLabel.text = "Misi: Cek HP"
-		elif not GameManager.toko_buka and GameManager.day_can_end:
-			misiLabel.text = "Misi: Tentukan keputusan modal"
-		else:
-			misiLabel.text = "Misi: Cek HP"
+		misiLabel.text = "Misi: Cek HP dan tentukan keputusan modal"
 		return
 
 	# ======================
