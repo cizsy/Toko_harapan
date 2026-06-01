@@ -47,7 +47,7 @@ var story_step = "hari_1_intro"
 var total_objek_wajib = 6 
 var jumlah_objek_dicek = 0
 var jumlah_objek_dibersihkan = 0
-var total_objek_bersih = 3
+var total_objek_bersih = 4
 
 var next_player_position = null
 
@@ -278,22 +278,33 @@ func debug_go_to_day(day):
 	timer_detik = 0.0
 	player_bisa_gerak = true
 
+	# Reset progres khusus
+	jumlah_objek_dicek = 0
+	jumlah_objek_dibersihkan = 0
+
 	if day == 1:
 		story_step = "hari_1_intro"
-		reset_story_check()
 
-	if day == 3:
+	elif day == 2:
+		story_step = "hari_2_sore_di_rumah"
+
+	elif day == 3:
+		story_step = "normal_gameplay"
 		event_hari_3_done = false
 
-	if day == 4:
+	elif day == 4:
+		story_step = "normal_gameplay"
 		event_hari_4_done = false
 
-	if day == 5:
+	elif day == 5:
+		story_step = "normal_gameplay"
 		event_hari_5_done = false
+
+	else:
+		story_step = "normal_gameplay"
 	
 	emit_signal("data_update")
 	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)
-
 
 func save_game():
 	var save_file = File.new()
@@ -365,7 +376,6 @@ func reset_bersih_toko():
 	jumlah_objek_dibersihkan = 0
 	emit_signal("data_update")
 
-
 func tambah_progres_bersih():
 	if story_step != "hari_2_bersih_toko":
 		get_tree().call_group("UI", "tampilkan_info", "Belum waktunya bersih-bersih.", Color.orange)
@@ -374,6 +384,10 @@ func tambah_progres_bersih():
 	jumlah_objek_dibersihkan += 1
 	emit_signal("data_update")
 
+	print("DEBUG BERSIH: ", jumlah_objek_dibersihkan, "/", total_objek_bersih)
+
 	if jumlah_objek_dibersihkan >= total_objek_bersih:
-		set_story_step("hari_2_buka_toko")
-		get_tree().call_group("UI", "tampilkan_info", "Toko sudah bersih. Sekarang buka toko.", Color.gold)
+		set_story_step("hari_2_pindah_toko")
+		print("DEBUG: Semua bersih, panggil selesai_bersih_toko")
+		get_tree().call_group("LevelToko", "selesai_bersih_toko")
+		

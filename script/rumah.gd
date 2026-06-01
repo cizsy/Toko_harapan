@@ -3,20 +3,62 @@ extends Node2D
 var laras_scene = preload("res://npcPrio/Laras.tscn")
 var laras_instance = null
 
+export(bool) var debug_day_2 = false
 
 func _ready():
+	if debug_day_2:
+		GameManager.debug_go_to_day(2)
+
 	call_deferred("atur_posisi_player_awal")
+
 	if GameManager.current_day == 1 and GameManager.story_step == "hari_1_laras":
 		spawn_laras()
+		return
 
+	if GameManager.current_day == 2 and GameManager.story_step == "hari_2_sore_di_rumah":
+		call_deferred("mulai_dialog_hari_2_sore")
+		return
 
 func spawn_laras():
 	if is_instance_valid(laras_instance):
 		return
 
 	laras_instance = laras_scene.instance()
-	laras_instance.global_position = Vector2(485, 427) # ganti sesuai posisi Laras di rumahmu
+	laras_instance.global_position = Vector2(485, 427)
 	add_child(laras_instance)
+
 
 func atur_posisi_player_awal():
 	GameManager.apply_next_player_position()
+
+
+func mulai_dialog_hari_2_sore():
+	var percakapan = [
+		{
+			"nama": "Raka",
+			"teks": "Sudah sore.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Aku harus pergi ke toko.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		}
+	]
+
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		print("ERROR: DialogSystem tidak ditemukan di rumah.")
+		get_tree().call_group("UI", "tampilkan_info", "DialogUI belum ada di rumah.", Color.red)
+		return
+
+	var dialog_ui = dialog_list[0]
+	dialog_ui.mulai_dialog(percakapan)
+
+	yield(dialog_ui, "dialog_selesai")
+
+	GameManager.set_story_step("hari_2_pergi_ke_toko")
+	get_tree().call_group("UI", "tampilkan_info", "Pergi ke toko.", Color.gold)

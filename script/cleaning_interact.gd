@@ -13,8 +13,11 @@ onready var collision = get_node_or_null("CollisionShape2D")
 
 
 func _ready():
-	connect("body_entered", self, "_on_body_entered")
-	connect("body_exited", self, "_on_body_exited")
+	if not is_connected("body_entered", self, "_on_body_entered"):
+		connect("body_entered", self, "_on_body_entered")
+
+	if not is_connected("body_exited", self, "_on_body_exited"):
+		connect("body_exited", self, "_on_body_exited")
 
 	if progress_bar:
 		progress_bar.visible = false
@@ -97,6 +100,7 @@ func selesai_membersihkan():
 		collision.set_deferred("disabled", true)
 
 	get_tree().call_group("UI", "tampilkan_info", teks_selesai, Color.black)
+
 	GameManager.tambah_progres_bersih()
 
 

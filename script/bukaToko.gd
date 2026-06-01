@@ -55,6 +55,20 @@ func eksekusi_buka_toko():
 	if GameManager.toko_buka:
 		return
 
+	# ==========================
+	# KUNCI HARI 1
+	# ==========================
+	if GameManager.current_day == 1:
+		get_tree().call_group("UI", "tampilkan_info", "Hari pertama fokus periksa toko dulu.", Color.red)
+		return
+
+	# ==========================
+	# KUNCI HARI 2
+	# ==========================
+	if GameManager.current_day == 2 and GameManager.story_step != "hari_2_buka_toko":
+		get_tree().call_group("UI", "tampilkan_info", "Bersihkan toko dulu sebelum buka.", Color.orange)
+		return
+
 	GameManager.toko_buka = true
 	GameManager.toko_sudah_dibuka_hari_ini = true
 
@@ -62,23 +76,31 @@ func eksekusi_buka_toko():
 
 	get_tree().call_group("UI", "tampilkan_info", "Toko Dibuka!", Color.green)
 
+	# ==========================
+	# TUTORIAL INFO HARI 2
+	# ==========================
+	if GameManager.current_day == 2 and GameManager.story_step == "hari_2_buka_toko":
+		GameManager.set_story_step("hari_2_jualan")
+		get_tree().call_group("UI", "tampilkan_info", "Tunggu pelanggan sampai kasir.", Color.black)
+
 	var event = GameManager.check_story_event_on_open_store()
 
-	# Sistem pemanggilan group spawner yang sinkron dengan event cerita
 	if event == "hari_3":
 		print("Trigger event Hari 3: pelanggan kecewa")
 		get_tree().call_group("LevelToko", "spawn_npc_event_hari3")
+
 	elif event == "hari_4":
 		print("Trigger event Hari 4: masalah modal")
 		get_tree().call_group("LevelToko", "spawn_npc")
+
 	elif event == "hari_5":
 		print("Trigger event Hari 5: iklan pinjol")
 		get_tree().call_group("LevelToko", "spawn_npc")
+
 	else:
 		get_tree().call_group("LevelToko", "spawn_npc")
 
 	GameManager.emit_signal("data_update")
-
 
 func eksekusi_tutup_toko():
 	if not GameManager.day_can_end:
@@ -87,9 +109,10 @@ func eksekusi_tutup_toko():
 
 	GameManager.toko_buka = false
 	_update_sign()
-	get_tree().call_group("UI", "tampilkan_info", "Toko Ditutup! Pulang dan tidur untuk lanjut hari.", Color.red)
-	GameManager.emit_signal("data_update")
 
+	get_tree().call_group("UI", "tampilkan_info", "Toko Ditutup! Pulang dan tidur untuk lanjut hari.", Color.red)
+
+	GameManager.emit_signal("data_update")
 
 func _update_sign():
 	if GameManager.toko_buka:

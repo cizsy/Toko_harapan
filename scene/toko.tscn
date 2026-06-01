@@ -1271,13 +1271,13 @@ z_index = 1
 texture = ExtResource( 2 )
 
 [node name="Furniture6Toko-export" type="Sprite" parent="map/furniture/YSort"]
-position = Vector2( 836.12, 366.906 )
+position = Vector2( 836.12, 355.906 )
 scale = Vector2( 1.79687, 1.79687 )
 z_index = 1
 texture = ExtResource( 5 )
 
 [node name="Furniture6Toko-export2" type="Sprite" parent="map/furniture/YSort"]
-position = Vector2( 693, 367 )
+position = Vector2( 693, 356 )
 scale = Vector2( 1.79687, 1.79687 )
 z_index = 1
 texture = ExtResource( 5 )
@@ -1291,20 +1291,20 @@ position = Vector2( 715, 284 )
 shape = SubResource( 25 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="map/furniture"]
-position = Vector2( 842, 388 )
+position = Vector2( 842, 377 )
 shape = SubResource( 25 )
 
 [node name="CollisionShape2D14" type="CollisionShape2D" parent="map/furniture"]
-position = Vector2( 697, 388 )
+position = Vector2( 697, 377 )
 shape = SubResource( 25 )
 
 [node name="kardus" type="Sprite" parent="map/furniture"]
-position = Vector2( 589, 392 )
+position = Vector2( 589, 381 )
 scale = Vector2( 0.969136, 0.969136 )
 texture = ExtResource( 3 )
 
 [node name="kardus2" type="Sprite" parent="map/furniture"]
-position = Vector2( 563, 392 )
+position = Vector2( 563, 381 )
 scale = Vector2( 0.969136, 0.969136 )
 texture = ExtResource( 3 )
 

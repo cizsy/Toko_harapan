@@ -148,7 +148,6 @@ text = "ini info pop up"
 autowrap = true
 
 [node name="DayTransition" type="CanvasLayer" parent="rootUI"]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="rootUI/DayTransition"]
 margin_right = 1280.0

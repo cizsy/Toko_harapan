@@ -39,3 +39,69 @@ func spawn_pak_beni():
 	pak_beni_instance = pak_beni_scene.instance()
 	pak_beni_instance.global_position = Vector2(451, 473)
 	add_child(pak_beni_instance)
+
+func selesai_bersih_toko():
+	print("DEBUG: selesai_bersih_toko kepanggil")
+
+	if GameManager.current_day != 2:
+		print("DEBUG: bukan day 2")
+		return
+
+	if GameManager.story_step != "hari_2_pindah_toko":
+		print("DEBUG: step salah: ", GameManager.story_step)
+		return
+
+	call_deferred("mulai_dialog_selesai_bersih")
+
+func mulai_dialog_selesai_bersih():
+	print("DEBUG: mulai dialog selesai bersih")
+
+	var percakapan = [
+		{
+			"nama": "Raka",
+			"teks": "Oke... toko ini mulai kelihatan lebih layak.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Sekarang tinggal buka toko dan coba layani pelanggan.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		}
+	]
+
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		print("ERROR: DialogSystem tidak ditemukan di day1_toko.")
+		pindah_ke_toko_normal()
+		return
+
+	var dialog_ui = dialog_list[0]
+	dialog_ui.mulai_dialog(percakapan)
+
+	yield(dialog_ui, "dialog_selesai")
+
+	pindah_ke_toko_normal()
+	
+func pindah_ke_toko_normal():
+	GameManager.player_bisa_gerak = false
+
+	var ui_list = get_tree().get_nodes_in_group("UI")
+	var ui_transisi = null
+
+	for ui in ui_list:
+		if ui.has_method("tampilkan_transisi_hari"):
+			ui_transisi = ui
+			break
+
+	if ui_transisi != null:
+		yield(ui_transisi.tampilkan_transisi_hari("Toko Siap Dibuka"), "completed")
+	else:
+		yield(get_tree().create_timer(1.5), "timeout")
+
+	GameManager.set_story_step("hari_2_buka_toko")
+	GameManager.player_bisa_gerak = true
+
+	get_tree().change_scene("res://scene/toko.tscn")

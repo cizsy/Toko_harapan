@@ -31,6 +31,10 @@ func _process(_delta):
 		interact_icon.visible = active
 
 	if active and Input.is_action_just_pressed("interact"):
+
+		# ==========================
+		# HARI 1
+		# ==========================
 		if GameManager.current_day == 1:
 			if GameManager.story_step != "hari_1_pulang":
 				get_tree().call_group("UI", "tampilkan_info", "Periksa semua sudut toko dulu sebelum pulang.", Color.red)
@@ -39,5 +43,23 @@ func _process(_delta):
 			GameManager.set_story_step("hari_1_laras")
 			get_tree().change_scene("res://scene/rumah.tscn")
 			return
+
+		# ==========================
+		# HARI 2 KE ATAS
+		# ==========================
+		if GameManager.toko_buka:
+			get_tree().call_group("UI", "tampilkan_info", "Tutup toko dulu sebelum pulang.", Color.red)
+			return
+
+		if not GameManager.toko_sudah_dibuka_hari_ini:
+			get_tree().call_group("UI", "tampilkan_info", "Buka toko dulu sebelum pulang.", Color.red)
+			return
+
+		if not GameManager.day_can_end:
+			get_tree().call_group("UI", "tampilkan_info", "Selesaikan pelanggan hari ini dulu.", Color.red)
+			return
+
+		if GameManager.current_day == 2:
+			GameManager.set_story_step("hari_2_tidur")
 
 		get_tree().change_scene("res://scene/rumah.tscn")

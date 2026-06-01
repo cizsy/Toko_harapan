@@ -181,8 +181,10 @@ func spawn_npc():
 	add_child(npc)
 
 	npc_saat_ini = npc
+
+	if GameManager.current_day == 2 and GameManager.story_step == "hari_2_jualan":
+		get_tree().call_group("UI", "tampilkan_info", "Kalau pelanggan sudah sampai kasir, tekan Layani Pelanggan.", Color.black)
 	
-	# Sinkronisasi visual tombol jika player kebetulan sudah stand-by di kasir
 	if player_di_kasir:
 		tombol_layani.visible = true
 		tombol_layani.disabled = false

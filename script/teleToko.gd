@@ -31,10 +31,17 @@ func _process(_delta):
 		interact_icon.visible = active
 
 	if active and Input.is_action_just_pressed("interact"):
-		# INTEGRASI HARI 1: Kalau sudah di rumah, dilarang balik ke toko, disuruh tidur!
-		if GameManager.current_day == 1 and GameManager.story_step == "hari_1_pulang":
-			get_tree().call_group("UI", "tampilkan_info", "Sudah malam, sebaiknya kamu langsung tidur di kasur.", Color.orange)
-			return # Batalkan pindah scene
-			
-		# Hari biasa (Hari 2 ke atas) boleh bolak-balik normal
+
+		if GameManager.current_day == 1:
+			get_tree().call_group("UI", "tampilkan_info", "Sudah malam, sebaiknya kamu tidur dulu.", Color.orange)
+			return
+
+		if GameManager.current_day == 2:
+			if GameManager.story_step != "hari_2_pergi_ke_toko":
+				get_tree().call_group("UI", "tampilkan_info", "Belum waktunya pergi ke toko.", Color.orange)
+				return
+
+			get_tree().change_scene("res://scene/day1_toko.tscn")
+			return
+
 		get_tree().change_scene("res://scene/toko.tscn")
