@@ -69,6 +69,18 @@ func eksekusi_buka_toko():
 		get_tree().call_group("UI", "tampilkan_info", "Bersihkan toko dulu sebelum buka.", Color.orange)
 		return
 
+	# ==========================
+	# KUNCI HARI 4
+	# Day 4 event sudah jalan saat masuk toko,
+	# jadi buka toko hanya boleh setelah dialog Pak Beni selesai.
+	# ==========================
+	if GameManager.current_day == 4 and GameManager.story_step != "hari_4_buka_toko":
+		get_tree().call_group("UI", "tampilkan_info", "Bicara dengan Pak Beni dulu.", Color.orange)
+		return
+
+	# ==========================
+	# BUKA TOKO
+	# ==========================
 	GameManager.toko_buka = true
 	GameManager.toko_sudah_dibuka_hari_ini = true
 
@@ -77,25 +89,39 @@ func eksekusi_buka_toko():
 	get_tree().call_group("UI", "tampilkan_info", "Toko Dibuka!", Color.green)
 
 	# ==========================
-	# TUTORIAL INFO HARI 2
+	# HARI 2
 	# ==========================
 	if GameManager.current_day == 2 and GameManager.story_step == "hari_2_buka_toko":
 		GameManager.set_story_step("hari_2_jualan")
 		get_tree().call_group("UI", "tampilkan_info", "Tunggu pelanggan sampai kasir.", Color.black)
+		get_tree().call_group("LevelToko", "spawn_npc")
+		GameManager.emit_signal("data_update")
+		return
 
+	# ==========================
+	# HARI 4
+	# Event modal sudah selesai sebelum buka toko,
+	# jadi setelah buka langsung jualan normal.
+	# ==========================
+	if GameManager.current_day == 4 and GameManager.story_step == "hari_4_buka_toko":
+		GameManager.set_story_step("hari_4_jualan")
+		get_tree().call_group("UI", "tampilkan_info", "Shift sore dimulai. Layani pelanggan seperti biasa.", Color.black)
+		get_tree().call_group("LevelToko", "spawn_npc")
+		GameManager.emit_signal("data_update")
+		return
+
+	# ==========================
+	# HARI 3 / HARI 5 / HARI NORMAL
+	# ==========================
 	var event = GameManager.check_story_event_on_open_store()
 
 	if event == "hari_3":
 		print("Trigger event Hari 3: pelanggan kecewa")
 		get_tree().call_group("LevelToko", "spawn_npc_event_hari3")
 
-	elif event == "hari_4":
-		print("Trigger event Hari 4: masalah modal")
-		get_tree().call_group("LevelToko", "spawn_npc")
-
 	elif event == "hari_5":
 		print("Trigger event Hari 5: iklan pinjol")
-		get_tree().call_group("LevelToko", "spawn_npc")
+		get_tree().call_group("LevelToko", "mulai_event_hari5_pinjol")
 
 	else:
 		get_tree().call_group("LevelToko", "spawn_npc")

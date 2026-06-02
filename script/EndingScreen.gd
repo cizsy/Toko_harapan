@@ -30,36 +30,76 @@ var narasi_tanpa_pinjaman = [
 var baris_aktif = []
 var indeks_teks = 0
 
+
 func _ready():
 	tombol_menu.visible = false
 	teks_label.text = ""
 	GameManager.player_bisa_gerak = false
-	
-	# Pilih data teks narasi berdasarkan keputusan player di Hari 5
+
 	if GameManager.story_step == "ending_pinjaman":
 		baris_aktif = narasi_pinjaman
-	else:
+	elif GameManager.story_step == "ending_tanpa_pinjaman":
 		baris_aktif = narasi_tanpa_pinjaman
-		
+	else:
+		# Fallback kalau masuk scene ending tanpa step yang jelas
+		baris_aktif = narasi_tanpa_pinjaman
+
 	tampilkan_baris_berikutnya()
 
+
 func _input(event):
-	if event.is_action_just_pressed("ui_accept") or event.is_action_just_pressed("interact") or event is InputEventMouseButton and event.pressed:
-		if indeks_teks < baris_aktif.size():
-			tampilkan_baris_berikutnya()
+	if tombol_menu.visible:
+		return
+
+	if event.is_action_just_pressed("ui_accept") or event.is_action_just_pressed("interact") or (event is InputEventMouseButton and event.pressed):
+		tampilkan_baris_berikutnya()
+
 
 func tampilkan_baris_berikutnya():
 	if indeks_teks < baris_aktif.size():
 		teks_label.text = baris_aktif[indeks_teks]
 		indeks_teks += 1
 	else:
-		# Cerita selesai, munculkan tombol kembali ke main menu
 		teks_label.text = "--- TAMAT ---"
 		tombol_menu.visible = true
 
+
 func _on_MenuButton_pressed():
-	# Reset game state sebelum kembali ke menu agar bisa replay baru
+	reset_game_state()
+	get_tree().change_scene("res://scene/mainMenu.tscn")
+
+
+func reset_game_state():
 	GameManager.current_day = 1
+	GameManager.current_month = 1
 	GameManager.story_step = "hari_1_intro"
-	GameManager.money = 5000000 
-	get_tree().change_scene("res://scene/main_menu.tscn") # Sesuaikan path scene menumu
+
+	GameManager.money = 2000000
+	GameManager.hutang_utama = 20000000
+	GameManager.pinjol = 0
+	GameManager.reputasi = 0
+
+	GameManager.toko_buka = false
+	GameManager.toko_sudah_dibuka_hari_ini = false
+	GameManager.day_can_end = false
+	GameManager.served_today = 0
+
+	GameManager.event_hari_3_done = false
+	GameManager.event_hari_4_done = false
+	GameManager.event_hari_5_done = false
+
+	GameManager.jumlah_objek_dicek = 0
+	GameManager.jumlah_objek_dibersihkan = 0
+
+	GameManager.jam = 15
+	GameManager.menit = 0
+	GameManager.timer_detik = 0.0
+	GameManager.player_bisa_gerak = true
+
+	GameManager.stock = {
+		"mie": 10,
+		"minyak": 5,
+		"beras": 3
+	}
+
+	GameManager.emit_signal("data_update")

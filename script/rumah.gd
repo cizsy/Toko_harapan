@@ -3,11 +3,12 @@ extends Node2D
 var laras_scene = preload("res://npcPrio/Laras.tscn")
 var laras_instance = null
 
-export(bool) var debug_day_2 = false
+export(bool) var debug_mode = false
+export(int) var debug_day = 1
 
 func _ready():
-	if debug_day_2:
-		GameManager.debug_go_to_day(2)
+	if debug_mode:
+		GameManager.debug_go_to_day(debug_day)
 
 	call_deferred("atur_posisi_player_awal")
 

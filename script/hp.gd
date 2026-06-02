@@ -21,25 +21,11 @@ func _on_AkhiriHari_pressed():
 	get_tree().call_group("UI", "tampilkan_info", "Sekarang akhiri hari lewat kasur di rumah.", Color.orange)
 
 
-func _on_Peraturan_pressed():
-	show_settings()
-
-
-func _on_toktok_pressed():
-	show_toktok()
-
-
-func _on_crome_pressed():
-	show_crome()
-
-
 func _on_Supplier_pressed():
 	show_supplier()
 
-
-func _on_bankku_pressed():
-	show_bank()
-
+func _on_Note_pressed():
+	show_note()
 
 func _on_BackButton_pressed():
 	show_home()
@@ -48,10 +34,7 @@ func _on_BackButton_pressed():
 func hide_all_panels():
 	$HomePanel.visible = false
 	$SupplierPanel.visible = false
-	$BankPanel.visible = false
-	$TokTokPanel.visible = false
-	$SettingsPanel.visible = false
-	$CromePanel.visible = false
+	$NotePanel.visible = false
 
 
 func show_home():
@@ -65,24 +48,10 @@ func show_supplier():
 	update_supplier_ui()
 
 
-func show_bank():
+func show_note():
 	hide_all_panels()
 	$BankPanel.visible = true
 
-
-func show_toktok():
-	hide_all_panels()
-	$TokTokPanel.visible = true
-
-
-func show_settings():
-	hide_all_panels()
-	$SettingsPanel.visible = true
-
-
-func show_crome():
-	hide_all_panels()
-	$CromePanel.visible = true
 
 
 func update_supplier_ui():
@@ -122,3 +91,6 @@ func _on_BeliBeras_pressed():
 	if sukses:
 		update_supplier_ui()
 		GameManager.emit_signal("data_update")
+
+
+

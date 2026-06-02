@@ -22,6 +22,7 @@ onready var p_bar = $layani/pelangganBar
 onready var tombol_layani = $layani/layaniPelanggan
 
 
+
 func _ready():
 	add_to_group("LevelToko")
 	p_bar.visible = false
@@ -29,12 +30,12 @@ func _ready():
 	tombol_layani.visible = false
 	tombol_layani.disabled = false
 	
-	# Memastikan fungsi acak di-seed sekali saja di awal
 	randomize()
-
-	if GameManager.current_day == 1 and GameManager.story_step == "hari_1_intro":
+	
+	if GameManager.current_day == 4 and not GameManager.event_hari_4_done:
+		GameManager.set_story_step("hari_4_shift_sore")
 		spawn_pak_beni()
-
+		call_deferred("mulai_event_hari4_modal")
 
 func _process(delta):
 	if sedang_melayani:
@@ -248,3 +249,129 @@ func _on_player_bisa_layani_body_exited(body):
 	if body.is_in_group("Player") or body.name == "Player" or body.name == "player":
 		player_di_kasir = false
 		tombol_layani.visible = false
+
+func mulai_event_hari4_modal():
+	if GameManager.event_hari_4_done:
+		return
+
+	GameManager.event_hari_4_done = true
+	GameManager.player_bisa_gerak = false
+
+	var pemasukan_pagi = 0
+
+	if GameManager.has_method("beri_pemasukan_pagi"):
+		pemasukan_pagi = GameManager.beri_pemasukan_pagi()
+
+	var percakapan = [
+		{
+			"nama": "Pak Beni",
+			"teks": "Kamu sudah datang, Ka? Shift pagi sudah Bapak tutup.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Gimana pagi ini, Pak?",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Ada beberapa pembeli. Uangnya sudah Bapak taruh di laci.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Makasih, Pak. Lumayan buat nambah modal.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Pak, kalau ambil barang dulu, bayarnya nanti... bisa nggak?",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Bapak sudah coba tanya supplier lama.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Mereka minta bayar cash dulu. Katanya masih ada catatan utang lama.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Jadi kalau modalnya kurang, toko ini susah berkembang.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Iya. Tapi jangan ambil jalan cepat yang bikin kamu makin berat.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		},
+		{
+			"nama": "Pak Beni",
+			"teks": "Bapak pulang dulu. Sore ini toko kamu yang pegang.",
+			"portrait": "res://Asset/character/PortraitsFinal/pakbeni.png",
+			"posisi": "kanan"
+		}
+	]
+
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		GameManager.player_bisa_gerak = true
+		GameManager.set_story_step("hari_4_buka_toko")
+		return
+
+	var dialog_ui = dialog_list[0]
+	dialog_ui.mulai_dialog(percakapan)
+
+	yield(dialog_ui, "dialog_selesai")
+
+	if pemasukan_pagi > 0:
+		get_tree().call_group("UI", "tampilkan_info", "Pemasukan pagi dari Pak Beni: Rp " + str(pemasukan_pagi), Color.gold)
+
+	GameManager.player_bisa_gerak = true
+	GameManager.set_story_step("hari_4_buka_toko")
+
+	if is_instance_valid(pak_beni_instance):
+		pak_beni_instance.pulang()
+
+	get_tree().call_group("UI", "tampilkan_info", "Sekarang buka toko untuk shift sore.", Color.gold)
+
+func munculkan_pilihan_pinjol():
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		get_tree().call_group("UI", "tampilkan_info", "DialogSystem tidak ditemukan.", Color.red)
+		GameManager.player_bisa_gerak = true
+		return
+
+	var dialog_ui = dialog_list[0]
+
+	if not dialog_ui.has_method("tampilkan_choice_pinjol"):
+		get_tree().call_group("UI", "tampilkan_info", "ChoicePanel belum ada di DialogUI.", Color.red)
+		GameManager.player_bisa_gerak = true
+		return
+
+	dialog_ui.tampilkan_choice_pinjol()
+
+	var pilihan = yield(dialog_ui, "pilihan_dipilih")
+
+	if pilihan == "pinjol":
+		GameManager.pinjol += 10000000
+		GameManager.set_story_step("ending_pinjaman")
+		get_tree().change_scene("res://scene/ending.tscn")
+
+	elif pilihan == "tanpa_pinjol":
+		GameManager.set_story_step("ending_tanpa_pinjaman")
+		get_tree().change_scene("res://scene/ending_screen.tscn")

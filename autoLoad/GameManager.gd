@@ -17,7 +17,7 @@ var kecepatan_waktu = 0.2
 
 var day_can_end = false
 
-var money = 5000000
+var money = 2000000
 var hutang_utama = 20000000
 var pinjol = 0
 var reputasi = 0
@@ -51,6 +51,11 @@ var total_objek_bersih = 4
 
 var next_player_position = null
 
+var pemasukan_min_pak_beni = 150000
+var pemasukan_max_pak_beni = 350000
+var pak_beni_income_given_today = false
+
+var ending_choice = ""
 
 func _process(delta):
 	if toko_buka:
@@ -154,6 +159,7 @@ func reset_day_state():
 	menit = 0
 	timer_detik = 0.0
 	player_bisa_gerak = true
+	pak_beni_income_given_today = false
 
 
 func end_month():
@@ -218,12 +224,6 @@ func check_story_event_on_open_store():
 		get_tree().call_group("UI", "tampilkan_info", "Ada pelanggan mencari barang yang belum tersedia.", Color.orange)
 		emit_signal("data_update")
 		return "hari_3"
-
-	if current_day == 4 and not event_hari_4_done:
-		event_hari_4_done = true
-		get_tree().call_group("UI", "tampilkan_info", "Pak Beni ingin membicarakan soal modal.", Color.orange)
-		emit_signal("data_update")
-		return "hari_4"
 
 	if current_day == 5 and not event_hari_5_done:
 		event_hari_5_done = true
@@ -344,7 +344,7 @@ func load_game() -> bool:
 	if typeof(save_data) == TYPE_DICTIONARY:
 		current_day = int(save_data.get("current_day", 1))
 		current_month = int(save_data.get("current_month", 1))
-		money = int(save_data.get("money", 5000000))
+		money = int(save_data.get("money", 2000000))
 		hutang_utama = int(save_data.get("hutang_utama", 20000000))
 		pinjol = int(save_data.get("pinjol", 0))
 		reputasi = int(save_data.get("reputasi", 0))
@@ -390,4 +390,20 @@ func tambah_progres_bersih():
 		set_story_step("hari_2_pindah_toko")
 		print("DEBUG: Semua bersih, panggil selesai_bersih_toko")
 		get_tree().call_group("LevelToko", "selesai_bersih_toko")
-		
+
+func beri_pemasukan_pagi():
+	if pak_beni_income_given_today:
+		return 0
+
+	randomize()
+
+	var pemasukan = int(rand_range(pemasukan_min_pak_beni, pemasukan_max_pak_beni))
+	money += pemasukan
+	pak_beni_income_given_today = true
+
+	emit_signal("data_update")
+	return pemasukan
+
+func pilih_ending(choice):
+	ending_choice = choice
+	emit_signal("data_update")

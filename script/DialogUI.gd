@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal dialog_selesai
+signal pilihan_dipilih(pilihan)
 
 onready var panel_dialog = $DialogBox
 onready var label_nama_kiri = $DialogBox/NamaLabelKiri
@@ -9,6 +10,11 @@ onready var label_teks = $DialogBox/TeksLabel
 onready var portrait_kiri = $DialogBox/PortraitKiri
 onready var portrait_kanan = $DialogBox/PortraitKanan
 onready var tween = $Tween
+
+onready var choice_panel = get_node_or_null("ChoicePanel")
+onready var choice_label = get_node_or_null("ChoicePanel/Panel/ChoiceLabel")
+onready var tombol_ambil_pinjaman = get_node_or_null("ChoicePanel/Panel/ButtonAmbilPinjaman")
+onready var tombol_tanya_pak_beni = get_node_or_null("ChoicePanel/Panel/ButtonTanyaPakBeni")
 
 var data_dialog = []
 var indeks_sekarang = 0
@@ -25,6 +31,23 @@ func _ready():
 	portrait_kiri.visible = false
 	portrait_kanan.visible = false
 
+	if choice_panel:
+		choice_panel.visible = false
+	else:
+		print("ERROR: ChoicePanel tidak ditemukan di DialogUI.")
+
+	if tombol_ambil_pinjaman:
+		if not tombol_ambil_pinjaman.is_connected("pressed", self, "_on_ambil_pinjaman_pressed"):
+			tombol_ambil_pinjaman.connect("pressed", self, "_on_ambil_pinjaman_pressed")
+	else:
+		print("ERROR: ButtonAmbilPinjaman tidak ditemukan.")
+
+	if tombol_tanya_pak_beni:
+		if not tombol_tanya_pak_beni.is_connected("pressed", self, "_on_tanya_pak_beni_pressed"):
+			tombol_tanya_pak_beni.connect("pressed", self, "_on_tanya_pak_beni_pressed")
+	else:
+		print("ERROR: ButtonTanyaPakBeni tidak ditemukan.")
+
 
 func mulai_dialog(list_percakapan):
 	if list_percakapan.empty():
@@ -38,6 +61,9 @@ func mulai_dialog(list_percakapan):
 
 	GameManager.player_bisa_gerak = false
 	get_tree().call_group("UI", "masuk_mode_dialog")
+
+	if choice_panel:
+		choice_panel.visible = false
 
 	panel_dialog.visible = true
 	tampilkan_baris_dialog()
@@ -57,7 +83,6 @@ func tampilkan_baris_dialog():
 
 	label_teks.text = teks
 
-	# Reset tampilan dulu
 	label_nama_kiri.visible = false
 	label_nama_kanan.visible = false
 	portrait_kiri.visible = false
@@ -66,7 +91,6 @@ func tampilkan_baris_dialog():
 	label_nama_kiri.text = ""
 	label_nama_kanan.text = ""
 
-	# Nama karakter sesuai posisi
 	if posisi == "kiri":
 		label_nama_kiri.text = nama
 		label_nama_kiri.visible = true
@@ -74,7 +98,6 @@ func tampilkan_baris_dialog():
 		label_nama_kanan.text = nama
 		label_nama_kanan.visible = true
 
-	# Portrait karakter sesuai posisi
 	if jalur_foto != "":
 		var texture = load(jalur_foto)
 
@@ -88,7 +111,6 @@ func tampilkan_baris_dialog():
 		else:
 			print("Portrait tidak ditemukan: " + str(jalur_foto))
 
-	# Efek ketik
 	label_teks.percent_visible = 0.0
 
 	var durasi_ketik = max(label_teks.text.length() * 0.03, 0.2)
@@ -147,3 +169,42 @@ func selesai_dialog():
 
 func _on_Tween_tween_all_completed():
 	sedang_mengetik = false
+
+
+func tampilkan_choice_pinjol():
+	if choice_panel == null:
+		print("ERROR: ChoicePanel belum ada / path salah.")
+		return
+
+	if choice_label == null:
+		print("ERROR: ChoiceLabel belum ada / path salah.")
+		return
+
+	panel_dialog.visible = false
+	choice_panel.visible = true
+	GameManager.player_bisa_gerak = false
+	get_tree().call_group("UI", "masuk_mode_dialog")
+
+	choice_label.text = "Raka mendapat tawaran pinjaman modal cepat.\nApa yang harus dilakukan?"
+
+	if tombol_ambil_pinjaman:
+		tombol_ambil_pinjaman.text = "Ambil Pinjaman"
+
+	if tombol_tanya_pak_beni:
+		tombol_tanya_pak_beni.text = "Tanya Pak Beni Dulu"
+
+
+func _on_ambil_pinjaman_pressed():
+	if choice_panel:
+		choice_panel.visible = false
+
+	get_tree().call_group("UI", "keluar_mode_dialog")
+	emit_signal("pilihan_dipilih", "pinjol")
+
+
+func _on_tanya_pak_beni_pressed():
+	if choice_panel:
+		choice_panel.visible = false
+
+	get_tree().call_group("UI", "keluar_mode_dialog")
+	emit_signal("pilihan_dipilih", "tanpa_pinjol")

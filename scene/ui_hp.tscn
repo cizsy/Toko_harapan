@@ -1,13 +1,11 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Asset/UI buatan/hp.png" type="Texture" id=1]
 [ext_resource path="res://script/hp.gd" type="Script" id=2]
 [ext_resource path="res://Asset/app hp/wp.jpg" type="Texture" id=3]
 [ext_resource path="res://Asset/app hp/supply (2).png" type="Texture" id=4]
-[ext_resource path="res://Asset/app hp/bank (2).png" type="Texture" id=5]
-[ext_resource path="res://Asset/app hp/settings.png" type="Texture" id=6]
-[ext_resource path="res://Asset/app hp/tiktok.png" type="Texture" id=8]
-[ext_resource path="res://Asset/app hp/chrome.png" type="Texture" id=9]
+[ext_resource path="res://Asset/app hp/noteBG.jpg" type="Texture" id=5]
+[ext_resource path="res://Asset/app hp/note.png" type="Texture" id=6]
 [ext_resource path="res://Asset/font/Cabin-Bold.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="StyleBoxFlat" id=15]
@@ -17,67 +15,10 @@ bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 500, 500 )
 
-[sub_resource type="StyleBoxFlat" id=16]
-bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
-
-[sub_resource type="StyleBoxTexture" id=17]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=18]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=19]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=36]
-texture = ExtResource( 9 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxFlat" id=20]
-bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
-
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=8]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=9]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=10]
-texture = ExtResource( 8 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
 [sub_resource type="StyleBoxFlat" id=44]
 bg_color = Color( 0.121569, 0.0470588, 0.545098, 1 )
 
 [sub_resource type="StyleBoxTexture" id=45]
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxFlat" id=22]
-bg_color = Color( 0.513726, 0.784314, 0.929412, 1 )
-
-[sub_resource type="StyleBoxTexture" id=23]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=24]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=25]
-texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 500, 500 )
-
-[sub_resource type="StyleBoxTexture" id=26]
 texture = ExtResource( 6 )
 region_rect = Rect2( 0, 0, 500, 500 )
 
@@ -130,8 +71,6 @@ font_data = ExtResource( 10 )
 [sub_resource type="StyleBoxFlat" id=43]
 bg_color = Color( 0.0745098, 0.196078, 0.0509804, 1 )
 
-[sub_resource type="StyleBoxFlat" id=46]
-
 [node name="ui_hp" type="Control"]
 anchor_left = 1.0
 anchor_top = 1.0
@@ -155,84 +94,54 @@ margin_bottom = -23.0
 texture = ExtResource( 3 )
 expand = true
 
-[node name="HPFrame" type="TextureRect" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -494.0
-margin_top = -598.0
-margin_right = 171.0
-margin_bottom = 83.0
-texture = ExtResource( 1 )
-expand = true
-
 [node name="HomePanel" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_left = 993.0
+margin_top = 220.0
+margin_right = 1250.0
+margin_bottom = 701.0
 
 [node name="Supplier" type="Button" parent="HomePanel"]
-margin_left = 1163.0
-margin_top = 480.0
-margin_right = 1228.0
-margin_bottom = 545.0
+anchor_left = -3.84047
+anchor_top = -0.502016
+anchor_right = -3.84047
+anchor_bottom = -0.502016
+margin_left = 1135.0
+margin_top = 569.0
+margin_right = 1200.0
+margin_bottom = 634.0
 custom_styles/hover = SubResource( 15 )
 custom_styles/normal = SubResource( 5 )
 
-[node name="crome" type="Button" parent="HomePanel"]
-margin_left = 1013.0
-margin_top = 478.0
-margin_right = 1078.0
-margin_bottom = 543.0
-custom_styles/hover = SubResource( 16 )
-custom_styles/pressed = SubResource( 17 )
-custom_styles/focus = SubResource( 18 )
-custom_styles/disabled = SubResource( 19 )
-custom_styles/normal = SubResource( 36 )
-
-[node name="toktok" type="Button" parent="HomePanel"]
-margin_left = 1088.0
-margin_top = 479.0
-margin_right = 1153.0
-margin_bottom = 544.0
-custom_styles/hover = SubResource( 20 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
-
-[node name="bankku" type="Button" parent="HomePanel"]
-margin_left = 1053.0
-margin_top = 553.0
-margin_right = 1119.0
-margin_bottom = 618.0
+[node name="Note" type="Button" parent="HomePanel"]
+anchor_left = -3.84047
+anchor_top = -0.502016
+anchor_right = -3.84047
+anchor_bottom = -0.502016
+margin_left = 1030.0
+margin_top = 569.0
+margin_right = 1096.0
+margin_bottom = 634.0
 custom_styles/hover = SubResource( 44 )
 custom_styles/normal = SubResource( 45 )
 
-[node name="Peraturan" type="Button" parent="HomePanel"]
-margin_left = 1126.0
-margin_top = 552.0
-margin_right = 1191.0
-margin_bottom = 617.0
-custom_styles/hover = SubResource( 22 )
-custom_styles/pressed = SubResource( 23 )
-custom_styles/focus = SubResource( 24 )
-custom_styles/disabled = SubResource( 25 )
-custom_styles/normal = SubResource( 26 )
-
 [node name="TeksJam" type="Label" parent="HomePanel"]
-margin_left = 1040.0
-margin_top = 261.0
-margin_right = 1205.0
-margin_bottom = 341.0
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -82.5
+margin_right = 82.5
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 35 )
 text = "15.00"
 
 [node name="nutupHP" type="Button" parent="HomePanel"]
-margin_left = 1078.0
-margin_top = 662.0
-margin_right = 1166.0
-margin_bottom = 682.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -44.0
+margin_top = -40.0
+margin_right = 44.0
+margin_bottom = -20.0
 custom_styles/hover = SubResource( 31 )
 custom_styles/pressed = SubResource( 37 )
 custom_styles/focus = SubResource( 38 )
@@ -259,12 +168,6 @@ margin_right = 159.0
 margin_bottom = 31.0
 custom_fonts/font = SubResource( 42 )
 text = "Supplier"
-
-[node name="StockLabel" type="Label" parent="SupplierPanel"]
-margin_left = 526.0
-margin_top = -160.0
-margin_right = 694.0
-margin_bottom = -38.0
 
 [node name="miePanel" type="Panel" parent="SupplierPanel"]
 margin_left = 7.0
@@ -380,57 +283,71 @@ margin_top = 424.0
 margin_right = 148.0
 margin_bottom = 446.0
 
-[node name="BankPanel" type="Control" parent="."]
-margin_left = 19.0
-margin_top = 9.0
-margin_right = 240.0
-margin_bottom = 476.0
+[node name="NotePanel" type="Control" parent="."]
+anchor_left = 0.79
+anchor_top = 0.307
+anchor_right = 0.963
+anchor_bottom = 0.962
+margin_left = -6.20001
+margin_top = 2.95999
+margin_right = -6.64014
+margin_bottom = -1.64008
 
-[node name="Panel2" type="Panel" parent="BankPanel"]
+[node name="Panel2" type="TextureRect" parent="NotePanel"]
 margin_left = -2.0
-margin_right = 223.0
-margin_bottom = 471.0
+margin_right = 233.0
+margin_bottom = 467.0
+texture = ExtResource( 5 )
+expand = true
 
-[node name="LabelUang" type="Label" parent="BankPanel"]
-margin_left = 37.0
-margin_top = 128.0
-margin_right = 77.0
-margin_bottom = 142.0
-text = "Saldo:"
+[node name="Label" type="Label" parent="NotePanel"]
+margin_left = 92.0
+margin_top = 24.0
+margin_right = 139.0
+margin_bottom = 38.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Catatan"
 
-[node name="LabelHutang" type="Label" parent="BankPanel"]
-margin_left = 38.0
-margin_top = 143.0
-margin_right = 83.0
-margin_bottom = 157.0
+[node name="StockLabel" type="Label" parent="NotePanel"]
+margin_left = 25.0
+margin_top = 105.0
+margin_right = 193.0
+margin_bottom = 227.0
+
+[node name="LabelUang" type="Label" parent="NotePanel"]
+margin_left = 29.0
+margin_top = 46.0
+margin_right = 69.0
+margin_bottom = 60.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Uang:"
+
+[node name="LabelHutang" type="Label" parent="NotePanel"]
+margin_left = 30.0
+margin_top = 70.0
+margin_right = 75.0
+margin_bottom = 84.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Hutang"
 
-[node name="ButtonBayarHutang" type="Button" parent="BankPanel"]
-margin_left = 44.0
-margin_top = 424.0
-margin_right = 176.0
-margin_bottom = 444.0
-custom_styles/normal = SubResource( 46 )
-text = "Bayar hutang"
-
 [node name="SettingsPanel" type="Control" parent="."]
-visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="CromePanel" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="TokTokPanel" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="HPFrame" type="TextureRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -494.0
+margin_top = -598.0
+margin_right = 171.0
+margin_bottom = 83.0
+texture = ExtResource( 1 )
+expand = true
 
 [connection signal="pressed" from="HomePanel/Supplier" to="." method="_on_Supplier_pressed"]
-[connection signal="pressed" from="HomePanel/crome" to="." method="_on_crome_pressed"]
-[connection signal="pressed" from="HomePanel/toktok" to="." method="_on_toktok_pressed"]
-[connection signal="pressed" from="HomePanel/bankku" to="." method="_on_bankku_pressed"]
-[connection signal="pressed" from="HomePanel/Peraturan" to="." method="_on_Peraturan_pressed"]
+[connection signal="pressed" from="HomePanel/Note" to="." method="_on_Note_pressed"]
 [connection signal="pressed" from="HomePanel/nutupHP" to="." method="_on_nutupHP_pressed"]
 [connection signal="pressed" from="SupplierPanel/miePanel/BeliMie" to="." method="_on_BeliMie_pressed"]
 [connection signal="pressed" from="SupplierPanel/MinyakPanel/BeliMinyak" to="." method="_on_BeliMinyak_pressed"]

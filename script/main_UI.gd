@@ -98,14 +98,18 @@ func update_misi():
 	# HARI 4 - MASALAH MODAL
 	# ======================
 	if GameManager.current_day == 4:
-		if not GameManager.toko_sudah_dibuka_hari_ini:
-			misiLabel.text = "Misi: Buka toko dan cari pemasukan"
-		elif GameManager.toko_buka and not GameManager.day_can_end:
-			misiLabel.text = "Misi: Pikirkan cara menambah modal"
+		if GameManager.story_step == "hari_4_shift_sore":
+			misiLabel.text = "Misi: Bicara dengan Pak Beni"
+		elif GameManager.story_step == "hari_4_buka_toko":
+			misiLabel.text = "Misi: Buka toko untuk shift sore"
+		elif GameManager.story_step == "hari_4_jualan" and GameManager.toko_buka and not GameManager.day_can_end:
+			misiLabel.text = "Misi: Layani pelanggan"
 		elif GameManager.toko_buka and GameManager.day_can_end:
-			misiLabel.text = "Misi: Tutup toko" 
+			misiLabel.text = "Misi: Tutup toko"
 		elif not GameManager.toko_buka and GameManager.day_can_end:
-			misiLabel.text = "Misi: Pulang ke rumah lalu tidur" 
+			misiLabel.text = "Misi: Pulang dan tidur"
+		else:
+			misiLabel.text = "Misi: Lanjutkan aktivitas"
 		return
 
 	# ======================
