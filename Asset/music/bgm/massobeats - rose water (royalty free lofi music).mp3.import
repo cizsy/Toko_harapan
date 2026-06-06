@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/massobeats - rose water (royalty free lofi music).mp3-46eeaec678324e6f0b9e9aca2476388e.mp3str"
+
+[deps]
+
+source_file="res://Asset/music/bgm/massobeats - rose water (royalty free lofi music).mp3"
+dest_files=[ "res://.import/massobeats - rose water (royalty free lofi music).mp3-46eeaec678324e6f0b9e9aca2476388e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

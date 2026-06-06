@@ -7,6 +7,7 @@ onready var signTutup = $SignTutup
 
 
 func _ready():
+	add_to_group("BukaToko")
 	tombolInteract.visible = false
 	_update_sign()
 
@@ -147,3 +148,6 @@ func _update_sign():
 	else:
 		signBuka.visible = false
 		signTutup.visible = true
+
+func force_update_sign():
+	_update_sign()

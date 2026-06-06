@@ -11,10 +11,10 @@ onready var portrait_kiri = $DialogBox/PortraitKiri
 onready var portrait_kanan = $DialogBox/PortraitKanan
 onready var tween = $Tween
 
-onready var choice_panel = get_node_or_null("ChoicePanel")
-onready var choice_label = get_node_or_null("ChoicePanel/Panel/ChoiceLabel")
-onready var tombol_ambil_pinjaman = get_node_or_null("ChoicePanel/Panel/ButtonAmbilPinjaman")
-onready var tombol_tanya_pak_beni = get_node_or_null("ChoicePanel/Panel/ButtonTanyaPakBeni")
+onready var choice_panel = $ChoicePanel
+onready var choice_label = $ChoicePanel/ChoiceLabel
+onready var tombol_ambil_pinjaman = $ChoicePanel/ButtonAmbilPinjaman
+onready var tombol_tanya_pak_beni = $ChoicePanel/ButtonTanyaPakBeni
 
 var data_dialog = []
 var indeks_sekarang = 0

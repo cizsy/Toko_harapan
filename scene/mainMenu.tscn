@@ -3,7 +3,7 @@
 [ext_resource path="res://script/mainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Asset/UI buatan/bg menu.png" type="Texture" id=2]
 [ext_resource path="res://Asset/font/Seven Moon.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://music/bgm/massobeats - rose water (royalty free lofi music).mp3" type="AudioStream" id=5]
+[ext_resource path="res://Asset/music/soundEffect/transaksi berhasil.mp3" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 55
@@ -76,7 +76,7 @@ icon_align = 1
 switch_on_hover = true
 
 [node name="bgm" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 4 )
 autoplay = true
 bus = "Music"
 

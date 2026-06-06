@@ -43,5 +43,13 @@ func _process(_delta):
 
 			get_tree().change_scene("res://scene/day1_toko.tscn")
 			return
+		
+		if GameManager.current_day >= 3 and GameManager.current_day <= 5:
+			var step_harus = "hari_" + str(GameManager.current_day) + "_pergi_ke_toko"
 
-		get_tree().change_scene("res://scene/toko.tscn")
+			if GameManager.story_step != step_harus:
+				get_tree().call_group("UI", "tampilkan_info", "Belum waktunya pergi ke toko.", Color.orange)
+				return
+
+			get_tree().change_scene("res://scene/toko.tscn")
+			return

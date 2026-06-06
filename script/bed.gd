@@ -51,7 +51,8 @@ func tidur():
 
 	var success = GameManager.end_day()
 	if success:
-		jalankan_transisi_hari("Hari Ke-" + str(GameManager.current_day), "res://scene/toko.tscn", "normal_gameplay")
+		var step_baru = "hari_" + str(GameManager.current_day) + "_sore_di_rumah"
+		jalankan_transisi_hari("Hari Ke-" + str(GameManager.current_day), "res://scene/rumah.tscn", step_baru, Vector2(869, 366))
 
 func jalankan_transisi_hari(teks_transisi, scene_tujuan, next_story_step, posisi_player = null):
 	GameManager.player_bisa_gerak = false

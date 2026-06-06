@@ -40,6 +40,17 @@ func update_ui():
 	label_uang.text = "💰 Rp " + str(GameManager.money)
 	update_misi()
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused:
+			return
+
+		if get_tree().current_scene:
+			GameManager.prev_scen = get_tree().current_scene.filename
+		else:
+			GameManager.prev_scen = ""
+
+		get_tree().change_scene("res://scene/settings.tscn")
 
 func update_misi():
 	# ======================

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/transaksi berhasil.mp3-920de7bcbb692f3883d9507edeab3234.mp3str"
+
+[deps]
+
+source_file="res://Asset/music/soundEffect/transaksi berhasil.mp3"
+dest_files=[ "res://.import/transaksi berhasil.mp3-920de7bcbb692f3883d9507edeab3234.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

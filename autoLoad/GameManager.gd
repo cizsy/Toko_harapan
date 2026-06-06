@@ -262,8 +262,12 @@ func jalankan_jam(delta):
 
 func paksa_tutup_toko():
 	toko_buka = false
+	day_can_end = true
 	player_bisa_gerak = true
-	get_tree().call_group("UI", "tampilkan_info", "Sudah larut malam. Toko tutup.", Color.red)
+
+	get_tree().call_group("UI", "tampilkan_info", "Sudah larut malam. Toko harus ditutup untuk hari ini.", Color.red)
+	get_tree().call_group("BukaToko", "force_update_sign")
+
 	emit_signal("data_update")
 
 
@@ -277,8 +281,8 @@ func debug_go_to_day(day):
 	menit = 0
 	timer_detik = 0.0
 	player_bisa_gerak = true
+	pak_beni_income_given_today = false
 
-	# Reset progres khusus
 	jumlah_objek_dicek = 0
 	jumlah_objek_dibersihkan = 0
 
@@ -289,22 +293,60 @@ func debug_go_to_day(day):
 		story_step = "hari_2_sore_di_rumah"
 
 	elif day == 3:
-		story_step = "normal_gameplay"
+		story_step = "hari_3_sore_di_rumah"
 		event_hari_3_done = false
 
 	elif day == 4:
-		story_step = "normal_gameplay"
+		story_step = "hari_4_sore_di_rumah"
 		event_hari_4_done = false
 
 	elif day == 5:
-		story_step = "normal_gameplay"
+		story_step = "hari_5_sore_di_rumah"
 		event_hari_5_done = false
 
 	else:
 		story_step = "normal_gameplay"
-	
+
 	emit_signal("data_update")
 	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)
+
+func reset_new_game():
+	current_day = 1
+	current_month = 1
+	story_step = "hari_1_intro"
+
+	money = 2000000
+	hutang_utama = 20000000
+	pinjol = 0
+	reputasi = 0
+	ending_choice = ""
+
+	toko_buka = false
+	toko_sudah_dibuka_hari_ini = false
+	served_today = 0
+	day_can_end = false
+
+	event_hari_3_done = false
+	event_hari_4_done = false
+	event_hari_5_done = false
+
+	jumlah_objek_dicek = 0
+	jumlah_objek_dibersihkan = 0
+
+	jam = 15
+	menit = 0
+	timer_detik = 0.0
+	player_bisa_gerak = true
+	pak_beni_income_given_today = false
+	next_player_position = null
+
+	stock = {
+		"mie": 10,
+		"minyak": 5,
+		"beras": 3
+	}
+
+	emit_signal("data_update")
 
 func save_game():
 	var save_file = File.new()
@@ -349,15 +391,23 @@ func load_game() -> bool:
 		pinjol = int(save_data.get("pinjol", 0))
 		reputasi = int(save_data.get("reputasi", 0))
 		stock = save_data.get("stock", stock)
-		story_step = save_data.get("story_step", "normal_gameplay")
-		
+		story_step = save_data.get("story_step", "hari_1_intro")
+
 		var target_scene = save_data.get("last_scene", "res://scene/rumah.tscn")
-		get_tree().change_scene(target_scene)
-		
+
+		var file_check = File.new()
+		if not file_check.file_exists(target_scene):
+			print("Scene save tidak ditemukan: ", target_scene)
+			target_scene = "res://scene/rumah.tscn"
+
+		var change_err = get_tree().change_scene(target_scene)
+
+		if change_err != OK:
+			print("Gagal pindah ke scene save. Error: ", change_err)
+			get_tree().change_scene("res://scene/rumah.tscn")
+
 		emit_signal("data_update")
 		return true
-
-	return false
 
 func set_next_player_position(posisi):
 	next_player_position = posisi

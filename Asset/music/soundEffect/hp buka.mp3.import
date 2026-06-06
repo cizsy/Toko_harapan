@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hp buka.mp3-449a818e1d15685fc9194ae603f22663.mp3str"
+
+[deps]
+
+source_file="res://Asset/music/soundEffect/hp buka.mp3"
+dest_files=[ "res://.import/hp buka.mp3-449a818e1d15685fc9194ae603f22663.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -370,7 +370,7 @@ func munculkan_pilihan_pinjol():
 	if pilihan == "pinjol":
 		GameManager.pinjol += 10000000
 		GameManager.set_story_step("ending_pinjaman")
-		get_tree().change_scene("res://scene/ending.tscn")
+		get_tree().change_scene("res://scene/ending_screen.tscn")
 
 	elif pilihan == "tanpa_pinjol":
 		GameManager.set_story_step("ending_tanpa_pinjaman")

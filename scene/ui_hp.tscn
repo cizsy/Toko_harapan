@@ -330,6 +330,12 @@ margin_bottom = 84.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Hutang"
 
+[node name="BackButton2" type="Button" parent="NotePanel"]
+margin_left = 79.0
+margin_top = 433.0
+margin_right = 154.0
+margin_bottom = 455.0
+
 [node name="SettingsPanel" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -343,6 +349,7 @@ margin_left = -494.0
 margin_top = -598.0
 margin_right = 171.0
 margin_bottom = 83.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
 
@@ -353,3 +360,4 @@ expand = true
 [connection signal="pressed" from="SupplierPanel/MinyakPanel/BeliMinyak" to="." method="_on_BeliMinyak_pressed"]
 [connection signal="pressed" from="SupplierPanel/BerasPanel/BeliBeras" to="." method="_on_BeliBeras_pressed"]
 [connection signal="pressed" from="SupplierPanel/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="NotePanel/BackButton2" to="." method="_on_BackButton_pressed"]

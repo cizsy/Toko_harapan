@@ -50,7 +50,7 @@ func show_supplier():
 
 func show_note():
 	hide_all_panels()
-	$BankPanel.visible = true
+	$NotePanel.visible = true
 
 
 
