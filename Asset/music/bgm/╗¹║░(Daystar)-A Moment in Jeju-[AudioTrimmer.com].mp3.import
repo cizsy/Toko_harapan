@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/╗¹║░(Daystar)-A Moment in Jeju-[AudioTrimmer.com].mp3-e24ae6ec2f6164c2a27585891356e4bc.mp3str"
+
+[deps]
+
+source_file="res://Asset/music/bgm/╗¹║░(Daystar)-A Moment in Jeju-[AudioTrimmer.com].mp3"
+dest_files=[ "res://.import/╗¹║░(Daystar)-A Moment in Jeju-[AudioTrimmer.com].mp3-e24ae6ec2f6164c2a27585891356e4bc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

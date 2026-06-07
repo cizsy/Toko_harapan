@@ -118,7 +118,10 @@ func selesai_melayani():
 	if success:
 		if is_instance_valid(npc_saat_ini):
 			npc_saat_ini.pulang()
-
+		
+		if has_node("/root/SoundManager"):
+			SoundManager.play("cash")
+		
 		npc_saat_ini = null
 		emit_signal("pelayanan_selesai")
 		

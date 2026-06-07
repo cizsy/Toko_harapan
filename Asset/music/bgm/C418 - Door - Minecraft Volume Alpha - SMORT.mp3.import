@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/C418 - Door - Minecraft Volume Alpha - SMORT.mp3-2056339a10549e6df5b0105d70d47e83.mp3str"
+
+[deps]
+
+source_file="res://Asset/music/bgm/C418 - Door - Minecraft Volume Alpha - SMORT.mp3"
+dest_files=[ "res://.import/C418 - Door - Minecraft Volume Alpha - SMORT.mp3-2056339a10549e6df5b0105d70d47e83.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -11,10 +11,10 @@
 [ext_resource path="res://scene/bed.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Asset/furniture rumah crop/furniture rumah/sofa besarbelakang.png" type="Texture" id=10]
 [ext_resource path="res://scene/DialogUI.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Asset/music/bgm/╗¹║░(Daystar)-Odd, isn't it_-[AudioTrimmer.com].mp3" type="AudioStream" id=12]
 [ext_resource path="res://scene/pintuRumah.tscn" type="PackedScene" id=15]
 [ext_resource path="res://script/rumah.gd" type="Script" id=21]
 [ext_resource path="res://scene/main_UI.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Asset/music/bgm/╗¹║░(Daystar)-Odd, isn't it_.mp3" type="AudioStream" id=23]
 [ext_resource path="res://Asset/rumah/TopDownHouse_FloorsAndWalls.png" type="Texture" id=24]
 
 [sub_resource type="TileSet" id=1]
@@ -458,7 +458,7 @@ position = Vector2( -53, -4 )
 [node name="mainUI" parent="." instance=ExtResource( 22 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 23 )
+stream = ExtResource( 12 )
 autoplay = true
 
 [node name="posisiLaras" type="Position2D" parent="."]

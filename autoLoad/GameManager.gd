@@ -409,8 +409,7 @@ func load_game() -> bool:
 		emit_signal("data_update")
 		return true
 
-func set_next_player_position(posisi):
-	next_player_position = posisi
+	return false
 
 
 func apply_next_player_position():

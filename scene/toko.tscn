@@ -16,7 +16,7 @@
 [ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_3.png" type="Texture" id=14]
 [ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_4.png" type="Texture" id=15]
 [ext_resource path="res://Asset/UI buatan/UI_Flat_Button01a_1.png" type="Texture" id=16]
-[ext_resource path="res://Asset/music/bgm/╗¹║░(Daystar)-A Moment in Jeju.mp3" type="AudioStream" id=17]
+[ext_resource path="res://Asset/music/bgm/╗¹║░(Daystar)-A Moment in Jeju-[AudioTrimmer.com].mp3" type="AudioStream" id=17]
 [ext_resource path="res://Asset/toko/furniture5_toko-export.png" type="Texture" id=18]
 [ext_resource path="res://Asset/tileset 16x16/Singles_16x16/Item_singles_1.png" type="Texture" id=19]
 [ext_resource path="res://scene/bukaToko.tscn" type="PackedScene" id=20]
