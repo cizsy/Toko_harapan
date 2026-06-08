@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/C418 - Clark - Minecraft Volume Alpha - SMORT-[AudioTrimmer.com].mp3-a2cd70d3e041030f825f7c925dd160e9.mp3str"
+
+[deps]
+
+source_file="res://Asset/music/bgm/C418 - Clark - Minecraft Volume Alpha - SMORT-[AudioTrimmer.com].mp3"
+dest_files=[ "res://.import/C418 - Clark - Minecraft Volume Alpha - SMORT-[AudioTrimmer.com].mp3-a2cd70d3e041030f825f7c925dd160e9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

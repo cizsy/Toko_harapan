@@ -18,7 +18,7 @@
 [ext_resource path="res://Asset/rumah/debu.png" type="Texture" id=16]
 [ext_resource path="res://Asset/rumah/sarang.png" type="Texture" id=17]
 [ext_resource path="res://script/cleaning_interact.gd" type="Script" id=18]
-[ext_resource path="res://Asset/music/bgm/C418 - Clark - Minecraft Volume Alpha - SMORT.mp3" type="AudioStream" id=19]
+[ext_resource path="res://Asset/music/bgm/C418 - Clark - Minecraft Volume Alpha - SMORT-[AudioTrimmer.com].mp3" type="AudioStream" id=19]
 
 [sub_resource type="TileSet" id=25]
 0/name = "Floor_3_16x16.png 0"

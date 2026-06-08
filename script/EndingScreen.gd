@@ -70,36 +70,4 @@ func _on_MenuButton_pressed():
 
 
 func reset_game_state():
-	GameManager.current_day = 1
-	GameManager.current_month = 1
-	GameManager.story_step = "hari_1_intro"
-
-	GameManager.money = 2000000
-	GameManager.hutang_utama = 20000000
-	GameManager.pinjol = 0
-	GameManager.reputasi = 0
-
-	GameManager.toko_buka = false
-	GameManager.toko_sudah_dibuka_hari_ini = false
-	GameManager.day_can_end = false
-	GameManager.served_today = 0
-
-	GameManager.event_hari_3_done = false
-	GameManager.event_hari_4_done = false
-	GameManager.event_hari_5_done = false
-
-	GameManager.jumlah_objek_dicek = 0
-	GameManager.jumlah_objek_dibersihkan = 0
-
-	GameManager.jam = 15
-	GameManager.menit = 0
-	GameManager.timer_detik = 0.0
-	GameManager.player_bisa_gerak = true
-
-	GameManager.stock = {
-		"mie": 10,
-		"minyak": 5,
-		"beras": 3
-	}
-
-	GameManager.emit_signal("data_update")
+	GameManager.reset_new_game()

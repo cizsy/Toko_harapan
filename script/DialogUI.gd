@@ -21,6 +21,12 @@ var indeks_sekarang = 0
 var sedang_mengetik = false
 var dialog_aktif = false
 
+# Cache portrait biar tidak load ulang tiap baris
+var portrait_cache = {}
+
+# Cooldown biar tidak skip dua baris sekaligus
+var input_cooldown = false
+
 
 func _ready():
 	add_to_group("DialogSystem")
@@ -58,6 +64,16 @@ func mulai_dialog(list_percakapan):
 	indeks_sekarang = 0
 	sedang_mengetik = false
 	dialog_aktif = true
+	input_cooldown = false
+	portrait_cache.clear()
+
+	# Pre-load semua portrait sekaligus di awal biar tidak lag tiap baris
+	for entry in data_dialog:
+		var path = entry.get("portrait", "")
+		if path != "" and not portrait_cache.has(path):
+			var tex = load(path)
+			if tex != null:
+				portrait_cache[path] = tex
 
 	GameManager.player_bisa_gerak = false
 	get_tree().call_group("UI", "masuk_mode_dialog")
@@ -81,39 +97,33 @@ func tampilkan_baris_dialog():
 	var posisi = data.get("posisi", "kiri")
 	var jalur_foto = data.get("portrait", "")
 
-	label_teks.text = teks
-
+	# Reset semua dulu
 	label_nama_kiri.visible = false
 	label_nama_kanan.visible = false
 	portrait_kiri.visible = false
 	portrait_kanan.visible = false
-
 	label_nama_kiri.text = ""
 	label_nama_kanan.text = ""
 
+	# Nama & portrait
 	if posisi == "kiri":
 		label_nama_kiri.text = nama
 		label_nama_kiri.visible = true
+		if jalur_foto != "" and portrait_cache.has(jalur_foto):
+			portrait_kiri.texture = portrait_cache[jalur_foto]
+			portrait_kiri.visible = true
 	elif posisi == "kanan":
 		label_nama_kanan.text = nama
 		label_nama_kanan.visible = true
+		if jalur_foto != "" and portrait_cache.has(jalur_foto):
+			portrait_kanan.texture = portrait_cache[jalur_foto]
+			portrait_kanan.visible = true
 
-	if jalur_foto != "":
-		var texture = load(jalur_foto)
-
-		if texture != null:
-			if posisi == "kiri":
-				portrait_kiri.texture = texture
-				portrait_kiri.visible = true
-			elif posisi == "kanan":
-				portrait_kanan.texture = texture
-				portrait_kanan.visible = true
-		else:
-			print("Portrait tidak ditemukan: " + str(jalur_foto))
-
+	# Typewriter effect
+	label_teks.text = teks
 	label_teks.percent_visible = 0.0
 
-	var durasi_ketik = max(label_teks.text.length() * 0.03, 0.2)
+	var durasi_ketik = max(teks.length() * 0.03, 0.3)
 
 	tween.stop_all()
 	tween.interpolate_property(
@@ -126,8 +136,12 @@ func tampilkan_baris_dialog():
 		Tween.EASE_IN_OUT
 	)
 	tween.start()
-
 	sedang_mengetik = true
+
+	# Cooldown singkat biar input sebelumnya tidak langsung skip baris ini
+	input_cooldown = true
+	yield(get_tree().create_timer(0.1), "timeout")
+	input_cooldown = false
 
 
 func _input(event):
@@ -137,14 +151,31 @@ func _input(event):
 	if not panel_dialog.visible:
 		return
 
-	if event.is_action_pressed("ui_accept") or event.is_action_pressed("interact"):
-		if sedang_mengetik:
-			tween.stop_all()
-			label_teks.percent_visible = 1.0
-			sedang_mengetik = false
-		else:
-			indeks_sekarang += 1
-			tampilkan_baris_dialog()
+	if input_cooldown:
+		return
+
+	# Hanya tangkap satu action, ui_accept ATAU interact — tidak keduanya
+	var pressed = false
+	if event.is_action_pressed("ui_accept"):
+		pressed = true
+	elif event.is_action_pressed("interact"):
+		pressed = true
+
+	if not pressed:
+		return
+
+	# Konsumsi event biar tidak tembus ke node lain
+	get_tree().set_input_as_handled()
+
+	if sedang_mengetik:
+		# Skip typewriter — langsung tampilkan semua teks
+		tween.stop_all()
+		label_teks.percent_visible = 1.0
+		sedang_mengetik = false
+	else:
+		# Lanjut ke baris berikutnya
+		indeks_sekarang += 1
+		tampilkan_baris_dialog()
 
 
 func selesai_dialog():
@@ -160,6 +191,8 @@ func selesai_dialog():
 	indeks_sekarang = 0
 	sedang_mengetik = false
 	dialog_aktif = false
+	input_cooldown = false
+	portrait_cache.clear()
 
 	GameManager.player_bisa_gerak = true
 	get_tree().call_group("UI", "keluar_mode_dialog")

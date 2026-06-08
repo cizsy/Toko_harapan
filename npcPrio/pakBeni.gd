@@ -43,6 +43,15 @@ func mulai_dialog_hari_1():
 	dialog_started = true
 	interact_icon.visible = false
 
+	# Paksa player hadap atas (menghadap Pak Beni yang ada di atas player)
+	var players = get_tree().get_nodes_in_group("Player")
+	if players.size() > 0:
+		var player = players[0]
+		if player.has_node("AnimatedSprite"):
+			player.get_node("AnimatedSprite").play("idle_up")
+		if "last_facing_dir" in player:
+			player.last_facing_dir = Vector2.UP
+
 	var percakapan = [
 		{
 			"nama": "Pak Beni",
@@ -182,15 +191,14 @@ func mulai_dialog_hari_1():
 
 func selesai_dialog_hari_1():
 	GameManager.set_story_step("hari_1_periksa")
-	get_tree().call_group("UI", "keluar_mode_dialog")
+	# HAPUS keluar_mode_dialog di sini — DialogUI sudah panggil sendiri!
 	pulang()
 
 
 func pulang():
 	player_in_area = false
 	interact_icon.visible = false
-	
-	# Biar Pak Beni nggak nabrak player pas pulang
+
 	if is_instance_valid(body_collision):
 		body_collision.set_deferred("disabled", true)
 
@@ -199,8 +207,6 @@ func pulang():
 
 	target_tujuan = titik_keluar
 	sedang_pulang = true
-	
-	print("Pak Beni pulang lewat pintu.")
 
 
 func _on_Area2D_body_entered(body):

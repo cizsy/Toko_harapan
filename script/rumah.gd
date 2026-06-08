@@ -6,24 +6,32 @@ var laras_instance = null
 export(bool) var debug_mode = false
 export(int) var debug_day = 1
 
+
 func _ready():
 	if debug_mode:
 		GameManager.debug_go_to_day(debug_day)
 
 	call_deferred("atur_posisi_player_awal")
 
+	var akan_ada_dialog = false
+
 	if GameManager.current_day == 1 and GameManager.story_step == "hari_1_laras":
 		spawn_laras()
+		GameManager.player_bisa_gerak = true
 		return
 
-	if GameManager.current_day == 2 and GameManager.story_step == "hari_2_sore_di_rumah":
+	elif GameManager.current_day == 2 and GameManager.story_step == "hari_2_sore_di_rumah":
+		akan_ada_dialog = true
 		call_deferred("mulai_dialog_hari_2_sore")
-		return
-	
-	if GameManager.current_day >= 3 and GameManager.current_day <= 5:
+
+	elif GameManager.current_day >= 3 and GameManager.current_day <= 5:
 		if GameManager.story_step == "hari_" + str(GameManager.current_day) + "_sore_di_rumah":
+			akan_ada_dialog = true
 			call_deferred("mulai_dialog_hari_baru_sore")
-			return
+
+	if not akan_ada_dialog:
+		GameManager.player_bisa_gerak = true
+
 
 func spawn_laras():
 	if is_instance_valid(laras_instance):
@@ -39,6 +47,17 @@ func atur_posisi_player_awal():
 
 
 func mulai_dialog_hari_2_sore():
+	# Safety: tunggu satu frame biar semua node siap
+	yield(get_tree(), "idle_frame")
+
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		print("ERROR: DialogSystem tidak ditemukan di rumah.")
+		GameManager.set_story_step("hari_2_pergi_ke_toko")
+		GameManager.player_bisa_gerak = true
+		return
+
 	var percakapan = [
 		{
 			"nama": "Raka",
@@ -53,13 +72,6 @@ func mulai_dialog_hari_2_sore():
 			"posisi": "kiri"
 		}
 	]
-
-	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
-
-	if dialog_list.size() == 0:
-		print("ERROR: DialogSystem tidak ditemukan di rumah.")
-		get_tree().call_group("UI", "tampilkan_info", "DialogUI belum ada di rumah.", Color.red)
-		return
 
 	var dialog_ui = dialog_list[0]
 	dialog_ui.mulai_dialog(percakapan)
@@ -67,9 +79,22 @@ func mulai_dialog_hari_2_sore():
 	yield(dialog_ui, "dialog_selesai")
 
 	GameManager.set_story_step("hari_2_pergi_ke_toko")
+	GameManager.player_bisa_gerak = true
 	get_tree().call_group("UI", "tampilkan_info", "Pergi ke toko.", Color.gold)
 
+
 func mulai_dialog_hari_baru_sore():
+	# Safety: tunggu satu frame biar semua node siap
+	yield(get_tree(), "idle_frame")
+
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		print("ERROR: DialogSystem tidak ditemukan di rumah.")
+		GameManager.set_story_step("hari_" + str(GameManager.current_day) + "_pergi_ke_toko")
+		GameManager.player_bisa_gerak = true
+		return
+
 	var percakapan = [
 		{
 			"nama": "Raka",
@@ -85,18 +110,11 @@ func mulai_dialog_hari_baru_sore():
 		}
 	]
 
-	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
-
-	if dialog_list.size() == 0:
-		print("ERROR: DialogSystem tidak ditemukan di rumah.")
-		GameManager.set_story_step("hari_" + str(GameManager.current_day) + "_pergi_ke_toko")
-		return
-
 	var dialog_ui = dialog_list[0]
 	dialog_ui.mulai_dialog(percakapan)
 
 	yield(dialog_ui, "dialog_selesai")
 
 	GameManager.set_story_step("hari_" + str(GameManager.current_day) + "_pergi_ke_toko")
+	GameManager.player_bisa_gerak = true
 	get_tree().call_group("UI", "tampilkan_info", "Pergi ke toko.", Color.gold)
-

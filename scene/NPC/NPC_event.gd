@@ -21,6 +21,8 @@ var event_icons = {
 
 func _ready():
 	_update_request_label()
+	# Putar animasi walk_up saat pertama kali muncul menuju kasir
+	_update_animation(Vector2.UP)
 
 
 func _physics_process(_delta):
@@ -28,8 +30,15 @@ func _physics_process(_delta):
 		var arah = (target_tujuan - global_position).normalized()
 		move_and_slide(arah * kecepatan)
 		
+		# Perbarui animasi berdasarkan arah pergerakan vektor
+		_update_animation(arah)
+		
 		if global_position.distance_to(target_tujuan) < 10:
 			sudah_sampai = true
+			
+			# Berhenti animasi jalan saat sudah sampai di kasir
+			if not sedang_pulang:
+				_stop_animation()
 			
 			if sedang_pulang:
 				lapor_event_selesai()
@@ -91,6 +100,10 @@ func pulang():
 	target_tujuan = titik_pintu
 	sudah_sampai = false
 	sedang_pulang = true
+	
+	# Mainkan animasi walk_down karena arahnya ke bawah (pintu)
+	_update_animation(Vector2.DOWN)
+	
 	print("NPC Event: saya pulang dulu.")
 
 
@@ -100,3 +113,22 @@ func lapor_event_selesai():
 
 	event_sudah_dilapor = true
 	get_tree().call_group("LevelToko", "selesai_event_hari3")
+
+
+# --- FUNGSI TAMBAHAN UNTUK ANIMASI ---
+
+func _update_animation(arah: Vector2):
+	if has_node("AnimatedSprite"):
+		var anim = $AnimatedSprite
+		# Jika bergerak ke atas (nilai Y negatif)
+		if arah.y < 0:
+			anim.play("walk_up")
+		# Jika bergerak ke bawah (nilai Y positif)
+		elif arah.y > 0:
+			anim.play("walk_down")
+
+
+func _stop_animation():
+	if has_node("AnimatedSprite"):
+		$AnimatedSprite.stop()
+		$AnimatedSprite.frame = 0 # Mengembalikan ke pose berdiri diam

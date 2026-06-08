@@ -23,9 +23,11 @@ func load_settings():
 	if err != OK:
 		return
 
-	var master_vol = config.get_value("audio", "master_volume", 0.8)
-	var music_vol = config.get_value("audio", "music_volume", 0.8)
-	var sfx_vol = config.get_value("audio", "sfx_volume", 0.8)
+	# Nilai disimpan dalam skala 0-100 (dari settings.gd)
+	# jadi normalize dulu ke 0.0-1.0 sebelum dipakai
+	var master_vol = config.get_value("audio", "master_volume", 80)
+	var music_vol = config.get_value("audio", "music_volume", 70)
+	var sfx_vol = config.get_value("audio", "sfx_volume", 80)
 
 	_set_bus_volume("Master", master_vol)
 	_set_bus_volume("Music", music_vol)
@@ -37,4 +39,12 @@ func _set_bus_volume(bus_name, value):
 	if index == -1:
 		return
 
-	AudioServer.set_bus_volume_db(index, linear2db(max(value, 0.001)))
+	# value dalam skala 0-100, normalize ke 0.0-1.0
+	var normalized = clamp(float(value) / 100.0, 0.0, 1.0)
+
+	if normalized <= 0.001:
+		AudioServer.set_bus_volume_db(index, -80)
+		AudioServer.set_bus_mute(index, true)
+	else:
+		AudioServer.set_bus_mute(index, false)
+		AudioServer.set_bus_volume_db(index, linear2db(normalized))

@@ -8,7 +8,6 @@ var player_di_kasir = false
 var event_sedang_berjalan = false
 
 var list_npc = [
-	preload("res://scene/NPC/NPC_Base.tscn"),
 	preload("res://scene/NPC/NPC_bapak2.tscn"),
 	preload("res://scene/NPC/NPC_bocah.tscn"),
 ]
@@ -350,6 +349,48 @@ func mulai_event_hari4_modal():
 		pak_beni_instance.pulang()
 
 	get_tree().call_group("UI", "tampilkan_info", "Sekarang buka toko untuk shift sore.", Color.gold)
+
+func mulai_event_hari5_pinjol():
+	if GameManager.event_hari_5_done:
+		return
+
+	GameManager.player_bisa_gerak = false
+
+	var percakapan = [
+		{
+			"nama": "Raka",
+			"teks": "HP-ku bergetar. Ada notifikasi masuk.",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Pinjaman modal cepat, cair dalam 5 menit, tanpa jaminan...",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		},
+		{
+			"nama": "Raka",
+			"teks": "Modal toko lagi seret. Tapi... ini aman nggak ya?",
+			"portrait": "res://Asset/character/PortraitsFinal/raka.png",
+			"posisi": "kiri"
+		}
+	]
+
+	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")
+
+	if dialog_list.size() == 0:
+		GameManager.player_bisa_gerak = true
+		munculkan_pilihan_pinjol()
+		return
+
+	var dialog_ui = dialog_list[0]
+	dialog_ui.mulai_dialog(percakapan)
+
+	yield(dialog_ui, "dialog_selesai")
+
+	munculkan_pilihan_pinjol()
+
 
 func munculkan_pilihan_pinjol():
 	var dialog_list = get_tree().get_nodes_in_group("DialogSystem")

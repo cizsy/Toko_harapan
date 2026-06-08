@@ -229,24 +229,18 @@ func tampilkan_info(pesan, warna = Color.black):
 
 
 func tampilkan_transisi_hari(teks):
-	if not is_instance_valid(day_transition):
-		print("ERROR: DayTransition ColorRect tidak ditemukan.")
+	# FASE 1: Fade in ke hitam, tahan, lalu selesai
+	# bed.gd harus ganti scene SETELAH yield fungsi ini, lalu panggil transisi_fade_out()
+	if not is_instance_valid(day_transition) or not is_instance_valid(day_transition_label):
+		print("ERROR: DayTransition node tidak ditemukan.")
 		return
 
-	if not is_instance_valid(day_transition_label):
-		print("ERROR: DayTransition Label tidak ditemukan.")
-		return
-
-	print("TRANSISI MULAI: " + str(teks))
-
-	# Pastikan dia muncul di atas
+	day_transition_label.text = teks
 	day_transition.visible = true
 	day_transition.show()
 	day_transition.raise()
 	day_transition.modulate.a = 0.0
-	day_transition_label.text = teks
 
-	# Sembunyikan UI gameplay saat transisi
 	$moneyPanel.visible = false
 	$dayPanel.visible = false
 	$MisiPanel.visible = false
@@ -256,33 +250,51 @@ func tampilkan_transisi_hari(teks):
 	var tween_baru = Tween.new()
 	add_child(tween_baru)
 
+	# Fade IN ke hitam
 	tween_baru.interpolate_property(
-		day_transition,
-		"modulate:a",
-		0.0,
-		1.0,
-		0.5,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT
+		day_transition, "modulate:a",
+		0.0, 1.0, 0.5,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	tween_baru.start()
 	yield(tween_baru, "tween_completed")
 
-	yield(get_tree().create_timer(1.2), "timeout")
+	# Tahan di hitam biar teks terbaca
+	yield(get_tree().create_timer(0.8), "timeout")
 
+	tween_baru.queue_free()
+	# Layar masih hitam penuh di sini
+	# bed.gd akan change_scene() sekarang, lalu panggil transisi_fade_out()
+
+
+func transisi_fade_out():
+	# FASE 2: Fade out dari hitam ke scene baru
+	# Dipanggil bed.gd setelah change_scene() + yield satu frame
+	if not is_instance_valid(day_transition):
+		return
+
+	day_transition.modulate.a = 1.0
+	day_transition.visible = true
+	day_transition.raise()
+
+	var tween_baru = Tween.new()
+	add_child(tween_baru)
+
+	# Fade OUT — scene baru muncul perlahan
 	tween_baru.interpolate_property(
-		day_transition,
-		"modulate:a",
-		1.0,
-		0.0,
-		0.5,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_IN_OUT
+		day_transition, "modulate:a",
+		1.0, 0.0, 0.6,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT
 	)
 	tween_baru.start()
 	yield(tween_baru, "tween_completed")
 
 	day_transition.visible = false
 	tween_baru.queue_free()
+
+	$moneyPanel.visible = true
+	$dayPanel.visible = true
+	$MisiPanel.visible = true
+	$HpButton.visible = true
 
 	print("TRANSISI SELESAI")

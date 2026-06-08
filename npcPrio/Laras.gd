@@ -29,7 +29,7 @@ func mulai_dialog_laras():
 		{
 			"nama": "Laras",
 			"teks": "Mas, tadi dari toko?",
-			"portrait": "",
+			"portrait": "res://Asset/character/PortraitsFinal/Girl2.png",
 			"posisi": "kanan"
 		},
 		{
@@ -41,7 +41,7 @@ func mulai_dialog_laras():
 		{
 			"nama": "Laras",
 			"teks": "Gimana?",
-			"portrait": "",
+			"portrait": "res://Asset/character/PortraitsFinal/Girl2.png",
 			"posisi": "kanan"
 		},
 		{
@@ -53,7 +53,7 @@ func mulai_dialog_laras():
 		{
 			"nama": "Laras",
 			"teks": "Besok dibuka?",
-			"portrait": "",
+			"portrait": "res://Asset/character/PortraitsFinal/Girl2.png",
 			"posisi": "kanan"
 		},
 		{
@@ -65,7 +65,7 @@ func mulai_dialog_laras():
 		{
 			"nama": "Laras",
 			"teks": "Mas mukanya udah kayak orang tua.",
-			"portrait": "",
+			"portrait": "res://Asset/character/PortraitsFinal/Girl2.png",
 			"posisi": "kanan"
 		},
 		{
@@ -76,8 +76,8 @@ func mulai_dialog_laras():
 		},
 		{
 			"nama": "Laras",
-			"teks": "Udah tidur sana. Besok masih panjang.",
-			"portrait": "",
+			"teks": "Ya udah tidur sana. Besok hari masih panjang mas.",
+			"portrait": "res://Asset/character/PortraitsFinal/Girl2.png",
 			"posisi": "kanan"
 		}
 	]

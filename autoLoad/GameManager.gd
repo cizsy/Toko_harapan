@@ -311,6 +311,11 @@ func debug_go_to_day(day):
 	get_tree().call_group("UI", "tampilkan_info", "DEBUG: Lompat ke Hari " + str(day), Color.orange)
 
 func reset_new_game():
+	# Hapus save lama biar Continue tidak bisa load state sebelumnya
+	var dir = Directory.new()
+	if dir.file_exists("user://save_game.save"):
+		dir.remove("user://save_game.save")
+
 	current_day = 1
 	current_month = 1
 	story_step = "hari_1_intro"
@@ -393,21 +398,15 @@ func load_game() -> bool:
 		stock = save_data.get("stock", stock)
 		story_step = save_data.get("story_step", "hari_1_intro")
 
+		# Safety runtime state saat Continue
+		player_bisa_gerak = true
+		toko_buka = false
+		toko_sudah_dibuka_hari_ini = false
+		day_can_end = false
+		served_today = 0
+		timer_detik = 0.0
+
 		var target_scene = save_data.get("last_scene", "res://scene/rumah.tscn")
-
-		var file_check = File.new()
-		if not file_check.file_exists(target_scene):
-			print("Scene save tidak ditemukan: ", target_scene)
-			target_scene = "res://scene/rumah.tscn"
-
-		var change_err = get_tree().change_scene(target_scene)
-
-		if change_err != OK:
-			print("Gagal pindah ke scene save. Error: ", change_err)
-			get_tree().change_scene("res://scene/rumah.tscn")
-
-		emit_signal("data_update")
-		return true
 
 	return false
 

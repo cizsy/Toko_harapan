@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://script/main_UI.gd" type="Script" id=1]
-[ext_resource path="res://addons/dialogic/Example Assets/Fonts/Overlock/Overlock-Black.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Asset/UI/UI_Flat_Banner04a.png" type="Texture" id=3]
 [ext_resource path="res://Asset/UI/UI_Flat_Banner03a.png" type="Texture" id=4]
 [ext_resource path="res://Asset/UI/UI_Flat_BarFill01f.png" type="Texture" id=5]
@@ -23,7 +22,7 @@ region_rect = Rect2( 0, 0, 64, 20 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 26
-font_data = ExtResource( 2 )
+font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 7 )
@@ -88,13 +87,15 @@ margin_bottom = 44.0
 custom_styles/panel = SubResource( 13 )
 
 [node name="dayLabel" type="Label" parent="rootUI/dayPanel"]
+anchor_right = 0.964
+anchor_bottom = 0.977
 margin_left = 1.0
 margin_top = 5.0
-margin_right = 135.0
-margin_bottom = 43.0
+margin_right = 0.0399933
+margin_bottom = 0.0119972
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "tess"
+text = "tessghdhd"
 align = 1
 
 [node name="HpButton" type="Button" parent="rootUI"]

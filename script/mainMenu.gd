@@ -9,6 +9,8 @@ func _ready():
 
 func _on_Start_pressed():
 	GameManager.reset_new_game()
+	if has_node("Continue"):
+		$Continue.disabled = true
 	get_tree().change_scene("res://scene/day1_toko.tscn")
 
 
