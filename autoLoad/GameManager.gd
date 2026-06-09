@@ -398,7 +398,6 @@ func load_game() -> bool:
 		stock = save_data.get("stock", stock)
 		story_step = save_data.get("story_step", "hari_1_intro")
 
-		# Safety runtime state saat Continue
 		player_bisa_gerak = true
 		toko_buka = false
 		toko_sudah_dibuka_hari_ini = false
@@ -407,6 +406,20 @@ func load_game() -> bool:
 		timer_detik = 0.0
 
 		var target_scene = save_data.get("last_scene", "res://scene/rumah.tscn")
+
+		var file_check = File.new()
+		if not file_check.file_exists(target_scene):
+			print("Scene save tidak ditemukan: ", target_scene)
+			target_scene = "res://scene/rumah.tscn"
+
+		var change_err = get_tree().change_scene(target_scene)
+
+		if change_err != OK:
+			print("Gagal pindah ke scene save. Error: ", change_err)
+			get_tree().change_scene("res://scene/rumah.tscn")
+
+		emit_signal("data_update")
+		return true
 
 	return false
 
@@ -455,3 +468,17 @@ func beri_pemasukan_pagi():
 func pilih_ending(choice):
 	ending_choice = choice
 	emit_signal("data_update")
+
+func format_rupiah(angka):
+	var teks = str(int(angka))
+	var hasil = ""
+	var hitung = 0
+
+	for i in range(teks.length() - 1, -1, -1):
+		hasil = teks[i] + hasil
+		hitung += 1
+
+		if hitung % 3 == 0 and i != 0:
+			hasil = "." + hasil
+
+	return "Rp " + hasil

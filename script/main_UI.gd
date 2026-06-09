@@ -37,7 +37,7 @@ func _process(_delta):
 
 func update_ui():
 	day_label.text = "Hari " + str(GameManager.current_day)
-	label_uang.text = "💰 Rp " + str(GameManager.money)
+	label_uang.text = "💰 " + GameManager.format_rupiah(GameManager.money)
 	update_misi()
 
 func _input(event):

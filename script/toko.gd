@@ -19,6 +19,7 @@ var npc_event = preload("res://scene/NPC/NPC_event.tscn")
 
 onready var p_bar = $layani/pelangganBar
 onready var tombol_layani = $layani/layaniPelanggan
+onready var cash_sound = $layani/CashSound
 
 
 
@@ -115,24 +116,23 @@ func selesai_melayani():
 	var success = GameManager.sell_item(item)
 
 	if success:
+		if cash_sound:
+			if cash_sound.playing:
+				cash_sound.stop()
+			cash_sound.play()
+
 		if is_instance_valid(npc_saat_ini):
 			npc_saat_ini.pulang()
-		
-		if has_node("/root/SoundManager"):
-			SoundManager.play("cash")
-		
+
 		npc_saat_ini = null
 		emit_signal("pelayanan_selesai")
 		
 		if GameManager.served_today < GameManager.max_customer_per_day and GameManager.toko_buka:
 			yield(get_tree().create_timer(2.0), "timeout")
-			# PENGAMAN: Pastikan level/toko belum di-free saat timer selesai
 			if is_inside_tree() and GameManager.toko_buka:
 				spawn_npc()
 	else:
-		# Jika stok kurang, tombol_layani sudah otomatis bisa diklik lagi nanti setelah player restock!
 		get_tree().call_group("UI", "tampilkan_info", "Stok " + item.to_upper() + " tidak cukup! Restock lewat HP.", Color.red)
-
 
 func _boleh_melayani():
 	if not GameManager.toko_buka:
@@ -351,11 +351,9 @@ func mulai_event_hari4_modal():
 	get_tree().call_group("UI", "tampilkan_info", "Sekarang buka toko untuk shift sore.", Color.gold)
 
 func mulai_event_hari5_pinjol():
-	if GameManager.event_hari_5_done:
-		return
-
+	GameManager.set_story_step("hari_5_pinjol")
 	GameManager.player_bisa_gerak = false
-
+	
 	var percakapan = [
 		{
 			"nama": "Raka",

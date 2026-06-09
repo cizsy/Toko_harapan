@@ -78,8 +78,9 @@ animations = [ {
 
 [node name="NPC_bapak2" instance=ExtResource( 1 )]
 
-[node name="AnimatedSprite" parent="." index="0"]
-frames = SubResource( 11 )
-
 [node name="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2( -0.75, 2 )
+
+[node name="AnimatedSprite" parent="." index="2"]
+visible = true
+frames = SubResource( 11 )

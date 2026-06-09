@@ -111,9 +111,9 @@ custom_styles/focus = SubResource( 11 )
 custom_styles/normal = SubResource( 8 )
 
 [node name="infoPanel" type="Panel" parent="rootUI"]
-margin_top = 232.0
-margin_right = 272.0
-margin_bottom = 312.0
+margin_top = 184.0
+margin_right = 270.0
+margin_bottom = 264.0
 custom_styles/panel = SubResource( 14 )
 
 [node name="infoLabel" type="Label" parent="rootUI/infoPanel"]
@@ -131,16 +131,16 @@ autowrap = true
 [node name="MisiPanel" type="Panel" parent="rootUI"]
 margin_top = 96.0
 margin_right = 272.0
-margin_bottom = 216.0
+margin_bottom = 169.0
 custom_styles/panel = SubResource( 16 )
 
 [node name="MisiLabel" type="Label" parent="rootUI/MisiPanel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 8.0
-margin_top = -60.0
-margin_right = 272.0
-margin_bottom = 60.0
+margin_left = 5.0
+margin_top = -34.0
+margin_right = 269.0
+margin_bottom = 31.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
@@ -166,5 +166,7 @@ margin_right = 175.0
 margin_bottom = 49.0
 custom_fonts/font = SubResource( 17 )
 text = "HARI KE 2"
+align = 1
+valign = 1
 
 [connection signal="pressed" from="rootUI/HpButton" to="rootUI" method="_on_HpButton_pressed"]

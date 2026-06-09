@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=58 format=2]
 
 [ext_resource path="res://Asset/toko/furniture3_toko-export.png" type="Texture" id=1]
 [ext_resource path="res://Asset/toko/rak depan kasir.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Asset/tileset 16x16/Singles_16x16/Item_singles_1.png" type="Texture" id=19]
 [ext_resource path="res://scene/bukaToko.tscn" type="PackedScene" id=20]
 [ext_resource path="res://scene/DialogUI.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Asset/music/soundEffect/transaksi berhasil.mp3" type="AudioStream" id=22]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Floor_3_16x16.png 0"
@@ -1363,7 +1364,12 @@ margin_top = 227.0
 margin_right = 189.0
 margin_bottom = 283.0
 rect_scale = Vector2( 0.8, 0.7 )
+custom_colors/icon_color_pressed = Color( 0, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover_pressed = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/icon_color_normal = Color( 0, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 32 )
 custom_styles/hover = SubResource( 33 )
 custom_styles/pressed = SubResource( 34 )
@@ -1381,6 +1387,9 @@ margin_top = -135.0
 margin_right = -90.0
 margin_bottom = -105.0
 rect_scale = Vector2( 0.72, 0.727029 )
+
+[node name="CashSound" type="AudioStreamPlayer2D" parent="layani"]
+stream = ExtResource( 22 )
 
 [node name="player_bisa_layani" type="Area2D" parent="."]
 

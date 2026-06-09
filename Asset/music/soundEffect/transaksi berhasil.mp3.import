@@ -11,5 +11,5 @@ dest_files=[ "res://.import/transaksi berhasil.mp3-920de7bcbb692f3883d9507edeab3
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

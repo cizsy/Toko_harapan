@@ -1,7 +1,7 @@
 extends Control
 
 onready var teks_label = $Label
-onready var tombol_menu = $MenuButton
+onready var tombol_menu = $Button
 
 var narasi_pinjaman = [
 	"Beberapa minggu setelah pinjaman itu cair, rak toko akhirnya kembali penuh.",
