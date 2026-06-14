@@ -17,7 +17,7 @@ var kecepatan_waktu = 0.2
 
 var day_can_end = false
 
-var money = 2000000
+var money = 300000
 var hutang_utama = 20000000
 var pinjol = 0
 var reputasi = 0
@@ -320,7 +320,7 @@ func reset_new_game():
 	current_month = 1
 	story_step = "hari_1_intro"
 
-	money = 2000000
+	money = 300000
 	hutang_utama = 20000000
 	pinjol = 0
 	reputasi = 0
@@ -362,12 +362,26 @@ func save_game():
 	var save_data = {
 		"current_day": current_day,
 		"current_month": current_month,
+
 		"money": money,
 		"hutang_utama": hutang_utama,
 		"pinjol": pinjol,
 		"reputasi": reputasi,
+
 		"stock": stock,
 		"story_step": story_step,
+
+		"served_today": served_today,
+		"toko_buka": toko_buka,
+		"toko_sudah_dibuka_hari_ini": toko_sudah_dibuka_hari_ini,
+		"day_can_end": day_can_end,
+
+		"jam": jam,
+		"menit": menit,
+
+		"jumlah_objek_dicek": jumlah_objek_dicek,
+		"jumlah_objek_dibersihkan": jumlah_objek_dibersihkan,
+
 		"last_scene": get_tree().current_scene.filename if get_tree().current_scene else "res://scene/rumah.tscn"
 	}
 
@@ -391,7 +405,7 @@ func load_game() -> bool:
 	if typeof(save_data) == TYPE_DICTIONARY:
 		current_day = int(save_data.get("current_day", 1))
 		current_month = int(save_data.get("current_month", 1))
-		money = int(save_data.get("money", 2000000))
+		money = int(save_data.get("money", 300000))
 		hutang_utama = int(save_data.get("hutang_utama", 20000000))
 		pinjol = int(save_data.get("pinjol", 0))
 		reputasi = int(save_data.get("reputasi", 0))
@@ -399,10 +413,18 @@ func load_game() -> bool:
 		story_step = save_data.get("story_step", "hari_1_intro")
 
 		player_bisa_gerak = true
-		toko_buka = false
-		toko_sudah_dibuka_hari_ini = false
-		day_can_end = false
-		served_today = 0
+
+		served_today = int(save_data.get("served_today", 0))
+		toko_buka = save_data.get("toko_buka", false)
+		toko_sudah_dibuka_hari_ini = save_data.get("toko_sudah_dibuka_hari_ini", false)
+		day_can_end = save_data.get("day_can_end", false)
+
+		jam = int(save_data.get("jam", 15))
+		menit = int(save_data.get("menit", 0))
+
+		jumlah_objek_dicek = int(save_data.get("jumlah_objek_dicek", 0))
+		jumlah_objek_dibersihkan = int(save_data.get("jumlah_objek_dibersihkan", 0))
+
 		timer_detik = 0.0
 
 		var target_scene = save_data.get("last_scene", "res://scene/rumah.tscn")

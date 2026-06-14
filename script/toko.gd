@@ -10,6 +10,9 @@ var event_sedang_berjalan = false
 var list_npc = [
 	preload("res://scene/NPC/NPC_bapak2.tscn"),
 	preload("res://scene/NPC/NPC_bocah.tscn"),
+	preload("res://scene/NPC/NPC_1.tscn"),
+	preload("res://scene/NPC/NPC_2.tscn"),
+	preload("res://scene/NPC/NPC_3.tscn")
 ]
 
 var pak_beni_scene = preload("res://npcPrio/pakBeni.tscn")
